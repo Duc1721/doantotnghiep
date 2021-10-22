@@ -12,73 +12,74 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 var database = firebase.database();
-var nhahoang = database.ref("nhacuahoang");
-// ---------------------------------------config firebase-------------------------//
-// var dataRef = db.ref('Ban1');
-var okey = document.getElementById("okey");
-var temp = document.getElementById("temp");
-var okey2 = document.getElementById("okey2");
-var temp2 = document.getElementById("temp2");
-var ttden = 0;
-var ttden2 = 0;
-// PHONG KHÁCH
 
-okey.onclick = function() {
-    if (ttden == 0) {
-        ttden = 1;
+tableReportAll = document.getElementById("tablestate");
+database.ref("ALL").on('value', async function (snap) {
+    var ketqualangnghe = await snap.val();
+    tableReportAll.innerHTML = ''
+    num = 0;
+    for (var Home in ketqualangnghe) {
+        nhathemS = ketqualangnghe[Home]
+        for (var Room in nhathemS) {
+            phongthemS = nhathemS[Room]
+            for (var Device in phongthemS) {
+                num++;
+                State = phongthemS[Device]
+                tableReportAll.innerHTML += `
+                <tr>
+                    <td>${num}</td>
+                    <td>${Home}</td>
+                    <td>${Room}</td>
+                    <td>${Device}</td>
+                    <td>${State}</td>
+                    <td><button>X</button></td>
+                </tr>`
 
-    } else {
-        ttden = 0;
+            }
+        }
+
     }
 
-    console.log("hello");
-    firebase.database().ref('nhacuahoang/' + 'phongkhach').update({
-        den: ttden
-    });
+});
+//fitter
+function search() {
+  const input = document.getElementById("myInput");
+  const inputStr = input.value.toUpperCase();
+    document.querySelectorAll('#tabstate tr:not(.header)').forEach((tr) => {
+    const anyMatch = [...tr.children]
+      .some(td => td.textContent.toUpperCase().includes(inputStr));
+    if (anyMatch) tr.style.removeProperty('display');
+    else tr.style.display = 'none';
+  });
 }
 
+//////////// open/close tab state
+function openState() {
+  document.getElementById("tabstate").style.width = "100%";
+}
 
-nhahoang.child('phongkhach/nhietdo').on('value', async function(snap) {
-    var nhietdo = await snap.val();
-    temp.innerHTML = 'Nhiệt độ là: ' + nhietdo;
-    console.log(nhietdo)
-});
+function closeState() {
+    document.getElementById("tabstate").style.width = "0";
+}
+/////////// open/close tab home state
+function openRoom(evt, roomName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
 
-nhahoang.child('phongkhach/den').on('value', async function(snap) {
-    var ttled = await snap.val();
-    ttden = ttled;
-});
-
-
-// PHONG BẾP
-okey2.onclick = function() {
-    if (ttden2 == 0) {
-        ttden2 = 1;
-
-    } else {
-        ttden2 = 0;
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
     }
 
-    console.log("hello");
-    firebase.database().ref('nhacuahoang/' + 'phongbep').update({
-        den: ttden2
-    });
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace("active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(roomName).style.display = "block";
+    evt.currentTarget.className += "active";
 }
 
-
-nhahoang.child('phongbep/nhietdo').on('value', async function(snap) {
-    var nhietdo = await snap.val();
-    temp2.innerHTML = 'Nhiệt độ là: ' + nhietdo;
-    console.log(nhietdo)
-});
-
-nhahoang.child('phongbep/den').on('value', async function(snap) {
-    var ttled = await snap.val();
-    ttden2 = ttled;
-});
-
-// okey.addEventListener("click", writeUserData("phongkhach", 20));
-// document.getElementById("okey").onclick = writeUserData("phongkhach", 12);
-// console.log(okey)
-console.log("hello");
-console.log("hello");
