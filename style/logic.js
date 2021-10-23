@@ -15,27 +15,17 @@ var database = firebase.database();
 ////////////////
 
 function toggleStatea(home, room, device, stageToggle) {
-    //if (stageToggle == 'ON') {
-       // stageToggle = 'OFF';
+    if (stageToggle == 'ON') {
+       stageToggle = 'OFF';
 
-   // } else {
-      //  stageToggle == 'ON';
-  //  }
-    console.log(stageToggle);
-    stageToggle="HOANG"
-    //firebase.database().ref("ALL").update(); 
-    newPushRef = database.ref("ALL").child(home).child(room)
-    newPushRef.set( {device}, stageToggle );
-
-
-//lỗi gì nhỉ cái phần tử trong table m chạy trong for, sao lôi ra đây dùng đc
-// t truyền đối số vào mà.
-
- 
-
+    } else {
+        stageToggle = 'ON';
+    }
+    newPushRef = database.ref("ALL").child(home).child(room).child(device)
+    newPushRef.set(stageToggle);
 
 }
-///////////up date đâu :)) m up date cái gì đấy :)))) t chưa truyền vào
+//////table update
 tableReportAll = document.getElementById("tablestate");
 database.ref("ALL").on('value', async function (snap) {
     var ketqualangnghe = await snap.val();
@@ -55,7 +45,7 @@ database.ref("ALL").on('value', async function (snap) {
                     <td>${Room}</td>
                     <td>${Device}</td>
                     <td>${State}</td>
-                    <td><button onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${State}' )"> Click </button></td>
+                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${State}' )"> Toggle </button></td>
                 </tr>`
 
             }

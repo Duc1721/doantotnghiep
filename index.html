@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script type="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.jqueryui.min.css"/>
 </head>
 <body>
 
@@ -92,11 +93,10 @@
 <div id="tabstate" class="state1">
     <div class="container" >
         <div class="tab">
-          <button class="tablinks" onclick="openRoom(event, 'Room1')" id="defaultOpen">ALL</button>
-          <button class="tablinks" onclick="openRoom(event, 'Room2')">Home Duc's</button>
+          <button class="tablinks" onclick="openRoom(event, 'Room1')" id="defaultOpen">STATE TABLE</button>
+          <button class="tablinks" onclick="openRoom(event, 'Room2')">SETTING CONFIG</button>
           <button class="tablinks" onclick="openRoom(event, 'Room3')">
-          <a href="javascript:void(0)" class="closebtn" onclick="closeState()">&times;</a>
-        Home Hoang's</button>
+          <a href="javascript:void(0)" class="closebtn" onclick="closeState()">&times;</a>FUNCION PLUS</button>
     </div>
         <div id="Room1" class="tabcontent-active">
             <div class="container">
@@ -201,11 +201,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-<!--     <script >
-        var ON = "ON";
-        var OFF = "OFF";
-
-    </script> -->
     <script src="./style/logic.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -213,20 +208,3 @@
 </body>
 
 </html>
- <!-- <h1>WEB-Firebase-NODE1</h1>
-
-    <div>
-        <button id="okey">okey</button>
-        <h2 id='temp'>Nhiệt độ phòng: </h2>
-
-    </div>
-
-
-    <h1>WEB-Firebase-NODE2</h1>
-
-    <div>
-        <button id="okey2">okey</button>
-        <h2 id='temp2'>Nhiệt độ phòng: </h2>
-
-    </div> -->
-

@@ -386,3 +386,6 @@ hr.light {
   margin-top: 20px;
   margin-bottom: 10px;
 }
+.btn-outline-dark{
+  border-radius: 5px;
+}
