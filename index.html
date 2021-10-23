@@ -100,14 +100,14 @@
     </div>
         <div id="Room1" class="tabcontent-active">
             <div class="container">
-                 <h2>STATE ALL HOME</h2>
                  <div class="panel panel-primary"> 
-    <input type="text" id="myInput" onkeyup="search()" placeholder="Key word">
+    
+    <input class="form-control" type="search" id="myInput" onkeyup="search()" placeholder="Search" aria-label="Search">
         </div>
               <div class="table-responsive">
                 <table class="table table-bordered">
                   <thead>
-                    <tr>
+                    <tr class="header">
                       <th>#</th>
                       <th>Home</th>
                       <th>Room</th>
@@ -201,6 +201,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+<!--     <script >
+        var ON = "ON";
+        var OFF = "OFF";
+
+    </script> -->
     <script src="./style/logic.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 

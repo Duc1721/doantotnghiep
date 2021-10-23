@@ -1,4 +1,4 @@
-// ---------------------------------------config firebase-------------------------//
+﻿// ---------------------------------------config firebase-------------------------//
 const firebaseConfig = {
     apiKey: "AIzaSyAEqi81NFMPBJGxWRy7QtQv961efPzL9LA",
     authDomain: "hellodatn.firebaseapp.com",
@@ -12,7 +12,30 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 var database = firebase.database();
+////////////////
 
+function toggleStatea(home, room, device, stageToggle) {
+    //if (stageToggle == 'ON') {
+       // stageToggle = 'OFF';
+
+   // } else {
+      //  stageToggle == 'ON';
+  //  }
+    console.log(stageToggle);
+    stageToggle="HOANG"
+    //firebase.database().ref("ALL").update(); 
+    newPushRef = database.ref("ALL").child(home).child(room)
+    newPushRef.set( {device}, stageToggle );
+
+
+//lỗi gì nhỉ cái phần tử trong table m chạy trong for, sao lôi ra đây dùng đc
+// t truyền đối số vào mà.
+
+ 
+
+
+}
+///////////up date đâu :)) m up date cái gì đấy :)))) t chưa truyền vào
 tableReportAll = document.getElementById("tablestate");
 database.ref("ALL").on('value', async function (snap) {
     var ketqualangnghe = await snap.val();
@@ -32,7 +55,7 @@ database.ref("ALL").on('value', async function (snap) {
                     <td>${Room}</td>
                     <td>${Device}</td>
                     <td>${State}</td>
-                    <td><button>X</button></td>
+                    <td><button onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${State}' )"> Click </button></td>
                 </tr>`
 
             }
@@ -41,18 +64,18 @@ database.ref("ALL").on('value', async function (snap) {
     }
 
 });
+
 //fitter
 function search() {
   const input = document.getElementById("myInput");
   const inputStr = input.value.toUpperCase();
-    document.querySelectorAll('#tabstate tr:not(.header)').forEach((tr) => {
+    document.querySelectorAll('#tabstate tr:not(.header').forEach((tr) => {
     const anyMatch = [...tr.children]
       .some(td => td.textContent.toUpperCase().includes(inputStr));
     if (anyMatch) tr.style.removeProperty('display');
     else tr.style.display = 'none';
   });
-}
-
+} 
 //////////// open/close tab state
 function openState() {
   document.getElementById("tabstate").style.width = "100%";
