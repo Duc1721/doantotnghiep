@@ -45,7 +45,7 @@ database.ref("ALL").on('value', async function (snap) {
                     <td>${Room}</td>
                     <td>${Device}</td>
                     <td>${State}</td>
-                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${State}' )"> Toggle </button></td>
+                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${State}' )"> Toggle <i class="fas fa-power-off    "></i></button></td>
                 </tr>`
 
             }

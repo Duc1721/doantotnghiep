@@ -381,11 +381,17 @@ hr.light {
 .header {
   border-bottom: 3px solid black;
 }
-.form-control{
-  max-width: 320px;
-  margin-top: 20px;
-  margin-bottom: 10px;
+input[type=search] {
+  width: 130px;
+  -webkit-transition: 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=search]:focus {
+  width: 100%;
 }
 .btn-outline-dark{
   border-radius: 5px;
 }
+
