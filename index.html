@@ -93,12 +93,12 @@
 <div id="tabstate" class="state1">
     <div class="container" >
         <div class="tab">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeState()">&times;</a>
           <button class="tablinks" onclick="openRoom(event, 'Room1')" id="defaultOpen">STATE TABLE</button>
           <button class="tablinks" onclick="openRoom(event, 'Room2')">SETTING CONFIG</button>
-          <button class="tablinks" onclick="openRoom(event, 'Room3')">
-          <a href="javascript:void(0)" class="closebtn" onclick="closeState()">&times;</a>FUNCION PLUS</button>
+          <button class="tablinks" onclick="openRoom(event, 'Room3')">FUNCION PLUS</button>
     </div>
-        <div id="Room1" class="tabcontent-active">
+        <div id="Room1" class="tabcontent">
             <div class="container">
                  <form class="form-inline">      
                     <input type="search" id="myInput" onkeyup="search()" placeholder=" Search" aria-label="Search">
@@ -127,9 +127,8 @@
         <div id="Room3" class="tabcontent">
           <h3>Room 3</h3>
         </div>
-    </div>
+    </div> 
 </div>
-
 
 <div class="container-fluid padding">
     <!-- chữ phân đều giữa -->
