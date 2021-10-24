@@ -66,8 +66,8 @@ html, body {
     animation-name: cd-bounce-rotate;
     animation-duration: 1s;
 }
-.btn-success {
-    min-width: 50px;
+.btn-success{
+    margin-left: -50px;
 }
 .jumbotron {
     /*1 rem là 1 font size, không bo tròn*/
@@ -382,16 +382,21 @@ hr.light {
   border-bottom: 3px solid black;
 }
 input[type=search] {
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  margin-top: 10px;
+  margin-bottom: 5px;
   width: 130px;
   -webkit-transition: 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
-}
+  border: none;
+  padding: 5px;
 
-/* When the input field gets focus, change its width to 100% */
+}
 input[type=search]:focus {
   width: 100%;
 }
 .btn-outline-dark{
   border-radius: 5px;
 }
-
