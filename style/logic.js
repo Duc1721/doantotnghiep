@@ -12,18 +12,26 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 var database = firebase.database();
-////////////////
-
+/////////////// toogle state
 function toggleStatea(home, room, device, stageToggle) {
-    if (stageToggle == 'ON') {
-       stageToggle = 'OFF';
+    if (stageToggle == '1') {
+        stageToggle = '0';
 
+    } else if (stageToggle == '0') {
+        stageToggle = '1';
     } else {
-        stageToggle = 'ON';
     }
     newPushRef = database.ref("ALL").child(home).child(room).child(device)
     newPushRef.set(stageToggle);
 
+}
+/////////////////// clear Device
+function deleteDevice(home, room, device) {
+    var result = confirm("Are you sure you want to delete this device configuration?");
+    if (result == true) {
+        newRemoteRef = database.ref("ALL").child(home).child(room).child(device)
+        newRemoteRef.remove();
+    }
 }
 //////table update
 tableReportAll = document.getElementById("tablestate");
@@ -45,7 +53,9 @@ database.ref("ALL").on('value', async function (snap) {
                     <td>${Room}</td>
                     <td>${Device}</td>
                     <td>${State}</td>
-                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${State}' )"> Toggle <i class="fas fa-power-off    "></i></button></td>
+                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${State}' )"><i class="fas fa-power-off"></i></button>
+                        <button class="btn-outline-dark" onclick = "deleteDevice( '${Home}', '${Room}','${Device}')"><i class="far fa-trash-alt"></i></button>
+                    </td>
                 </tr>`
 
             }
@@ -97,3 +107,4 @@ function openRoom(evt, roomName) {
 }
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
+

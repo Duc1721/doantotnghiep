@@ -101,7 +101,7 @@
         <div id="Room1" class="tabcontent">
             <div class="container">
                  <form class="form-inline">      
-                    <input type="search" id="myInput" onkeyup="search()" placeholder=" Search" aria-label="Search">
+                    <input type="search" id="myInput" onkeyup="search()" placeholder= "  Search" aria-label="Search">
                  </form>
               <div class="table-responsive">
                 <table class="table table-bordered">
@@ -112,7 +112,7 @@
                       <th>Room</th>
                       <th>Device</th>
                       <th>State</th>
-                      <th>Turn on/off</th>
+                      <th>Togger/Delete</th>
                     </tr>
                   </thead>
                   <tbody id="tablestate">
@@ -122,7 +122,50 @@
             </div>
         </div>
         <div id="Room2" class="tabcontent">
-          <h3>Room 2</h3>
+            <div class="container-fluid">
+              <div class="row">
+               <div class="accordion" id="myaccordion" style="max-width: 320px">
+                <div class="card">
+                    <div class="card-header btn"  data-toggle="collapse" data-target="#noidungcard1" aria-expanded="true"
+                         data-parent="#myaccordion">ADD</div>
+                    <div class="card-body collapse show"  data-toggle="collapse"  aria-expanded="false" id="noidungcard1">
+                        <h5 class="card-title">Design your home</h5>
+                        <h5><input type="text" placeholder="Your room name"><h5>
+                        <button class="btn btn-dark">OK</button>
+                        <button class="btn btn-dark">Add room</button>
+                        <button class="btn btn-dark">Add device</button>
+                    </div>    
+                </div>
+                
+                <div class="card">
+                    <div class="card-header btn"  data-toggle="collapse" data-target="#noidungcard2" data-parent="#myaccordion">
+                        DELETE
+                    </div>
+                    <div class="card-body collapse show"  data-toggle="collapse"  aria-expanded="false" id="noidungcard1">
+                        <h5 class="card-title">Design your home</h5>
+                        <h5><input type="text" placeholder="Your house name"><h5>
+                        <button class="btn btn-dark">Add room</button>
+                        <button class="btn btn-dark">Add device</button>
+                    </div>  
+                
+                </div>
+                
+                <div class="card">
+                    <div class="card-header btn"  data-toggle="collapse" data-target="#noidungcard3" data-parent="#myaccordion">
+                        MODYFI
+                    </div>
+                   <div class="card-body collapse show"  data-toggle="collapse"  aria-expanded="false" id="noidungcard1">
+                        <h5 class="card-title">Design your home</h5>
+                        <h5><input type="text" placeholder="Your house name"><h5>
+                        <button class="btn btn-dark">Add room</button>
+                        <button class="btn btn-dark">Add device</button>
+                    </div>  
+                
+                </div>
+
+            </div>
+              </div>
+            </div>
         </div>
         <div id="Room3" class="tabcontent">
           <h3>Room 3</h3>
@@ -195,13 +238,13 @@
         </div>
     </div>
 </footer>
+
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="./style/logic.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 
 </body>
 
