@@ -25,6 +25,8 @@ function toggleStatea(home, room, device, stageToggle) {
     newPushRef.set(stageToggle);
 
 }
+
+
 /////////////////// clear Device
 function deleteDevice(home, room, device) {
     var result = confirm("Are you sure you want to delete this device configuration?");
@@ -35,12 +37,14 @@ function deleteDevice(home, room, device) {
 }
 //////table update
 tableReportAll = document.getElementById("tablestate");
+tableHomeAll = document.getElementById("homeName");
 database.ref("ALL").on('value', async function (snap) {
     var ketqualangnghe = await snap.val();
     tableReportAll.innerHTML = ''
     num = 0;
     for (var Home in ketqualangnghe) {
         nhathemS = ketqualangnghe[Home]
+      
         for (var Room in nhathemS) {
             phongthemS = nhathemS[Room]
             for (var Device in phongthemS) {
@@ -64,6 +68,65 @@ database.ref("ALL").on('value', async function (snap) {
     }
 
 });
+
+homeName = document.getElementById("HName");
+function showHome() {
+    database.ref("ALL").once('value', async function (snap) {
+        var ketqualangnghe = await snap.val();
+        homeName.innerHTML = "";
+        for (var Home in ketqualangnghe) {    
+            homeName.innerHTML += `
+                    <div class="card">
+                        <h5 class="card-header btn " style ="text-align: left">Name: ${Home}</h5>
+                        <h5></h5>
+                        <h6><button class="btn info" onclick="showRoom('${Home}')" style="width:25%"><i class="fas fa-home"></i></button>
+                        <button class="btn info" style="width:25%"><i class="far fa-plus-square"></i></button> </h6>
+                    </div>  
+            `
+        }
+    });
+}
+
+romeName = document.getElementById("RName");
+function showRoom(Rhome) {
+    database.ref("ALL").child(Rhome).once('value', async function (snap) {
+        var ketqualangnghe = await snap.val();
+        romeName.innerHTML = "";      
+        for (var Room in ketqualangnghe) {
+                romeName.innerHTML += `
+                <div class="card">
+                        <h5 class="card-header btn">${Rhome}: ${Room}</h5>
+                        <h5></h5>
+                        <h6><button class="btn info" onclick="showDevice('${Rhome}','${Room}')" style="width:25%"><i class="fas fa-video"></i></button>
+                        <button class="btn info" style="width:25%"><i class="far fa-plus-square"></i></button> </h6>
+                    </div> 
+            `
+
+
+        }
+    });
+}
+
+deviceName = document.getElementById("DName");
+function showDevice(Dhome, Droom) {
+    database.ref("ALL").child(Dhome).child(Droom).once('value', async function (snap) {
+        var ketqualangnghe = await snap.val();
+        deviceName.innerHTML = "";
+        for (var thietbi in ketqualangnghe) {
+            //nhathemS = ketqualangnghe[Room]
+            deviceName.innerHTML += `
+                  
+                   <div class="card">
+                        <h5 class="card-header btn">${Droom} : ${thietbi}</h5>
+                   
+                    </div> 
+            `
+
+            
+        }
+    });
+}
+
 
 //fitter
 function search() {
@@ -107,4 +170,4 @@ function openRoom(evt, roomName) {
 }
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
-
+document.getElementById("btnadd").click();

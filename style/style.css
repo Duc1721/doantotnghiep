@@ -403,12 +403,32 @@ input[type=search]:focus {
 }
 
 /**/
-dialog {
-    visibility: hidden;
-    transform: scale(0.1);
-    transition: transform 200ms;
+.vertical-menu {
+  width: 22%; /* Set a width if you like */
 }
-dialog.dialog-scale {
-    visibility: visible;
-    transform: scale(1);
+
+.vertical-menu a {
+  background-color: #eee; /* Grey background color */
+  color: black; /* Black text color */
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove underline from links */
 }
+
+.vertical-menu a:hover {
+  background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+  background-color: #04AA6D; /* Add a green color to the "active/current" link */
+  color: white;
+}
+.card{
+  margin-left: 10px;
+}
+
+.mauxanh{
+  background-color: greenyellow;
+}
+
+
