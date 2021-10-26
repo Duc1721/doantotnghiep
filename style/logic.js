@@ -86,7 +86,7 @@ function showHome() {
                     <div class="card">
                         <h5 class="card-header btn " style ="text-align: left">Name: ${Home}</h5>
                         <h5></h5>
-                        <h6><button class="btn info" onclick="showRoom('${Home}')" style="width:20%"><i class="fas fa-home"></i></button>
+                        <h6><button id="idhome${Home}" class="btn info" onclick="showRoom('${Home}')" style="width:20%"><i class="fas fa-home"></i></button>
                         <button class="btn info" style="width:20%"><i class="far fa-plus-square"></i></button>
                     </div>  
             `
@@ -97,6 +97,9 @@ function showHome() {
 ///////////////// hien thi nha
 romeName = document.getElementById("RName");
 function showRoom(Rhome) {
+    idhome = document.getElementById("idhome" + Rhome);
+    idhome.style.backgroundColor = "greenyellow";
+  
     database.ref("ALL").child(Rhome).once('value', async function (snap) {
         var ketqualangnghe = await snap.val();
         romeName.innerHTML = "";      
@@ -105,14 +108,18 @@ function showRoom(Rhome) {
                 <div class="card">
                         <h5 class="card-header btn" style="text-align: left">${Rhome}: ${Room}</h5>
                         <h5></h5>
-                        <h6><button class="btn info" onclick="showDevice('${Rhome}','${Room}')" style="width:20%"><i class="far fa-lightbulb"></i></button>
-                        <button class="btn info" style="width:20%" onclick="aDevice('${Rhome}','${Room}')" ><i class="far fa-plus-square"></i></button>
-                        <button class="btn info" style="width:20%" onclick = "deleteRoom( '${Rhome}', '${Room}')"><i class="fa fa-close"></i></button> 
-                        <button class="btn info" style="width:20%"><i class="fa fa-pencil-square-o"></i></button></h6>
+                        <h6><button id = "idroom${Rhome}${Room}"class="btn info" onclick="showDevice('${Rhome}','${Room}')"><i class="far fa-lightbulb"></i></button>
+                        <button class="btn info"  data-toggle="collapse" data-target="#showinput${Rhome}${Room}"><i class="far fa-plus-square"></i></button>
+                        <button class="btn info" onclick = "deleteRoom( '${Rhome}', '${Room}')"><i class="fa fa-close"></i></button> 
+                        <button class="btn info" ><i class="fa fa-pencil-square-o"></i></button></h6>
+                        <div id="showinput${Rhome}${Room}" class="collapse"><input type="text" placeholder="Device name" id="addnameroom">
+                   
+                            <i class="btn btn-dark fa fa-save btn-block" onclick="aDevice('${Rhome}','${Room}')"></i></div>
+                       
 	
                     </div> 
             `
-
+           
 
         }
     });
@@ -122,6 +129,8 @@ function showRoom(Rhome) {
 
 deviceName = document.getElementById("DName");
 function showDevice(Dhome, Droom) {
+    idroom = document.getElementById("idroom" + Dhome+ Droom);
+    idroom.style.backgroundColor = "greenyellow";
     database.ref("ALL").child(Dhome).child(Droom).once('value', async function (snap) {
         var ketqualangnghe = await snap.val();
         deviceName.innerHTML = "";
@@ -141,16 +150,22 @@ function showDevice(Dhome, Droom) {
 }
 
 function aDevice(home, room) {
-    addDevice = "thietbi" + home  + room;
-    trangthai = "on";   
-    newRootRef = database.ref("ALL").child(home).child(room)
-    newRootRef.child(addDevice).set(trangthai)
+    addDevice = document.getElementById("addnameroom").value;
+    if (addDevice != "") {
+        state = "1";
+        newRootRef = database.ref("ALL").child(home).child(room)
+        newRootRef.child(addDevice).set(state)
 
-    showRoom(home)
-    showDevice(home, room)
+        showRoom(home)
+        showDevice(home, room)
+        console.log(addDevice)
+        //console.log() điều kiện của m là ntn đây nếu tên không trung hoặc không trống thì gán
+
+
+    } else { window.alert("Error!"); }
+        
 
 }
-
 
 //fitter
 function search() {
@@ -196,10 +211,3 @@ function openRoom(evt, roomName) {
 document.getElementById("defaultOpen").click();
 document.getElementById("btnadd").click();
 
-function openForm() {
-    document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-}
