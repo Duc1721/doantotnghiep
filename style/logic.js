@@ -29,17 +29,22 @@ function toggleStatea(home, room, device, stageToggle) {
 
 /////////////////// clear Device
 function deleteDevice(home, room, device) {
+ 
     var result = confirm("Are you sure you want to delete this device configuration?");
     if (result == true) {
         newRemoteRef = database.ref("ALL").child(home).child(room).child(device)
         newRemoteRef.remove();
+        showDevice(home, room)
     }
+   
 }
 function deleteRoom(home, room) {
+ 
     var result = confirm("Are you sure you want to delete this room configuration?");
     if (result == true) {
         newRemoteRef = database.ref("ALL").child(home).child(room)
         newRemoteRef.remove();
+        showRoom(home)
     }
 }
 //////table update
@@ -109,10 +114,10 @@ function showRoom(Rhome) {
                         <h5 class="card-header btn" style="text-align: left">${Rhome}: ${Room}</h5>
                         <h5></h5>
                         <h6><button id = "idroom${Rhome}${Room}"class="btn info" onclick="showDevice('${Rhome}','${Room}')"><i class="far fa-lightbulb"></i></button>
-                        <button class="btn info"  data-toggle="collapse" data-target="#showinput${Rhome}${Room}"><i class="far fa-plus-square"></i></button>
+                        <button class="btn info"  data-toggle="collapse" data-target="#showinput${Rhome}${Room}" onclick = "showDevice( '${Rhome}', '${Room}')"><i class="far fa-plus-square"></i></button>
                         <button class="btn info" onclick = "deleteRoom( '${Rhome}', '${Room}')"><i class="fa fa-close"></i></button> 
                         <button class="btn info" ><i class="fa fa-pencil-square-o"></i></button></h6>
-                        <div id="showinput${Rhome}${Room}" class="collapse"><input type="text" placeholder="Device name" id="addnameroom">
+                        <div id="showinput${Rhome}${Room}" class="collapse"><input type="text" placeholder="Device name" id="addname${Rhome}${Room}">
                    
                             <i class="btn btn-dark fa fa-save btn-block" onclick="aDevice('${Rhome}','${Room}')"></i></div>
                        
@@ -150,22 +155,23 @@ function showDevice(Dhome, Droom) {
 }
 
 function aDevice(home, room) {
-    addDevice = document.getElementById("addnameroom").value;
+    addDevice = document.getElementById("addname" + home + room).value;
     if (addDevice != "") {
-        state = "1";
+        state = "0";
         newRootRef = database.ref("ALL").child(home).child(room)
         newRootRef.child(addDevice).set(state)
 
         showRoom(home)
         showDevice(home, room)
-        console.log(addDevice)
-        //console.log() điều kiện của m là ntn đây nếu tên không trung hoặc không trống thì gán
 
 
     } else { window.alert("Error!"); }
-        
+
+      
 
 }
+
+
 
 //fitter
 function search() {
@@ -210,4 +216,33 @@ function openRoom(evt, roomName) {
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 document.getElementById("btnadd").click();
+//////////////////random
+function randomString(len, an) {
+    an = an && an.toLowerCase();
+    var str = "", i = 0, min = an == "a" ? 10 : 0, max = an == "n" ? 10 : 62;
+    for (; i++ < len;) {
+        var r = Math.random() * (max - min) + min << 0;
+        str += String.fromCharCode(r += r > 9 ? r < 36 ? 55 : 61 : 48);
+    }
+    return str;
+}
 
+//randomString(10);        // "4Z8iNQag9v"
+//randomString(10, "A");   // "aUkZuHNcWw"
+//randomString(10, "N");   // "9055739230"
+console.log(randomString(8, "N"))
+/////////////////// add home
+var formAddHome = document.getElementById('addHome');
+function addnewHome() {
+    document.getElementById('addHome').style.display = 'block'
+    var newid = randomString(8)
+    document.getElementById("idnewHome").innerHTML = "ID HOME: " + newid;   
+}
+function roomPlus() {
+    var newidroom = randomString(4)
+    document.getElementById('idnewRoom').setAttribute('value', "ID Room: " + newidroom);
+    newidHome = document.getElementById("idnewHome").value;
+}
+function closeAddnewHome() {
+    document.getElementById('addHome').style.display = 'none'
+}
