@@ -35,6 +35,13 @@ function deleteDevice(home, room, device) {
         newRemoteRef.remove();
     }
 }
+function deleteRoom(home, room) {
+    var result = confirm("Are you sure you want to delete this room configuration?");
+    if (result == true) {
+        newRemoteRef = database.ref("ALL").child(home).child(room)
+        newRemoteRef.remove();
+    }
+}
 //////table update
 tableReportAll = document.getElementById("tablestate");
 tableHomeAll = document.getElementById("homeName");
@@ -79,14 +86,15 @@ function showHome() {
                     <div class="card">
                         <h5 class="card-header btn " style ="text-align: left">Name: ${Home}</h5>
                         <h5></h5>
-                        <h6><button class="btn info" onclick="showRoom('${Home}')" style="width:25%"><i class="fas fa-home"></i></button>
-                        <button class="btn info" style="width:25%"><i class="far fa-plus-square"></i></button> </h6>
+                        <h6><button class="btn info" onclick="showRoom('${Home}')" style="width:20%"><i class="fas fa-home"></i></button>
+                        <button class="btn info" style="width:20%"><i class="far fa-plus-square"></i></button>
                     </div>  
             `
         }
     });
-}
 
+}
+///////////////// hien thi nha
 romeName = document.getElementById("RName");
 function showRoom(Rhome) {
     database.ref("ALL").child(Rhome).once('value', async function (snap) {
@@ -95,16 +103,21 @@ function showRoom(Rhome) {
         for (var Room in ketqualangnghe) {
                 romeName.innerHTML += `
                 <div class="card">
-                        <h5 class="card-header btn">${Rhome}: ${Room}</h5>
+                        <h5 class="card-header btn" style="text-align: left">${Rhome}: ${Room}</h5>
                         <h5></h5>
-                        <h6><button class="btn info" onclick="showDevice('${Rhome}','${Room}')" style="width:25%"><i class="fas fa-video"></i></button>
-                        <button class="btn info" style="width:25%"><i class="far fa-plus-square"></i></button> </h6>
+                        <h6><button class="btn info" onclick="showDevice('${Rhome}','${Room}')" style="width:20%"><i class="far fa-lightbulb"></i></button>
+                        <button class="btn info" style="width:20%" onclick="aDevice('${Rhome}','${Room}')" ><i class="far fa-plus-square"></i></button>
+                        <button class="btn info" style="width:20%" onclick = "deleteRoom( '${Rhome}', '${Room}')"><i class="fa fa-close"></i></button> 
+                        <button class="btn info" style="width:20%"><i class="fa fa-pencil-square-o"></i></button></h6>
+	
                     </div> 
             `
 
 
         }
     });
+    deviceName.innerHTML = "";
+  
 }
 
 deviceName = document.getElementById("DName");
@@ -112,19 +125,30 @@ function showDevice(Dhome, Droom) {
     database.ref("ALL").child(Dhome).child(Droom).once('value', async function (snap) {
         var ketqualangnghe = await snap.val();
         deviceName.innerHTML = "";
-        for (var thietbi in ketqualangnghe) {
-            //nhathemS = ketqualangnghe[Room]
-            deviceName.innerHTML += `
-                  
+        for (var device in ketqualangnghe) { 
+            deviceName.innerHTML += `     
                    <div class="card">
-                        <h5 class="card-header btn">${Droom} : ${thietbi}</h5>
-                   
+                        <h5 class="card-header btn" style="text-align: left" >${Droom}: ${device}</h5>
+                        <h5></h5>
+                        <h6><button class="btn info" style="width:20%"><i class="fa fa-close" onclick = "deleteDevice( '${Dhome}', '${Droom}','${device}')"></i></button>
+                          <button class="btn info" style="width:20%"><i class="fa fa-pencil-square-o"></i></button> </h6>
                     </div> 
             `
 
             
         }
     });
+}
+
+function aDevice(home, room) {
+    addDevice = "thietbi" + home  + room;
+    trangthai = "on";   
+    newRootRef = database.ref("ALL").child(home).child(room)
+    newRootRef.child(addDevice).set(trangthai)
+
+    showRoom(home)
+    showDevice(home, room)
+
 }
 
 
@@ -171,3 +195,11 @@ function openRoom(evt, roomName) {
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 document.getElementById("btnadd").click();
+
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+}
