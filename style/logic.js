@@ -19,8 +19,7 @@ function toggleStatea(home, room, device, stageToggle) {
 
     } else if (stageToggle == '0') {
         stageToggle = '1';
-    } else {
-    }
+    } else {}
     newPushRef = database.ref("ALL").child(home).child(room).child(device)
     newPushRef.set(stageToggle);
 
@@ -29,17 +28,18 @@ function toggleStatea(home, room, device, stageToggle) {
 
 /////////////////// clear Device
 function deleteDevice(home, room, device) {
- 
+
     var result = confirm("Are you sure you want to delete this device configuration?");
     if (result == true) {
         newRemoteRef = database.ref("ALL").child(home).child(room).child(device)
         newRemoteRef.remove();
         showDevice(home, room)
     }
-   
+
 }
+
 function deleteRoom(home, room) {
- 
+
     var result = confirm("Are you sure you want to delete this room configuration?");
     if (result == true) {
         newRemoteRef = database.ref("ALL").child(home).child(room)
@@ -50,13 +50,13 @@ function deleteRoom(home, room) {
 //////table update
 tableReportAll = document.getElementById("tablestate");
 tableHomeAll = document.getElementById("homeName");
-database.ref("ALL").on('value', async function (snap) {
+database.ref("ALL").on('value', async function(snap) {
     var ketqualangnghe = await snap.val();
     tableReportAll.innerHTML = ''
     num = 0;
     for (var Home in ketqualangnghe) {
         nhathemS = ketqualangnghe[Home]
-      
+
         for (var Room in nhathemS) {
             phongthemS = nhathemS[Room]
             for (var Device in phongthemS) {
@@ -82,11 +82,12 @@ database.ref("ALL").on('value', async function (snap) {
 });
 
 homeName = document.getElementById("HName");
+
 function showHome() {
-    database.ref("ALL").once('value', async function (snap) {
+    database.ref("ALL").once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         homeName.innerHTML = "";
-        for (var Home in ketqualangnghe) {    
+        for (var Home in ketqualangnghe) {
             homeName.innerHTML += `
                     <div class="card">
                         <h5 class="card-header btn " style ="text-align: left">Name: ${Home}</h5>
@@ -101,15 +102,16 @@ function showHome() {
 }
 ///////////////// hien thi nha
 romeName = document.getElementById("RName");
+
 function showRoom(Rhome) {
     idhome = document.getElementById("idhome" + Rhome);
     idhome.style.backgroundColor = "greenyellow";
-  
-    database.ref("ALL").child(Rhome).once('value', async function (snap) {
+
+    database.ref("ALL").child(Rhome).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
-        romeName.innerHTML = "";      
+        romeName.innerHTML = "";
         for (var Room in ketqualangnghe) {
-                romeName.innerHTML += `
+            romeName.innerHTML += `
                 <div class="card">
                         <h5 class="card-header btn" style="text-align: left">${Rhome}: ${Room}</h5>
                         <h5></h5>
@@ -124,22 +126,23 @@ function showRoom(Rhome) {
 	
                     </div> 
             `
-           
+
 
         }
     });
     deviceName.innerHTML = "";
-  
+
 }
 
 deviceName = document.getElementById("DName");
+
 function showDevice(Dhome, Droom) {
-    idroom = document.getElementById("idroom" + Dhome+ Droom);
+    idroom = document.getElementById("idroom" + Dhome + Droom);
     idroom.style.backgroundColor = "greenyellow";
-    database.ref("ALL").child(Dhome).child(Droom).once('value', async function (snap) {
+    database.ref("ALL").child(Dhome).child(Droom).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         deviceName.innerHTML = "";
-        for (var device in ketqualangnghe) { 
+        for (var device in ketqualangnghe) {
             deviceName.innerHTML += `     
                    <div class="card">
                         <h5 class="card-header btn" style="text-align: left" >${Droom}: ${device}</h5>
@@ -149,7 +152,7 @@ function showDevice(Dhome, Droom) {
                     </div> 
             `
 
-            
+
         }
     });
 }
@@ -167,7 +170,7 @@ function aDevice(home, room) {
 
     } else { window.alert("Error!"); }
 
-      
+
 
 }
 
@@ -175,18 +178,18 @@ function aDevice(home, room) {
 
 //fitter
 function search() {
-  const input = document.getElementById("myInput");
-  const inputStr = input.value.toUpperCase();
+    const input = document.getElementById("myInput");
+    const inputStr = input.value.toUpperCase();
     document.querySelectorAll('#tabstate tr:not(.header').forEach((tr) => {
-    const anyMatch = [...tr.children]
-      .some(td => td.textContent.toUpperCase().includes(inputStr));
-    if (anyMatch) tr.style.removeProperty('display');
-    else tr.style.display = 'none';
-  });
-} 
+        const anyMatch = [...tr.children]
+            .some(td => td.textContent.toUpperCase().includes(inputStr));
+        if (anyMatch) tr.style.removeProperty('display');
+        else tr.style.display = 'none';
+    });
+}
 //////////// open/close tab state
 function openState() {
-  document.getElementById("tabstate").style.width = "100%";
+    document.getElementById("tabstate").style.width = "100%";
 }
 
 function closeState() {
@@ -219,7 +222,10 @@ document.getElementById("btnadd").click();
 //////////////////random
 function randomString(len, an) {
     an = an && an.toLowerCase();
-    var str = "", i = 0, min = an == "a" ? 10 : 0, max = an == "n" ? 10 : 62;
+    var str = "",
+        i = 0,
+        min = an == "a" ? 10 : 0,
+        max = an == "n" ? 10 : 62;
     for (; i++ < len;) {
         var r = Math.random() * (max - min) + min << 0;
         str += String.fromCharCode(r += r > 9 ? r < 36 ? 55 : 61 : 48);
@@ -233,10 +239,11 @@ function randomString(len, an) {
 //console.log(randomString(8, "N"))
 /////////////////// add home
 var formAddHome = document.getElementById('addHome');
+
 function addnewHome() {
     document.getElementById('addHome').style.display = 'block'
-    var newid = randomString(8, "N")
-    document.getElementById("idnewHome").innerHTML = "ID HOME: " + newid;   
+    var newid = randomString(6, "N")
+    document.getElementById("idnewHome").innerHTML = newid;
 }
 /////////////////////////
 function closeAddnewHome() {
@@ -244,19 +251,20 @@ function closeAddnewHome() {
 }
 ////////////////////////////////
 function decRoom() {
-     valueRoom = document.getElementById("valueRoomNumber").value;
-     minRoom = document.getElementById("valueRoomNumber").min
+    valueRoom = document.getElementById("valueRoomNumber").value;
+    minRoom = 0;
     if (valueRoom > minRoom) {
         valueRoom = parseInt(valueRoom) - 1;
         document.getElementById('valueRoomNumber').setAttribute('value', valueRoom);
     } else {
         return valueRoom
-    }   
-   
+    }
+
 }
+
 function incRoom() {
-     valueRoom = document.getElementById("valueRoomNumber").value;
-     maxRoom = document.getElementById("valueRoomNumber").max;
+    valueRoom = document.getElementById("valueRoomNumber").value;
+    maxRoom = 20;
     if (valueRoom < maxRoom) {
         valueRoom = parseInt(valueRoom) + 1;
         document.getElementById('valueRoomNumber').setAttribute('value', valueRoom);
@@ -264,52 +272,96 @@ function incRoom() {
     } else {
         return valueRoom
     }
-
-  
-   
 }
 ///////////////////////
 addIDroom = document.getElementById("themroom");
+nameRoom = document.getElementById("nameRoom");
+var mang_chua_cac_obj = []
+
 function roomPlus() {
-    numRoom = document.getElementById("valueRoomNumber").value;
+    name_home = document.getElementById("name_home").value
+    id_home = document.getElementById("idnewHome").textContent
+    nameRoom_new = document.getElementById("nameRoom").value;
+    num_device = document.getElementById("valueRoomNumber").value;
     document.getElementById('themroom').innerHTML = ""
-    for (var i = 0; i < numRoom; i++) {
-        var numDev = 'id="numde' + i + '"';
-        var idnumDev = "NUMDE" + i;
-
-        var newNameroom = 'id="ROOM' + i + '"';
-        var idNewRoom = "ROOM" + i;
-
-        var newidroom = randomString(4, "N")
-        id = 'id="' + newidroom + '"'
-        divnumDe = `<div class="form-select" style= "width:10%">
-                          <select onchange="selectDevice(numDev)">
-                            <option value="0">Select</option>  
-                            <option value="1">1 Device</option>
-                            <option value="2">2 Device</option>
-                            <option value="3">3 Device</option>
-                            <option value="4">4 Device</option>
-                            <option value="5">5 Device</option>
-                            <option value="6">6 Device</option>
-                            <option value="7">7 Device</option>
-                            <option value="8">8 Device</option>
-                            <option value="9">9 Device</option>
+    var newidroom = randomString(4, "N")
+    document.getElementById("idnewphong").innerHTML = newidroom
+        // tên phòng: nameRoom_new   ----- id phòng:newidroom
+    mang_chua_cac_obj = []
+    object_nha = {
+        name_nha: name_home,
+        id_nha: id_home
+    }
+    object_phong = {
+        name_phong: nameRoom_new,
+        id_phong: newidroom
+    }
+    mang_chua_cac_obj.push(object_nha)
+    mang_chua_cac_obj.push(object_phong)
+    for (var i = 0; i < num_device; i++) {
+        var newNameThietbi = 'id="id_device' + i + '"';
+        var idNew_NameThietbi = "id_device" + i;
+        var newithietbi = "thietbi" + i;
+        id = 'id="thietbi' + i + '"';
+        id_phanloai = "phanloaithietbi" + i;
+        divPhanLoai = `<div class="form-select" style= "width:10%">
+                          <select id="phanloaithietbi${i}" onchange="selectDevice('phanloaithietbi${i}')">
+                            <option value="0">Phân Loại</option>  
+                            <option value="1">ĐÈN</option>
+                            <option value="2">CẢM BIẾN</option>
                           </select>
                         </div>`
-
-        divID = '<input disabled type="nameHome" ' + id + 'style="width:70%"></input>'
-        divName = '<input disabled type="nameHome" ' + newNameroom + ' style="width:20%;color:black;background-color:#47aedb87"></input>'
+        divIDThietbi = '<input disabled type="nameHome" ' + id + 'style="width:70%">'
+        divNameThietbi = '<input type="nameHome" ' + newNameThietbi + ' style="width:20%;color:black;background-color:#47aedb87">'
             //< input disabled type = "nameHome" value = ""id = "{F8uu"} "></input>
-        document.getElementById('themroom').innerHTML += divName + divID + divnumDe;
-        document.getElementById(idNewRoom).setAttribute('value', "Room name: " + idNewRoom)
-        document.getElementById(newidroom).setAttribute('value', "ID Room: " + newidroom)
-        //document.getElementById(idnumDev).setAttribute('value', "ID Room: " + idnumDev)
-            
-    }
+        document.getElementById('themroom').innerHTML += divNameThietbi + divIDThietbi + divPhanLoai;
+        document.getElementById(idNew_NameThietbi).setAttribute('value', "Device name: " + idNew_NameThietbi)
+        document.getElementById(newithietbi).setAttribute('value', "ID Device: " + newithietbi)
+            //document.getElementById(idnumDev).setAttribute('value', "ID Room: " + idnumDev)   
 
+        // object_tonghop += { thietbi: newithietbi }
+        object_thietbi = {
+            id_name_device: idNew_NameThietbi,
+            id_device: newithietbi,
+            id_phanloai: id_phanloai
+        }
+        mang_chua_cac_obj.push(object_thietbi)
+            // console.log(name_home + "--" + id_home + "--" + nameRoom_new + "--" + newidroom + id_phanloai + newithietbi + idNew_NameThietbi)
+
+    }
+    document.getElementById('themroom').innerHTML += `<button onclick="oke_firebase()">OKE-chốt đơn</button>`
 }
+
 function selectDevice(seDeid) {
-    var selDevice = document.getElementById("seDeid").value;
+    var selDevice = document.getElementById(seDeid).value;
     console.log(selDevice)
 }
 
+function oke_firebase() {
+    console.log(mang_chua_cac_obj)
+    name_nha = mang_chua_cac_obj[0].name_nha
+    id_nha = mang_chua_cac_obj[0].id_nha
+    name_phong = mang_chua_cac_obj[1].name_phong
+    id_phong = mang_chua_cac_obj[1].id_phong
+    for (let i = 2; i < mang_chua_cac_obj.length; i++) {
+        id_name_device = mang_chua_cac_obj[i].id_name_device
+        id_device = mang_chua_cac_obj[i].id_device
+        id_phanloai = mang_chua_cac_obj[i].id_phanloai
+        name_device = document.getElementById(id_name_device).value;
+        phanloai = document.getElementById(id_phanloai).value;
+
+        console.log("nhà:" + name_nha + "idnha:" + id_nha + "phòng:" + name_phong + "idphong:" + id_phong + "thietbi:" + name_device + "id_device:" + id_device + "loại:" + phanloai)
+        newPushDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device)
+        newPushDevice.set({
+            namethietbi: name_device,
+            phanloai: phanloai,
+            trangthai: "đợi update từ gw"
+        });
+        newPushHome = database.ref("ADMIN").child(id_nha).child("namenha")
+        newPushHome.set(name_nha);
+        newPushRoom = database.ref("ADMIN").child(id_nha).child(id_phong).child("namephong")
+        newPushRoom.set(name_phong);
+
+    }
+
+}

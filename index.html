@@ -1,10 +1,13 @@
-<!DOCTYPE html> <!-- dùng html -->
+<!DOCTYPE html>
+<!-- dùng html -->
 <html lang="en">
+
 <head>
-    <meta charset="utf-8"> <!-- hiển thị tiếng việt -->
+    <meta charset="utf-8">
+    <!-- hiển thị tiếng việt -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Device Control Center</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <!-- <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -12,45 +15,45 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="./style/style.css">
 
-  
+
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-md navbar-light bg-dark"> 
-    <div class="container-fluid"> 
-        <a class="navbar-branch" href="#"> 
-             <img src="https://academy.vnnic.vn/data/sites/5ed4c8a606ed3f170d5aeeb5/files/iot.png" height="60">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse"  
-            data-target="#navbarResponsive">
+    <nav class="navbar navbar-expand-md navbar-light bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-branch" href="#">
+                <img src="https://academy.vnnic.vn/data/sites/5ed4c8a606ed3f170d5aeeb5/files/iot.png" height="60">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                   <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Team</a>
-                       <div class="dropdown-menu">
-                          <a class="dropdown-item" href="https://www.facebook.com/profile.php?id=100022178348683">Lê Xuân Đức</a>
-                          <a class="dropdown-item" href="https://www.facebook.com/hoagle30">Lê Việt Hoàng</a>
-                       </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Product</a></li>
-                <li class="nav-item">
-                    <form class="form-inline my-0 my-lg-0">
-                    <input class="form-control mr-sm-2"placeholder="Search" aria-label="Search">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form class="form-inline" action="/action_page.php">
-                    <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
-                    </form>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Team</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="https://www.facebook.com/profile.php?id=100022178348683">Lê Xuân Đức</a>
+                            <a class="dropdown-item" href="https://www.facebook.com/hoagle30">Lê Việt Hoàng</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Product</a></li>
+                    <li class="nav-item">
+                        <form class="form-inline my-0 my-lg-0">
+                            <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form class="form-inline" action="/action_page.php">
+                            <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="carousel-caption">
@@ -66,182 +69,183 @@
         </div>
         <div class="carousel-item-active">
             <img src="https://dizibrand-19a1e.kxcdn.com/wp-content/uploads/2021/03/IoT-Dizibrand-3.jpg"></div>
-    </div> 
+    </div>
     <div id="mySidenav" class="sidenav">
-       <a href="#" id="home">Home</a>
-       <a href="#" id="notice">Notice</a>
-       <a href="#" id="projects">Project</a>
-       <a href="#" id="time">Calendar</a>
+        <a href="#" id="home">Home</a>
+        <a href="#" id="notice">Notice</a>
+        <a href="#" id="projects">Project</a>
+        <a href="#" id="time">Calendar</a>
     </div>
-    <div class="container" >
-      <div class="row" >
-        <div class="col">
-            <button class="btn1"><i class="fa fa-cogs"></i><h1>Setting</h1></button>
-        </div>
-        <div class="col">
-            <button class="btn1"><i class="fa fa-bar-chart"></i><h1>Statistic</h1></button>
-        </div>
-        <div class="col" onclick="openState()">
-            <button class="btn1"><i class="fa fa-dashboard"></i><h1>State</h1></button>
-        </div>
-        <div class="col">
-            <button class="btn1"><i class="fa fa-globe"></i><h1>Map</h1></button>
-        </div>
-      </div>
-    </div>
-<div id="tabstate" class="state1">
-    <div class="container" >
-        <div class="tab">
-          <a href="javascript:void(0)" class="closebtn" onclick="closeState()">&times;</a>
-          <button class="tablinks" onclick="openRoom(event, 'Room1')" id="defaultOpen">STATE TABLE</button>
-          <button class="tablinks" onclick="openRoom(event, 'Room2')">SETTING CONFIG</button>
-          <button class="tablinks" onclick="openRoom(event, 'Room3')">FUNCION PLUS</button>
-    </div>
-        <div id="Room1" class="tabcontent">
-            <div class="container">
-                 <form class="form-inline">      
-                    <input type="search" id="myInput" onkeyup="search()" placeholder= "  Search" aria-label="Search">
-                 </form>
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr class="header">
-                      <th>#</th>
-                      <th id = "homeName">Home</th>
-                      <th>Room</th>
-                      <th>Device</th>
-                      <th>State</th>
-                      <th>Togger/Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody id="tablestate">
-                  </tbody>
-                </table>
-              </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <button class="btn1"><i class="fa fa-cogs"></i><h1>Setting</h1></button>
+            </div>
+            <div class="col">
+                <button class="btn1"><i class="fa fa-bar-chart"></i><h1>Statistic</h1></button>
+            </div>
+            <div class="col" onclick="openState()">
+                <button class="btn1"><i class="fa fa-dashboard"></i><h1>State</h1></button>
+            </div>
+            <div class="col">
+                <button class="btn1"><i class="fa fa-globe"></i><h1>Map</h1></button>
             </div>
         </div>
-        <div id="Room2" class="tabcontent">
-            <div class="container-fluid">
-              <div class="row">
-               <div class="accordion" id="myaccordion" style="max-width: 320px">
-                <div class="card">
-                  
-                    <div class="card-header btn-active" data-target="#noidungcard1" aria-expanded="true"
-                         data-parent="#myaccordion" onclick="showHome()" id = "btnadd"><b>ADD: Design your home</b></div>
-                    <div class="card-body collapse show"  data-toggle="collapse"  aria-expanded="false" id="noidungcard1">
-                        <h5 class="card-title">
-                            <button class="btn btn-light btn-block"><i class="fad fa-clinic-medical" 
+    </div>
+    <div id="tabstate" class="state1">
+        <div class="container">
+            <div class="tab">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeState()">&times;</a>
+                <button class="tablinks" onclick="openRoom(event, 'Room1')" id="defaultOpen">STATE TABLE</button>
+                <button class="tablinks" onclick="openRoom(event, 'Room2')">SETTING CONFIG</button>
+                <button class="tablinks" onclick="openRoom(event, 'Room3')">FUNCION PLUS</button>
+            </div>
+            <div id="Room1" class="tabcontent">
+                <div class="container">
+                    <form class="form-inline">
+                        <input type="search" id="myInput" onkeyup="search()" placeholder="  Search" aria-label="Search">
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="header">
+                                    <th>#</th>
+                                    <th id="homeName">Home</th>
+                                    <th>Room</th>
+                                    <th>Device</th>
+                                    <th>State</th>
+                                    <th>Togger/Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablestate">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="Room2" class="tabcontent">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="accordion" id="myaccordion" style="max-width: 320px">
+                            <div class="card">
+
+                                <div class="card-header btn-active" data-target="#noidungcard1" aria-expanded="true" data-parent="#myaccordion" onclick="showHome()" id="btnadd"><b>ADD: Design your home</b></div>
+                                <div class="card-body collapse show" data-toggle="collapse" aria-expanded="false" id="noidungcard1">
+                                    <h5 class="card-title">
+                                        <button class="btn btn-light btn-block"><i class="fad fa-clinic-medical" 
                                 onclick="addnewHome()" ></i></button></h5>
-                        
-                        <h5 class= "card-footer">Click the icon above to add your new home ♥ </h5>
-                    </div>    
-                </div>
-                <div class="card">
-                    <div class="card-header btn"  data-toggle="collapse" data-target="#noidungcard2" data-parent="#myaccordion">
-                        DELETE
-                    </div>
-                    <div class="card-body collapse show"   aria-expanded="false" id="noidungcard1">
-                        <h4 class="card-title">Design your home</h4>
-                        <h5><input type="text" placeholder="Your house name"><h5>
-                            
-                        <button class="btn btn-dark">Add device</button>
-                    </div>  
-               
-                </div>
-                
-                <div class="card">
-                    <div class="card-header btn"  data-toggle="collapse" data-target="#noidungcard3" data-parent="#myaccordion">
-                        MODIFY  
-                    </div>
-                   <div class="card-body collapse show" aria-expanded="false" id="noidungcard1">
-                        <h5 class="card-title">Design your home</h5>
-                        <h5><input type="text" placeholder="Your house name"><h5>
-                        <button class="btn btn-dark">Add room</button>
-                        <button class="btn btn-dark">Add device</button>
-                    </div>  
-                </div>    
-            </div>
-                <div class="vertical-menu" id="HName"></div>
-                <div class="vertical-menu" id="RName"></div>
-                <div class="vertical-menu" id="DName"></div>
 
-         
-          
-        <div id="Room3" class="tabcontent">
-          <h3>Room 3</h3>
-        </div>
-              </div>
-            </div>
-        </div>
-       
-    </div> 
-</div>
+                                    <h5 class="card-footer">Click the icon above to add your new home ♥ </h5>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header btn" data-toggle="collapse" data-target="#noidungcard2" data-parent="#myaccordion">
+                                    DELETE
+                                </div>
+                                <div class="card-body collapse show" aria-expanded="false" id="noidungcard1">
+                                    <h4 class="card-title">Design your home</h4>
+                                    <h5><input type="text" placeholder="Your house name">
+                                        <h5>
 
-<div class="container-fluid padding">
-    <!-- chữ phân đều giữa -->
-    <div class="row welcome text-center">
-        <hr>
-        <!-- gộp 12 cột làm 1 cho các kích thước -->
-        <div class="col-12">
-            <h1 class="display-4">Website is Updating</h1>
-        </div>
-        <!-- Horizontal Rule tức là đường kẻ ngang -->
-        <hr> 
-        <div class="col-12">
-            <p>Welcome to Device Control Center. Wish you a good day!</p>
+                                            <button class="btn btn-dark">Add device</button>
+                                </div>
+
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header btn" data-toggle="collapse" data-target="#noidungcard3" data-parent="#myaccordion">
+                                    MODIFY
+                                </div>
+                                <div class="card-body collapse show" aria-expanded="false" id="noidungcard1">
+                                    <h5 class="card-title">Design your home</h5>
+                                    <h5><input type="text" placeholder="Your house name">
+                                        <h5>
+                                            <button class="btn btn-dark">Add room</button>
+                                            <button class="btn btn-dark">Add device</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vertical-menu" id="HName"></div>
+                        <div class="vertical-menu" id="RName"></div>
+                        <div class="vertical-menu" id="DName"></div>
+
+
+
+                        <div id="Room3" class="tabcontent">
+                            <h3>Room 3</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
 
-<div class="container-fluid padding">   
-    <div class="row text-center padding">
-        <div class="col-12">
-            <h2>Contact us</h2>
-        </div>
-        <div class="col-12 social padding">
-            <!--  -->
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-google-plus-g"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-        </div>
-    </div>
-</div>  
-<!-- footer là phần ở cuối web -->
-<footer>
-    <div class="container-fluid padding">   
-        <div class="row text-center">
-            <div class="col-md-4">
-                <hr class="light">
-                <h5>Contact information</h5>
-                <hr class="light">
-                <p>217-595-905</p>
-                <p>DCCDH@gmail.com</p>
-                <p>Ho Chi Minh, Vietnam</p>
-            </div>
-            <div class="col-md-4">              
-                <hr class="light">
-                <h5>Working hours</h5>
-                <hr class="light">
-                <p>Monday-Friday: 8am - 10pm</p>
-                <p>Weekend: 8am - 12am</p>
-                <p>Closed on the 17th of every month</p>
-            </div>
-            <div class="col-md-4">              
-                <hr class="light">
-                <h5>Department</h5>
-                <hr class="light">
-                <p>Ottawa, Canada</p>
-                <p>Tokyo, Japan</p>
-                <p>New York, U.S</p>
-            </div>
+    <div class="container-fluid padding">
+        <!-- chữ phân đều giữa -->
+        <div class="row welcome text-center">
+            <hr>
+            <!-- gộp 12 cột làm 1 cho các kích thước -->
             <div class="col-12">
-                <hr class="light-100">
+                <h1 class="display-4">Website is Updating</h1>
+            </div>
+            <!-- Horizontal Rule tức là đường kẻ ngang -->
+            <hr>
+            <div class="col-12">
+                <p>Welcome to Device Control Center. Wish you a good day!</p>
             </div>
         </div>
     </div>
-</footer>
+
+    <div class="container-fluid padding">
+        <div class="row text-center padding">
+            <div class="col-12">
+                <h2>Contact us</h2>
+            </div>
+            <div class="col-12 social padding">
+                <!--  -->
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- footer là phần ở cuối web -->
+    <footer>
+        <div class="container-fluid padding">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <hr class="light">
+                    <h5>Contact information</h5>
+                    <hr class="light">
+                    <p>217-595-905</p>
+                    <p>DCCDH@gmail.com</p>
+                    <p>Ho Chi Minh, Vietnam</p>
+                </div>
+                <div class="col-md-4">
+                    <hr class="light">
+                    <h5>Working hours</h5>
+                    <hr class="light">
+                    <p>Monday-Friday: 8am - 10pm</p>
+                    <p>Weekend: 8am - 12am</p>
+                    <p>Closed on the 17th of every month</p>
+                </div>
+                <div class="col-md-4">
+                    <hr class="light">
+                    <h5>Department</h5>
+                    <hr class="light">
+                    <p>Ottawa, Canada</p>
+                    <p>Tokyo, Japan</p>
+                    <p>New York, U.S</p>
+                </div>
+                <div class="col-12">
+                    <hr class="light-100">
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
@@ -250,40 +254,37 @@
     <script src="./style/logic.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <div id="addHome" class="formAddHome">
-          
-          <div class="formAddHome-content animate">
+    <div id="addHome" class="formAddHome">
+
+        <div class="formAddHome-content animate">
             <div class="imgcontainer">
-              <span onclick="closeAddnewHome()" class="close" title="Close Modal">&times;</span>
-              <img src="https://scontent.fdad2-1.fna.fbcdn.net/v/t1.6435-9/197898388_972468156835787_603737600879346251_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=idtLdJmcb8EAX9ffqQu&_nc_ht=scontent.fdad2-1.fna&oh=1f00d8bdbf310b62a1902cedd9eba772&oe=619F6EF7" alt="Avatar" class="avatar">
+                <span onclick="closeAddnewHome()" class="close" title="Close Modal">&times;</span>
+                <img src="https://scontent.fdad2-1.fna.fbcdn.net/v/t1.6435-9/197898388_972468156835787_603737600879346251_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=idtLdJmcb8EAX9ffqQu&_nc_ht=scontent.fdad2-1.fna&oh=1f00d8bdbf310b62a1902cedd9eba772&oe=619F6EF7"
+                    alt="Avatar" class="avatar">
             </div>
 
             <div class="container1">
-                <label for="hname"><b id="idnewHome"></b></label>
-                <input type="nameHome" placeholder="Enter home name" name="uname" required>
-                <input type="nameRoom" disabled placeholder="Select room number and click add room to create a room list" name="psw" required>
+                <label for="hname"><b>ID HOME:</b><b id="idnewHome"></b></label>
+                <input id="name_home" type="nameHome" placeholder="Enter home name" name="uname" required>
+                <label style="display:block" for="hname"><b>ID PHÒNG:</b><b id="idnewphong"></b></label>
+                <input id="nameRoom" type="nameRoom" placeholder="Nhập tên phòng" name="nameRoom" required>
                 <div class="buttons_added">
-                   <input class="form-inde minus" type="button" onclick ="decRoom()" value="-">
-                   <input class="input-qty" max="99" min="1" type="numbershow" value="10" id="valueRoomNumber">
-                   <input class="form-inde plus" type="button" onclick ="incRoom()" value="+">
+                    <input class="form-inde minus" type="button" onclick="decRoom()" value="-">
+                    <input class="input-qty" max="99" min="1" type="numbershow" value="10" id="valueRoomNumber">
+                    <input class="form-inde plus" type="button" onclick="incRoom()" value="+">
                 </div>
-              <button onclick ="roomPlus()" class="btnadd" for="psw" name="psw" required>ADD ROOM</button>
-             
-              
-              <div id="themroom"></div>  
+                <button onclick="roomPlus()" class="btnadd" for="psw" name="psw" required>DEVICE</button>
+                <div id="themroom"></div>
 
-
-
-            <input type="checkbox" checked="checked" name="remember"> Remember me</input>
-              </label>
+                </label>
             </div>
 
             <div class="container1" style="background-color:#f1f1f1">
-              <button type="button" onclick="closeAddnewHome()" class="btnadd">Cancel</button>
-              <span class="psw">New? <a href="#">Tutorial</a></span>
+                <button type="button" onclick="closeAddnewHome()" class="btnadd">Cancel</button>
+                <span class="psw">New? <a href="#">Tutorial</a></span>
             </div>
-          </div>
         </div>
+    </div>
 
 
 </body>
