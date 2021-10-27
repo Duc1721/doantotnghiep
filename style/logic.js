@@ -230,19 +230,86 @@ function randomString(len, an) {
 //randomString(10);        // "4Z8iNQag9v"
 //randomString(10, "A");   // "aUkZuHNcWw"
 //randomString(10, "N");   // "9055739230"
-console.log(randomString(8, "N"))
+//console.log(randomString(8, "N"))
 /////////////////// add home
 var formAddHome = document.getElementById('addHome');
 function addnewHome() {
     document.getElementById('addHome').style.display = 'block'
-    var newid = randomString(8)
+    var newid = randomString(8, "N")
     document.getElementById("idnewHome").innerHTML = "ID HOME: " + newid;   
 }
-function roomPlus() {
-    var newidroom = randomString(4)
-    document.getElementById('idnewRoom').setAttribute('value', "ID Room: " + newidroom);
-    newidHome = document.getElementById("idnewHome").value;
-}
+/////////////////////////
 function closeAddnewHome() {
     document.getElementById('addHome').style.display = 'none'
 }
+////////////////////////////////
+function decRoom() {
+     valueRoom = document.getElementById("valueRoomNumber").value;
+     minRoom = document.getElementById("valueRoomNumber").min
+    if (valueRoom > minRoom) {
+        valueRoom = parseInt(valueRoom) - 1;
+        document.getElementById('valueRoomNumber').setAttribute('value', valueRoom);
+    } else {
+        return valueRoom
+    }   
+   
+}
+function incRoom() {
+     valueRoom = document.getElementById("valueRoomNumber").value;
+     maxRoom = document.getElementById("valueRoomNumber").max;
+    if (valueRoom < maxRoom) {
+        valueRoom = parseInt(valueRoom) + 1;
+        document.getElementById('valueRoomNumber').setAttribute('value', valueRoom);
+        console.log(valueRoom)
+    } else {
+        return valueRoom
+    }
+
+  
+   
+}
+///////////////////////
+addIDroom = document.getElementById("themroom");
+function roomPlus() {
+    numRoom = document.getElementById("valueRoomNumber").value;
+    document.getElementById('themroom').innerHTML = ""
+    for (var i = 0; i < numRoom; i++) {
+        var numDev = 'id="numde' + i + '"';
+        var idnumDev = "NUMDE" + i;
+
+        var newNameroom = 'id="ROOM' + i + '"';
+        var idNewRoom = "ROOM" + i;
+
+        var newidroom = randomString(4, "N")
+        id = 'id="' + newidroom + '"'
+        divnumDe = `<div class="form-select" style= "width:10%">
+                          <select onchange="selectDevice(numDev)">
+                            <option value="0">Select</option>  
+                            <option value="1">1 Device</option>
+                            <option value="2">2 Device</option>
+                            <option value="3">3 Device</option>
+                            <option value="4">4 Device</option>
+                            <option value="5">5 Device</option>
+                            <option value="6">6 Device</option>
+                            <option value="7">7 Device</option>
+                            <option value="8">8 Device</option>
+                            <option value="9">9 Device</option>
+                          </select>
+                        </div>`
+
+        divID = '<input disabled type="nameHome" ' + id + 'style="width:70%"></input>'
+        divName = '<input disabled type="nameHome" ' + newNameroom + ' style="width:20%;color:black;background-color:#47aedb87"></input>'
+            //< input disabled type = "nameHome" value = ""id = "{F8uu"} "></input>
+        document.getElementById('themroom').innerHTML += divName + divID + divnumDe;
+        document.getElementById(idNewRoom).setAttribute('value', "Room name: " + idNewRoom)
+        document.getElementById(newidroom).setAttribute('value', "ID Room: " + newidroom)
+        //document.getElementById(idnumDev).setAttribute('value', "ID Room: " + idnumDev)
+            
+    }
+
+}
+function selectDevice(seDeid) {
+    var selDevice = document.getElementById("seDeid").value;
+    console.log(selDevice)
+}
+

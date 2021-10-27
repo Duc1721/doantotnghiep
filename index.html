@@ -81,7 +81,7 @@
         <div class="col">
             <button class="btn1"><i class="fa fa-bar-chart"></i><h1>Statistic</h1></button>
         </div>
-        <div class="col" onclick="openState()";>
+        <div class="col" onclick="openState()">
             <button class="btn1"><i class="fa fa-dashboard"></i><h1>State</h1></button>
         </div>
         <div class="col">
@@ -127,7 +127,7 @@
                 <div class="card">
                   
                     <div class="card-header btn-active" data-target="#noidungcard1" aria-expanded="true"
-                         data-parent="#myaccordion" onclick="showHome()" id = "btnadd">ADD: Design your home</div>
+                         data-parent="#myaccordion" onclick="showHome()" id = "btnadd"><b>ADD: Design your home</b></div>
                     <div class="card-body collapse show"  data-toggle="collapse"  aria-expanded="false" id="noidungcard1">
                         <h5 class="card-title">
                             <button class="btn btn-light btn-block"><i class="fad fa-clinic-medical" 
@@ -259,17 +259,22 @@
             </div>
 
             <div class="container1">
-              <label for="hname"><b id="idnewHome"></b></label>
-              <input type="nameHome" placeholder="Enter home name" name="uname" required>
-              <input type="nameRoom" placeholder="Enter room name" name="psw" required>
-              <input id="idnewRoom" disabled type="nameRoom" placeholder="ID Room AUTO" value="" name="psw">
-              <button onclick ="roomPlus()" class="btnadd" for="psw">ADD ROOM</button><label>
-              <input disabled type="nameHome" value=""id="inforHome"></input>
-              <input disabled type="nameHome" value="" placeholder="Information"></input>
-              <input disabled type="nameHome" value="" placeholder="Information"></input>
-              <input disabled type="nameHome" value="" placeholder="Information"></input>
-                <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
+                <label for="hname"><b id="idnewHome"></b></label>
+                <input type="nameHome" placeholder="Enter home name" name="uname" required>
+                <input type="nameRoom" disabled placeholder="Select room number and click add room to create a room list" name="psw" required>
+                <div class="buttons_added">
+                   <input class="form-inde minus" type="button" onclick ="decRoom()" value="-">
+                   <input class="input-qty" max="99" min="1" type="numbershow" value="10" id="valueRoomNumber">
+                   <input class="form-inde plus" type="button" onclick ="incRoom()" value="+">
+                </div>
+              <button onclick ="roomPlus()" class="btnadd" for="psw" name="psw" required>ADD ROOM</button>
+             
+              
+              <div id="themroom"></div>  
+
+
+
+            <input type="checkbox" checked="checked" name="remember"> Remember me</input>
               </label>
             </div>
 
@@ -279,6 +284,8 @@
             </div>
           </div>
         </div>
+
+
 </body>
 
 </html>

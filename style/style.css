@@ -383,7 +383,6 @@ hr.light {
   border-bottom: 3px solid black;
 }
 input[type=search] {
-  background-image: url('searchicon.png');
   background-position: 10px 10px; 
   background-repeat: no-repeat;
   margin-top: 10px;
@@ -456,11 +455,11 @@ input[type=nameHome] {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid #5cc;
   box-sizing: border-box;
 }
 input[type=nameRoom]{
-  width: 43%;
+  width: 73%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -510,6 +509,17 @@ span.psw {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   padding-top: 60px;
 }
+
+
+.vl {
+  border-left: 6px solid green;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+} 
+
 
 /* formAddHome Content/Box */
 .formAddHome-content {
@@ -561,3 +571,120 @@ span.psw {
      width: 100%;
   }
 }
+/*////////////////////btn add room///////////////////////////////*/
+.buttons_added {
+    opacity:1;
+    display:inline-block;
+    display:-ms-inline-flexbox;
+    display:inline-flex;
+    white-space:nowrap;
+    padding: 12px;
+    width: 13%;
+    min-width: 135px;
+   
+}
+.form-inde {
+    display:-ms-inline-flexbox;
+    display:inline-flex;
+    display: inline-block;
+    position:relative;
+    width:3rem;
+    padding:12px;
+    text-shadow:1px 1px 1px #fff;
+    border:1px solid #ddd;
+
+}
+.form-inde:focus,.input-text:focus {
+    outline:none;
+
+}
+
+.form-inde.minus {
+    border-radius:0px 0 0 4px;
+    background-color: cornflowerblue;
+    
+    
+}
+.form-inde.plus {
+    border-radius:0 4px 0px 0;
+    background-color: cornflowerblue;
+    
+}
+.input-qty {
+    display: inline-block;
+    text-align:center;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    border-left:0;
+    border-right:0;
+    padding:0;
+    width: 100%;
+}
+.input-qty::-webkit-outer-spin-button,.input-qty::-webkit-inner-spin-button {
+    -webkit-appearance:none;
+    margin:0;
+}
+input[type="numbershow"]{
+   outline:none;
+}
+input[type="numbershow"]::-moz-focus-inner {
+   border: 0;
+}
+
+/*///////////////////////*/
+.form-select {
+    display:-ms-inline-flexbox;
+    display:inline-flex;
+    display: inline-block;
+    position:relative;
+    text-shadow:1px 1px 1px #fff;
+    box-shadow: none;
+
+
+}
+.form-select select{
+    content: '25BC';
+    height: 100%;
+    width: 100%;
+    padding: 12px;
+    border:1px solid #47aedb87;
+
+}
+ .form-select:hover::after {
+   color: Gainsboro;
+ }
+select::after {
+  
+   position: absolute;
+   top: 0;
+   right: 0;
+   background: DodgerBlue;
+   cursor: pointer;
+   pointer-events: none;
+   -webkit-transition: .25s all ease;
+   -o-transition: .25s all ease;
+   transition: .25s all ease;
+   color: white;
+ }
+
+  select {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   -ms-appearance: none;
+   appearance: none;
+   outline: 0;
+   box-shadow: none;
+   border: 0 !important;
+   background: #0084c1;
+   background-image: none;
+   border-radius: 0px 15px 0px 0px;
+ }
+.form-select {
+   position: relative;  
+ }
+ select {
+   flex: 1;
+   padding: 1em;
+   color: #fff;
+   cursor: pointer;
+ }
