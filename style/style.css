@@ -575,6 +575,16 @@ span.psw {
      width: 100%;
   }
 }
+.btncus{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+  padding: 7px;
+  min-width: 40px;
+  
+}
 /*////////////////////btn add room///////////////////////////////*/
 .buttons_added {
     opacity:1;

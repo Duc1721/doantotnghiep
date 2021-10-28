@@ -97,67 +97,95 @@ database.ref("ADMIN").on('value', async function(snap) {
 });
 
 homeName = document.getElementById("HName");
-
+////////////////////////hien thi nha
 function showHome() {
-    database.ref("ALL").once('value', async function(snap) {
+    database.ref("ADMIN").once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         homeName.innerHTML = "";
         for (var Home in ketqualangnghe) {
-            homeName.innerHTML += `
-                    <div class="card">
-                        <h5 class="card-header btn " style ="text-align: left">Name: ${Home}</h5>
-                        <h5></h5>
-                        <h6><button id="idhome${Home}" class="btn info" onclick="showRoom('${Home}')" style="width:20%"><i class="fas fa-home"></i></button>
-                        <button class="btn info" style="width:20%"><i class="far fa-plus-square"></i></button>
-                    </div>  
-            `
-        }
+                idnamenha = ketqualangnghe[Home]
+                name_nha_fb = idnamenha.namenha
+                id_nha_fb = Home
+             
+                    homeName.innerHTML += `
+                    <div class="container-fluid">
+                            <div class="card">
+                                <h5 class="card-header btn " style ="text-align: left">Name: ${name_nha_fb}</h5>
+                                <h5></h5>
+                                <h6><button id="idhome${name_nha_fb}" class="btncus" onclick="showRoom('${id_nha_fb}')"><i class="fas fa-home"></i></button>
+                                <button class="btncus"><i class="far fa-plus-square"></i></button>
+                            </div>  
+                        </div>
+                    `   
+            }
     });
 
 }
-///////////////// hien thi nha
+///////////////// hien thi ten phong
 romeName = document.getElementById("RName");
 
 function showRoom(Rhome) {
+    //console.log(Rhome)
     idhome = document.getElementById("idhome" + Rhome);
-    idhome.style.backgroundColor = "greenyellow";
-
-    database.ref("ALL").child(Rhome).once('value', async function(snap) {
+    //idhome.style.backgroundColor = "greenyellow";
+    database.ref("ADMIN").child(Rhome).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         romeName.innerHTML = "";
         for (var Room in ketqualangnghe) {
-            romeName.innerHTML += `
-                <div class="card">
-                        <h5 class="card-header btn" style="text-align: left">${Rhome}: ${Room}</h5>
-                        <h5></h5>
-                        <h6><button id = "idroom${Rhome}${Room}"class="btn info" onclick="showDevice('${Rhome}','${Room}')"><i class="far fa-lightbulb"></i></button>
-                        <button class="btn info"  data-toggle="collapse" data-target="#showinput${Rhome}${Room}" onclick = "showDevice( '${Rhome}', '${Room}')"><i class="far fa-plus-square"></i></button>
-                        <button class="btn info" onclick = "deleteRoom( '${Rhome}', '${Room}')"><i class="fa fa-close"></i></button> 
-                        <button class="btn info" ><i class="fa fa-pencil-square-o"></i></button></h6>
-                        <div id="showinput${Rhome}${Room}" class="collapse"><input type="text" placeholder="Device name" id="addname${Rhome}${Room}">
-                   
-                            <i class="btn btn-dark fa fa-save btn-block" onclick="aDevice('${Rhome}','${Room}')"></i></div>
-                       
-	
-                    </div> 
-            `
+            nameNha = ketqualangnghe[Room]
+            name_nha_fb = nameNha.namenha
+            //console.log(Room)
+                if (typeof nameNha === "object") {
+                        for(var thietbi in nameNha){
+                            id_tb = nameNha[thietbi]
+                          //  console.log(id_tb)
+                            nametb = id_tb.namethietbi
+                      //      console.log(nametb)
+                          //  console.log("1")
+                        }
+                    } else{
+                        for (var tim_tem_phong in ketqualangnghe) {
+                            name_phong = ketqualangnghe[tim_tem_phong]
+                            name_phong_fb = name_phong.namephong
+                        //  console.log(name_phong_fb)
+                            if (typeof name_phong_fb === "undefined") {    
+                                } else{
+                                romeName.innerHTML += `
+                                    <div class="card">
+                                            <h5 class="card-header btn" style="text-align: left">${nameNha}: ${name_phong_fb}</h5>
+                                            <h5></h5>
+                                            <h6><button id = "idroom${Rhome}${Room}"class="btn info" onclick="showDevice('${Rhome}','${Room}')"><i class="far fa-lightbulb"></i></button>
+                                            <button class="btn info"  data-toggle="collapse" data-target="#showinput${nameNha}${name_phong_fb}" onclick = "showDevice( '${nameNha}', '${name_phong_fb}')"><i class="far fa-plus-square"></i></button>
+                                            <button class="btn info" onclick = "deleteRoom( '${nameNha}', '${name_phong_fb}')"><i class="fa fa-close"></i></button> 
+                                            <button class="btn info" ><i class="fa fa-pencil-square-o"></i></button></h6>
+                                            <div id="showinput${nameNha}${name_phong_fb}" class="collapse"><input type="text" placeholder="Device name" id="addname${nameNha}${name_phong_fb}">
+                                    
+                                                <i class="btn btn-dark fa fa-save btn-block" onclick="aDevice('${nameNha}','${name_phong_fb}')"></i></div>
+                                        
+                        
+                                        </div> 
+                                `
+                            }
+                        }
+                    }
+                }
+        });
+        deviceName.innerHTML = "";
 
-
-        }
-    });
-    deviceName.innerHTML = "";
-
-}
+    }
 
 deviceName = document.getElementById("DName");
 
 function showDevice(Dhome, Droom) {
+    console.log(Dhome)
+    console.log(Droom)
     idroom = document.getElementById("idroom" + Dhome + Droom);
     idroom.style.backgroundColor = "greenyellow";
-    database.ref("ALL").child(Dhome).child(Droom).once('value', async function(snap) {
+    database.ref("ADMIN").child(Dhome).child(Droom).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         deviceName.innerHTML = "";
         for (var device in ketqualangnghe) {
+        
             deviceName.innerHTML += `     
                    <div class="card">
                         <h5 class="card-header btn" style="text-align: left" >${Droom}: ${device}</h5>
@@ -295,7 +323,7 @@ function incRoom() {
         return valueRoom
     }
 }
-/////////////////////// uầy xịn :v
+/////////////////////// 
 addIDroom = document.getElementById("themroom");
 nameRoom = document.getElementById("nameRoom");
 var mang_chua_cac_obj = []
