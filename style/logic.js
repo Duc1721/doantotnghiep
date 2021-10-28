@@ -50,31 +50,46 @@ function deleteRoom(home, room) {
 //////table update
 tableReportAll = document.getElementById("tablestate");
 tableHomeAll = document.getElementById("homeName");
-database.ref("ALL").on('value', async function(snap) {
+database.ref("ADMIN").on('value', async function(snap) {
     var ketqualangnghe = await snap.val();
     tableReportAll.innerHTML = ''
     num = 0;
     for (var Home in ketqualangnghe) {
         nhathemS = ketqualangnghe[Home]
-
+        id_nha_fb = Home
+        name_nha_fb = nhathemS.namenha
         for (var Room in nhathemS) {
+            // console.log(Room)
             phongthemS = nhathemS[Room]
-            for (var Device in phongthemS) {
-                num++;
-                State = phongthemS[Device]
-                tableReportAll.innerHTML += `
-                <tr>
-                    <td>${num}</td>
-                    <td>${Home}</td>
-                    <td>${Room}</td>
-                    <td>${Device}</td>
-                    <td>${State}</td>
-                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${State}' )"><i class="fas fa-power-off"></i></button>
-                        <button class="btn-outline-dark" onclick = "deleteDevice( '${Home}', '${Room}','${Device}')"><i class="far fa-trash-alt"></i></button>
-                    </td>
-                </tr>`
+            name_phong_fb = phongthemS.namephong
+                // console.log(phongthemS)
+            if (Room != "namenha") {
+                for (var Device in phongthemS) {
+                    if (Device != "namephong") {
+                        num++;
+                        State = phongthemS[Device]
+                        name_thietbi_fb = State.namethietbi
+                        phanloai = State.phanloai
+                        trangthai = State.trangthai
+                        tableReportAll.innerHTML += `
+                                <tr>
+                                    <td>${num}</td>
+                                    <td>${id_nha_fb}</td>
+                                    <td>${name_nha_fb}</td>
+                                    <td>${name_phong_fb}</td>
+                                    <td>${name_thietbi_fb}</td>
+                                    <td>${phanloai}</td>
+                                    <td>${trangthai}</td>
+                                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${State}' )"><i class="fas fa-power-off"></i></button>
+                                        <button class="btn-outline-dark" onclick = "deleteDevice( '${Home}', '${Room}','${Device}')"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>`
+                    }
+
+                }
 
             }
+
         }
 
     }
@@ -241,9 +256,16 @@ function randomString(len, an) {
 var formAddHome = document.getElementById('addHome');
 
 function addnewHome() {
+    document.getElementById('name_home').disabled = false;
     document.getElementById('addHome').style.display = 'block'
     var newid = randomString(6, "N")
     document.getElementById("idnewHome").innerHTML = newid;
+    document.getElementById('themroom').innerHTML = "";
+    document.getElementById("idnewphong").innerHTML = "";
+    document.getElementById("name_home").value = "";
+    document.getElementById("nameRoom").value = "";
+  
+
 }
 /////////////////////////
 function closeAddnewHome() {
@@ -252,7 +274,7 @@ function closeAddnewHome() {
 ////////////////////////////////
 function decRoom() {
     valueRoom = document.getElementById("valueRoomNumber").value;
-    minRoom = 0;
+    minRoom = 1;
     if (valueRoom > minRoom) {
         valueRoom = parseInt(valueRoom) - 1;
         document.getElementById('valueRoomNumber').setAttribute('value', valueRoom);
@@ -273,7 +295,7 @@ function incRoom() {
         return valueRoom
     }
 }
-///////////////////////
+/////////////////////// uầy xịn :v
 addIDroom = document.getElementById("themroom");
 nameRoom = document.getElementById("nameRoom");
 var mang_chua_cac_obj = []
@@ -299,24 +321,24 @@ function roomPlus() {
     mang_chua_cac_obj.push(object_nha)
     mang_chua_cac_obj.push(object_phong)
     for (var i = 0; i < num_device; i++) {
-        var newNameThietbi = 'id="id_device' + i + '"';
-        var idNew_NameThietbi = "id_device" + i;
-        var newithietbi = "thietbi" + i;
-        id = 'id="thietbi' + i + '"';
+        var newNameThietbi = 'id="Thiết bị ' + i + '"';
+        var idNew_NameThietbi = "Thiết bị " + i;
+        var newithietbi = "TB" + i;
+        id = 'id="TB' + i + '"';
         id_phanloai = "phanloaithietbi" + i;
         divPhanLoai = `<div class="form-select" style= "width:10%">
                           <select id="phanloaithietbi${i}" onchange="selectDevice('phanloaithietbi${i}')">
-                            <option value="0">Phân Loại</option>  
-                            <option value="1">ĐÈN</option>
-                            <option value="2">CẢM BIẾN</option>
+                            <option value="Chưa chọn">Phân Loại</option>  
+                            <option value="Thiết bị">Thiết bị</option>
+                            <option value="Cảm biến">Cảm biến</option>
                           </select>
                         </div>`
         divIDThietbi = '<input disabled type="nameHome" ' + id + 'style="width:70%">'
         divNameThietbi = '<input type="nameHome" ' + newNameThietbi + ' style="width:20%;color:black;background-color:#47aedb87">'
             //< input disabled type = "nameHome" value = ""id = "{F8uu"} "></input>
         document.getElementById('themroom').innerHTML += divNameThietbi + divIDThietbi + divPhanLoai;
-        document.getElementById(idNew_NameThietbi).setAttribute('value', "Device name: " + idNew_NameThietbi)
-        document.getElementById(newithietbi).setAttribute('value', "ID Device: " + newithietbi)
+        document.getElementById(idNew_NameThietbi).setAttribute('value', idNew_NameThietbi)
+        document.getElementById(newithietbi).setAttribute('value', "ID: " + newithietbi)
             //document.getElementById(idnumDev).setAttribute('value', "ID Room: " + idnumDev)   
 
         // object_tonghop += { thietbi: newithietbi }
@@ -329,7 +351,7 @@ function roomPlus() {
             // console.log(name_home + "--" + id_home + "--" + nameRoom_new + "--" + newidroom + id_phanloai + newithietbi + idNew_NameThietbi)
 
     }
-    document.getElementById('themroom').innerHTML += `<button onclick="oke_firebase()">OKE-chốt đơn</button>`
+    document.getElementById('themroom').innerHTML += `<button class="btnadd1" onclick="oke_firebase()"><b>LƯU THÔNG TIN PHÒNG</b></button>`
 }
 
 function selectDevice(seDeid) {
@@ -338,6 +360,9 @@ function selectDevice(seDeid) {
 }
 
 function oke_firebase() {
+    document.getElementById("nameRoom").value = "";
+    swal("Tốt lắm!", "Bạn đã lưu thông tin phòng!", "success");
+    document.getElementById('name_home').disabled = true;
     console.log(mang_chua_cac_obj)
     name_nha = mang_chua_cac_obj[0].name_nha
     id_nha = mang_chua_cac_obj[0].id_nha
@@ -355,7 +380,7 @@ function oke_firebase() {
         newPushDevice.set({
             namethietbi: name_device,
             phanloai: phanloai,
-            trangthai: "đợi update từ gw"
+            trangthai: "Đợi cập nhật từ GATEWAY"
         });
         newPushHome = database.ref("ADMIN").child(id_nha).child("namenha")
         newPushHome.set(name_nha);
@@ -363,5 +388,8 @@ function oke_firebase() {
         newPushRoom.set(name_phong);
 
     }
-
+    document.getElementById('themroom').innerHTML = "";
+    document.getElementById("idnewphong").innerHTML = "";
+    
 }
+

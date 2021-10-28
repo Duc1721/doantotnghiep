@@ -14,6 +14,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="./style/style.css">
+    <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
+    <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 
 
 </head>
@@ -79,16 +81,16 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <button class="btn1"><i class="fa fa-cogs"></i><h1>Setting</h1></button>
+                <button  onclick="addnewHome()" class="btn1"><i class="fa fa-cogs"></i><h1>Cài đặt</h1></button>
             </div>
             <div class="col">
-                <button class="btn1"><i class="fa fa-bar-chart"></i><h1>Statistic</h1></button>
+                <button class="btn1"><i class="fa fa-bar-chart"></i><h1>Thống kê</h1></button>
             </div>
             <div class="col" onclick="openState()">
-                <button class="btn1"><i class="fa fa-dashboard"></i><h1>State</h1></button>
+                <button class="btn1"><i class="fa fa-dashboard"></i><h1>Trạng thái</h1></button>
             </div>
             <div class="col">
-                <button class="btn1"><i class="fa fa-globe"></i><h1>Map</h1></button>
+                <button class="btn1"><i class="fa fa-globe"></i><h1>Bản đồ</h1></button>
             </div>
         </div>
     </div>
@@ -96,9 +98,8 @@
         <div class="container">
             <div class="tab">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeState()">&times;</a>
-                <button class="tablinks" onclick="openRoom(event, 'Room1')" id="defaultOpen">STATE TABLE</button>
-                <button class="tablinks" onclick="openRoom(event, 'Room2')">SETTING CONFIG</button>
-                <button class="tablinks" onclick="openRoom(event, 'Room3')">FUNCION PLUS</button>
+                <button class="tablinks" onclick="openRoom(event, 'Room1')" id="defaultOpen"><b>BẢNG TRẠNG THÁI</b></button>
+                <button class="tablinks" onclick="openRoom(event, 'Room2')" id="tabset"><b>CÀI ĐẶT CẤU HÌNH</b></button>
             </div>
             <div id="Room1" class="tabcontent">
                 <div class="container">
@@ -110,10 +111,12 @@
                             <thead>
                                 <tr class="header">
                                     <th>#</th>
-                                    <th id="homeName">Home</th>
-                                    <th>Room</th>
-                                    <th>Device</th>
-                                    <th>State</th>
+                                    <th>ID nhà</th>
+                                    <th id="homeName">Tên nhà</th>
+                                    <th>Tên phòng</th>
+                                    <th>Thiết bị</th>
+                                    <th>Phân Loại</th>
+                                    <th>Trạng thái</th>
                                     <th>Togger/Delete</th>
                                 </tr>
                             </thead>
@@ -132,10 +135,7 @@
                                 <div class="card-header btn-active" data-target="#noidungcard1" aria-expanded="true" data-parent="#myaccordion" onclick="showHome()" id="btnadd"><b>ADD: Design your home</b></div>
                                 <div class="card-body collapse show" data-toggle="collapse" aria-expanded="false" id="noidungcard1">
                                     <h5 class="card-title">
-                                        <button class="btn btn-light btn-block"><i class="fad fa-clinic-medical" 
-                                onclick="addnewHome()" ></i></button></h5>
-
-                                    <h5 class="card-footer">Click the icon above to add your new home ♥ </h5>
+                                        <button class="btn btn-light btn-block"><i class="fad fa-clinic-medical"></i></button></h5>
                                 </div>
                             </div>
                             <div class="card">
@@ -264,29 +264,27 @@
             </div>
 
             <div class="container1">
-                <label for="hname"><b>ID HOME:</b><b id="idnewHome"></b></label>
-                <input id="name_home" type="nameHome" placeholder="Enter home name" name="uname" required>
-                <label style="display:block" for="hname"><b>ID PHÒNG:</b><b id="idnewphong"></b></label>
-                <input id="nameRoom" type="nameRoom" placeholder="Nhập tên phòng" name="nameRoom" required>
+                <label for="hname"><b>ID NHÀ: </b><b id="idnewHome"></b></label>
+                <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" required>
+                <label style="display:block" for="hname"><b>ID PHÒNG: </b><b id="idnewphong"></b></label>
+                <input id="nameRoom" type="nameRoom" style="width:67%" placeholder="Nhập tên phòng" name="nameRoom" required>
                 <div class="buttons_added">
                     <input class="form-inde minus" type="button" onclick="decRoom()" value="-">
-                    <input class="input-qty" max="99" min="1" type="numbershow" value="10" id="valueRoomNumber">
+                    <input class="input-qty" type="numbershow" value="5" id="valueRoomNumber">
                     <input class="form-inde plus" type="button" onclick="incRoom()" value="+">
                 </div>
-                <button onclick="roomPlus()" class="btnadd" for="psw" name="psw" required>DEVICE</button>
+                <button onclick="roomPlus()" class="btnadd" for="psw" name="psw" required>XÁC NHẬN SỐ THIẾT BỊ</button>
                 <div id="themroom"></div>
 
                 </label>
             </div>
 
             <div class="container1" style="background-color:#f1f1f1">
-                <button type="button" onclick="closeAddnewHome()" class="btnadd">Cancel</button>
+                <button type="button" onclick="closeAddnewHome()" class="btnadd">THOÁT</button>
                 <span class="psw">New? <a href="#">Tutorial</a></span>
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>
