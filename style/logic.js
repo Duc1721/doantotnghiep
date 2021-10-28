@@ -31,7 +31,7 @@ function deleteDevice(home, room, device) {
 
     var result = confirm("Are you sure you want to delete this device configuration?");
     if (result == true) {
-        newRemoteRef = database.ref("ALL").child(home).child(room).child(device)
+        newRemoteRef = database.ref("ADMIN").child(home).child(room).child(device)
         newRemoteRef.remove();
         showDevice(home, room)
     }
@@ -42,7 +42,7 @@ function deleteRoom(home, room) {
 
     var result = confirm("Are you sure you want to delete this room configuration?");
     if (result == true) {
-        newRemoteRef = database.ref("ALL").child(home).child(room)
+        newRemoteRef = database.ref("ADMIN").child(home).child(room)
         newRemoteRef.remove();
         showRoom(home)
     }
@@ -103,99 +103,103 @@ function showHome() {
         var ketqualangnghe = await snap.val();
         homeName.innerHTML = "";
         for (var Home in ketqualangnghe) {
-                idnamenha = ketqualangnghe[Home]
-                name_nha_fb = idnamenha.namenha
-                id_nha_fb = Home
-             
-                    homeName.innerHTML += `
+
+            idnamenha = ketqualangnghe[Home]
+            name_nha_fb = idnamenha.namenha
+            id_nha_fb = Home
+
+            homeName.innerHTML += `
                     <div class="container-fluid">
                             <div class="card">
                                 <h5 class="card-header btn " style ="text-align: left">Name: ${name_nha_fb}</h5>
                                 <h5></h5>
-                                <h6><button id="idhome${name_nha_fb}" class="btncus" onclick="showRoom('${id_nha_fb}')"><i class="fas fa-home"></i></button>
-                                <button class="btncus"><i class="far fa-plus-square"></i></button>
+                                <h6><button id="idhome${id_nha_fb}" class="btncus" onclick="showRoom('${id_nha_fb}')"><i class="fas fa-home"></i></button>
+                                <button class="btncus" onclick="addnewRoom('${id_nha_fb}','${name_nha_fb}')"><i class="far fa-plus-square"></i></button>
                             </div>  
                         </div>
-                    `   
-            }
+                    `
+        }
     });
 
 }
 ///////////////// hien thi ten phong
 romeName = document.getElementById("RName");
 
+deviceName = document.getElementById("DName");
+
 function showRoom(Rhome) {
-    //console.log(Rhome)
     idhome = document.getElementById("idhome" + Rhome);
     //idhome.style.backgroundColor = "greenyellow";
     database.ref("ADMIN").child(Rhome).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         romeName.innerHTML = "";
         for (var Room in ketqualangnghe) {
-            nameNha = ketqualangnghe[Room]
-            name_nha_fb = nameNha.namenha
             //console.log(Room)
-                if (typeof nameNha === "object") {
-                        for(var thietbi in nameNha){
-                            id_tb = nameNha[thietbi]
-                          //  console.log(id_tb)
-                            nametb = id_tb.namethietbi
-                      //      console.log(nametb)
-                          //  console.log("1")
-                        }
-                    } else{
-                        for (var tim_tem_phong in ketqualangnghe) {
-                            name_phong = ketqualangnghe[tim_tem_phong]
-                            name_phong_fb = name_phong.namephong
-                        //  console.log(name_phong_fb)
-                            if (typeof name_phong_fb === "undefined") {    
-                                } else{
-                                romeName.innerHTML += `
-                                    <div class="card">
-                                            <h5 class="card-header btn" style="text-align: left">${nameNha}: ${name_phong_fb}</h5>
-                                            <h5></h5>
-                                            <h6><button id = "idroom${Rhome}${Room}"class="btn info" onclick="showDevice('${Rhome}','${Room}')"><i class="far fa-lightbulb"></i></button>
-                                            <button class="btn info"  data-toggle="collapse" data-target="#showinput${nameNha}${name_phong_fb}" onclick = "showDevice( '${nameNha}', '${name_phong_fb}')"><i class="far fa-plus-square"></i></button>
-                                            <button class="btn info" onclick = "deleteRoom( '${nameNha}', '${name_phong_fb}')"><i class="fa fa-close"></i></button> 
-                                            <button class="btn info" ><i class="fa fa-pencil-square-o"></i></button></h6>
-                                            <div id="showinput${nameNha}${name_phong_fb}" class="collapse"><input type="text" placeholder="Device name" id="addname${nameNha}${name_phong_fb}">
-                                    
-                                                <i class="btn btn-dark fa fa-save btn-block" onclick="aDevice('${nameNha}','${name_phong_fb}')"></i></div>
-                                        
-                        
-                                        </div> 
-                                `
+            if (Room != "namenha") {
+                for (var tennha in ketqualangnghe) {
+                    if (tennha == "namenha") { name_nha_fb = ketqualangnghe.namenha }
+                }
+                phong_fb = ketqualangnghe[Room]
+                for (var Device in phong_fb) {
+                    // console.log(Device)
+                    if (Device != "namephong") {
+                        for (var tenphong in phong_fb) {
+                            if (tenphong == "namephong") {
+                                name_phong_fb = phong_fb.namephong
                             }
                         }
+                        thietbi_fb = phong_fb[Device]
+                        name_thietbi_fb = thietbi_fb.namethietbi
+                        phanloai_thietbi_fb = thietbi_fb.phanloai
                     }
                 }
-        });
-        deviceName.innerHTML = "";
+                romeName.innerHTML += `
+                <div class="card">
+                        <h5 id= "tennhahienthitenphong${Room}"class="card-header btn" style="text-align: left">${name_nha_fb}: ${name_phong_fb}</h5>
+                        <h5></h5>
+                        <h6><button id = "idroom${Rhome}${Room}"class="btn info" onclick="showDevice('${Rhome}','${Room}')"><i class="far fa-lightbulb"></i></button> 
+                        <button class="btn info"  data-toggle="collapse" data-target="#showinput${Rhome}${Room}" onclick = "add_device( '${Rhome}','${name_nha_fb}', '${Room}','${name_phong_fb}','${phanloai_thietbi_fb}')"><i class="far fa-plus-square"></i></button>
+                        <button class="btn info" onclick = "deleteRoom( '${Rhome}', '${Room}')"><i class="fa fa-close"></i></button> 
+                        <button class="btn info" ><i class="fa fa-pencil-square-o"></i></button></h6>                
+                </div> 
+            `
+                    // console.log(Room)
+                deviceName.innerHTML = "";
+            }
+        }
+    });
+}
 
-    }
 
-deviceName = document.getElementById("DName");
-
-function showDevice(Dhome, Droom) {
-    console.log(Dhome)
-    console.log(Droom)
+function showDevice(Dhome, Droom, Phanloai) {
+    //Dhome:idnha | Droom: id phòng | D_namehome: tên nhà
     idroom = document.getElementById("idroom" + Dhome + Droom);
     idroom.style.backgroundColor = "greenyellow";
     database.ref("ADMIN").child(Dhome).child(Droom).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         deviceName.innerHTML = "";
-        for (var device in ketqualangnghe) {
-        
-            deviceName.innerHTML += `     
+        // ketqualangnghe
+        for (var Device in ketqualangnghe) {
+            console.log(Device)
+            if (Device != "namephong") {
+                for (var tenphong in ketqualangnghe) {
+                    if (tenphong == "namephong") {
+                        name_phong_fb = ketqualangnghe.namephong
+                        console.log(name_phong_fb)
+                    }
+                }
+                thietbi_fb = ketqualangnghe[Device]
+                name_thietbi_fb = thietbi_fb.namethietbi
+                phanloai_thietbi_fb = thietbi_fb.phanloai
+                deviceName.innerHTML += `     
                    <div class="card">
-                        <h5 class="card-header btn" style="text-align: left" >${Droom}: ${device}</h5>
+                        <h5 class="card-header btn" style="text-align: left" >${name_phong_fb}: ${name_thietbi_fb}: ${phanloai_thietbi_fb}</h5>
                         <h5></h5>
-                        <h6><button class="btn info" style="width:20%"><i class="fa fa-close" onclick = "deleteDevice( '${Dhome}', '${Droom}','${device}')"></i></button>
+                        <h6><button class="btn info" style="width:20%"><i class="fa fa-close" onclick = "deleteDevice( '${Dhome}', '${Droom}','${Device}')"></i></button>
                           <button class="btn info" style="width:20%"><i class="fa fa-pencil-square-o"></i></button> </h6>
                     </div> 
             `
-
-
+            }
         }
     });
 }
@@ -275,7 +279,7 @@ function randomString(len, an) {
     }
     return str;
 }
-
+ 
 //randomString(10);        // "4Z8iNQag9v"
 //randomString(10, "A");   // "aUkZuHNcWw"
 //randomString(10, "N");   // "9055739230"
@@ -292,9 +296,36 @@ function addnewHome() {
     document.getElementById("idnewphong").innerHTML = "";
     document.getElementById("name_home").value = "";
     document.getElementById("nameRoom").value = "";
-  
+
 
 }
+
+function addnewRoom(Idnha, nameNha) {
+    console.log(Idnha)
+        // Idnha
+    document.getElementById('addHome').style.display = 'block'
+    document.getElementById("idnewHome").innerHTML = Idnha;
+    document.getElementById('themroom').innerHTML = "";
+    document.getElementById("idnewphong").innerHTML = "";
+    document.getElementById("name_home").value = nameNha;
+    document.getElementById('name_home').disabled = true;
+    document.getElementById("nameRoom").value = "";
+}
+
+function add_device(Idnha, nameNha, Idphong, namePhong) {
+    showDevice(Idnha, Idphong)
+    document.getElementById('addHome').style.display = 'block'
+    document.getElementById("idnewHome").innerHTML = Idnha;
+    document.getElementById('themroom').innerHTML = "";
+    document.getElementById("idnewphong").innerHTML = Idphong;
+    document.getElementById("name_home").value = nameNha;
+    document.getElementById('name_home').disabled = true;
+    document.getElementById("nameRoom").value = namePhong;
+    document.getElementById("nameRoom").disabled = true;
+
+}
+
+
 /////////////////////////
 function closeAddnewHome() {
     document.getElementById('addHome').style.display = 'none'
@@ -418,6 +449,5 @@ function oke_firebase() {
     }
     document.getElementById('themroom').innerHTML = "";
     document.getElementById("idnewphong").innerHTML = "";
-    
-}
 
+}
