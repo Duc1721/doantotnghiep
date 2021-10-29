@@ -307,12 +307,17 @@ hr.light {
   top: 0;
   left: 0;
   background-color: #eee;
-  overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
   text-align:center;
+  overflow-y: scroll;
+  
+  
 }
-
+.state1::-webkit-scrollbar {
+  display: hidden;
+ 
+}
 .state1 a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
@@ -320,6 +325,7 @@ hr.light {
   color: #818181;
   display: block;
   transition: 0.3s;
+
 
 }
 
@@ -342,9 +348,10 @@ hr.light {
 
 /* Style the tab */
 .tab {
-  overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
+  overflow: auto;
+  
 }
 
 /* Style the buttons inside the tab */
@@ -358,6 +365,7 @@ hr.light {
   transition: 0.3s;
   font-size: 17px;
   display:flex;
+  
 }
 
 /* Change background color of buttons on hover */
@@ -376,8 +384,12 @@ hr.light {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
-  overflow:auto;
+  overflow-y: scroll;
 }
+.tabcontent::-webkit-scrollbar {
+  display: none;
+}
+
 .header {
   border-bottom: 3px solid black;
   
@@ -386,7 +398,7 @@ hr.light {
 .card-header{
   border-bottom: 3px solid black;
   background-color: #0da8ef73;
-  
+
 }
 input[type=search] {
   background-position: 10px 10px; 
@@ -405,15 +417,12 @@ input[type=search]:focus {
 }
 .btn-outline-dark{
   border-radius: 5px;
-  background-color: #3f3f3f;
+  background-color: #ffffff;
 }
 
 /**/
 .vertical-menu {
-  width: 30%; /* Set a width if you like */
-  margin-left: 10px;
-  margin-right: 10px;
-
+  width: 100%; /* Set a width if you like */
 }
 
 
@@ -429,7 +438,7 @@ input[type=search]:focus {
   border-radius: 10px;
   margin-top: 2%;
   width: 100%;
-  height: 12%;
+  height: 10%;
   overflow-x: scroll;
  
 }
@@ -503,7 +512,6 @@ img.avatar {
 .container1 {
   padding: 16px;
 }
-
 span.psw {
   float: right;
   padding-top: 16px;
@@ -522,16 +530,6 @@ span.psw {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   padding-top: 60px;
-}
-
-
-.vl {
-  border-left: 6px solid green;
-  height: 500px;
-  position: absolute;
-  left: 50%;
-  margin-left: -3px;
-  top: 0;
 } 
 
 
@@ -561,8 +559,8 @@ span.psw {
 
 /* Add Zoom Animation */
 .animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
+  -webkit-animation: animatezoom 0.5s;
+  animation: animatezoom 0.5s
 }
 
 @-webkit-keyframes animatezoom {
@@ -593,6 +591,7 @@ span.psw {
   border-radius: 5px;
   padding: 7px;
   min-width: 40px; 
+  background-color: rgb(255, 255, 255); 
 }
 /*////////////////////btn add room///////////////////////////////*/
 .buttons_added {

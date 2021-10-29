@@ -138,7 +138,7 @@ function showRoom(Rhome) {
                         <h5 id= "tennhahienthitenphong${Room}"class="card-header btn" style="text-align: left"><b>${name_nha_fb}: ${name_phong_fb}</b></h5>
                         <h5></h5>
                         <h6><button id = "idroom${Rhome}${Room}"class="btncus" onclick="showDevice('${Rhome}','${Room}')"><i class="far fa-lightbulb"></i></button> 
-                        <button class="btncus"  data-toggle="collapse" data-target="#showinput${Rhome}${Room}" onclick = "addnewdevice( '${Rhome}','${name_nha_fb}', '${Room}','${name_phong_fb}','${phanloai_thietbi_fb}')"><i class="far fa-plus-square"></i></button>
+                        <button class="btncus" onclick = "addnewdevice( '${Rhome}','${name_nha_fb}', '${Room}','${name_phong_fb}','${phanloai_thietbi_fb}')"><i class="far fa-plus-square"></i></button>
                         <button class="btncus" onclick = "deleteRoom( '${Rhome}', '${Room}')"><i class="fa fa-close"></i></button> 
                         <button class="btncus" ><i class="fa fa-pencil-square-o"></i></button></h6>                
                 </div> 
@@ -307,11 +307,6 @@ function addnewdevice(Idnha, nameNha, Idphong, namePhong) {
 /////////////////////////
 function closeAddnewHome() {
     document.getElementById('addHome').style.display = 'none' 
-    id_home = document.getElementById("idnewHome").textContent
-  //  id_room = document.getElementById("idnewphong").textContent
-    showRoom(id_home)  
-  //  showDevice(id_home,id_room)
-  //  console.log(id_room)
 }
 ////////////////////////////////
 function decRoom() {
@@ -440,7 +435,11 @@ function oke_firebase() {
         id_phanloai = mang_chua_cac_obj[i].id_phanloai
         name_device = document.getElementById(id_name_device).value;
         phanloai = document.getElementById(id_phanloai).value;
-
+        if (phanloai == "Cảm biến") {
+            id_device = 'CB' + mang_chua_cac_obj[i].id_device
+        } else if (phanloai == "Thiết bị") {
+            id_device = 'TB' + mang_chua_cac_obj[i].id_device
+        }
   //      console.log("nhà:" + name_nha + "idnha:" + id_nha + "phòng:" + name_phong + "idphong:" + id_phong + "thietbi:" + name_device + "id_device:" + id_device + "loại:" + phanloai)
         newPushDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device)
         newPushDevice.set({
@@ -456,6 +455,8 @@ function oke_firebase() {
     }
     document.getElementById('themroom').innerHTML = "";
     document.getElementById("idnewphong").innerHTML = "";
+    showRoom(id_nha)
+    showDevice(id_nha, id_phong)
 
 }
 function deleteRoom(home, room){
@@ -475,6 +476,7 @@ function deleteRoom(home, room){
       swal("Đã xóa!", "Dữ liệu của bạn đã được xóa!", "success");
       newRemoteRef = database.ref("ADMIN").child(home).child(room)
       newRemoteRef.remove();
+      deviceName.innerHTML = "";
       showRoom(home)
     } else {
       swal("Hủy", "Dữ liệu của bạn được bảo toàn!", "error");
@@ -509,4 +511,19 @@ function deleteDevice(home, room, device) {
       swal("Hủy", "Dữ liệu của bạn được bảo toàn!", "error");
     }
 	});
+}
+
+const button = document.querySelector('.btncus');
+
+button.addEventListener('click',changeColor);
+
+function changeColor(){
+    const background = document.querySelector('.btncus');
+    const arrayColor = ['red','yellow','pink','gray','black','orange','blue'];
+    let random = arrayColor[randomColor(arrayColor)];
+    background.style.backgroundColor = random;
+    // console.log(random);
+}
+function randomColor(array){
+    return Math.floor(Math.random()*array.length);
 }
