@@ -376,9 +376,17 @@ hr.light {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+  overflow:auto;
 }
 .header {
   border-bottom: 3px solid black;
+  
+  
+}
+.card-header{
+  border-bottom: 3px solid black;
+  background-color: #0da8ef73;
+  
 }
 input[type=search] {
   background-position: 10px 10px; 
@@ -397,20 +405,17 @@ input[type=search]:focus {
 }
 .btn-outline-dark{
   border-radius: 5px;
+  background-color: #3f3f3f;
 }
 
 /**/
 .vertical-menu {
-  width: 22%; /* Set a width if you like */
+  width: 30%; /* Set a width if you like */
+  margin-left: 10px;
+  margin-right: 10px;
+
 }
 
-.vertical-menu a {
-  background-color: #eee; /* Grey background color */
-  color: black; /* Black text color */
-  display: block; /* Make the links appear below each other */
-  padding: 12px; /* Add some padding */
-  text-decoration: none; /* Remove underline from links */
-}
 
 .vertical-menu a:hover {
   background-color: #ccc; /* Dark grey background on mouse-over */
@@ -421,7 +426,15 @@ input[type=search]:focus {
   color: white;
 }
 .card{
-  margin-left: 10px;
+  border-radius: 10px;
+  margin-top: 2%;
+  width: 100%;
+  height: 12%;
+  overflow-x: scroll;
+ 
+}
+.card::-webkit-scrollbar {
+  display: none;
 }
 
 .mauxanh{
@@ -438,9 +451,6 @@ input[type=search]:focus {
   margin-bottom: 5px;
  
   background-color: transparent;
-}
-.card-footer{
-  background-color: greenyellow;
 }
 
 
@@ -583,7 +593,6 @@ span.psw {
   border-radius: 5px;
   padding: 7px;
   min-width: 40px; 
-  
 }
 /*////////////////////btn add room///////////////////////////////*/
 .buttons_added {

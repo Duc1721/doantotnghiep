@@ -127,53 +127,10 @@
                 </div>
             </div>
             <div id="Room2" class="tabcontent">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="accordion" id="myaccordion" style="max-width: 320px">
-                            <div class="card">
-
-                                <div class="card-header btn-active" data-target="#noidungcard1" aria-expanded="true" data-parent="#myaccordion" onclick="showHome()" id="btnadd"><b>ADD: Design your home</b></div>
-                                <div class="card-body collapse show" data-toggle="collapse" aria-expanded="false" id="noidungcard1">
-                                    <h5 class="card-title">
-                                        <button class="btn btn-light btn-block"><i class="fad fa-clinic-medical"></i></button></h5>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header btn" data-toggle="collapse" data-target="#noidungcard2" data-parent="#myaccordion">
-                                    DELETE
-                                </div>
-                                <div class="card-body collapse show" aria-expanded="false" id="noidungcard1">
-                                    <h4 class="card-title">Design your home</h4>
-                                    <h5><input type="text" placeholder="Your house name">
-                                        <h5>
-
-                                            <button class="btn btn-dark">Add device</button>
-                                </div>
-
-                            </div>
-
-                            <div class="card">
-                                <div class="card-header btn" data-toggle="collapse" data-target="#noidungcard3" data-parent="#myaccordion">
-                                    MODIFY
-                                </div>
-                                <div class="card-body collapse show" aria-expanded="false" id="noidungcard1">
-                                    <h5 class="card-title">Design your home</h5>
-                                    <h5><input type="text" placeholder="Your house name">
-                                        <h5>
-                                            <button class="btn btn-dark">Add room</button>
-                                            <button class="btn btn-dark">Add device</button>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="row" onclick="showHome()" id="btnadd"> 
                         <div class="vertical-menu" id="HName"></div>
                         <div class="vertical-menu" id="RName"></div>
                         <div class="vertical-menu" id="DName"></div>
-
-
-
-                        <div id="Room3" class="tabcontent">
-                            <h3>Room 3</h3>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -273,7 +230,10 @@
                     <input class="input-qty" type="numbershow" value="5" id="valueRoomNumber">
                     <input class="form-inde plus" type="button" onclick="incRoom()" value="+">
                 </div>
-                <button onclick="roomPlus()" class="btnadd" for="psw" name="psw" required>XÁC NHẬN SỐ THIẾT BỊ</button>
+                <div id="add_device_modal">
+
+                </div>
+                
                 <div id="themroom"></div>
 
                 </label>
