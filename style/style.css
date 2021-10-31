@@ -312,7 +312,6 @@ hr.light {
   text-align:center;
   overflow-y: scroll; 
 }
-
 .state1::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
@@ -422,6 +421,7 @@ hr.light {
   border-bottom: 3px solid rgba(0, 0, 0, 0.514);
   background-color: #0da8ef73;
   overflow-x: scroll;
+  text-transform:uppercase;
 }
 /*scrollbar*/
 .card-header::-webkit-scrollbar-track
@@ -647,6 +647,9 @@ span.psw {
   min-width: 40px; 
   background-color: rgb(255, 255, 255); 
 }
+.btncus:hover {
+  background-color: rgb(139, 241, 113); /* Dark grey background on mouse-over */
+}
 /*////////////////////btn add room///////////////////////////////*/
 .buttons_added {
     opacity:1;
@@ -797,9 +800,16 @@ select::after {
   background-color: #4c67d3ef;
   color: white;
 }
+#defaultOpen:hover {
+  background-color: rgb(247, 103, 103); /* Dark grey background on mouse-over */
+}
 #tabset{
   background-color: #4c6783d4;
   color: white;
+}
+
+#tabset:hover {
+  background-color: rgb(139, 241, 113); /* Dark grey background on mouse-over */
 }
 .maubang_0{
   background-color: rgb(205, 210, 223);
@@ -830,4 +840,5 @@ select::after {
   padding: 8px 12px;
   border-radius: 10px;
   background-color: #9adee7;
+  display: inline-block;
 }

@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 var database = firebase.database();
 /////////////// toogle state
-function toggleStatea(home, room, device, stageToggle, phanloai_tb, tenthietbi) {
+function toggleStatea(home, room, device, stageToggle) {
     if (stageToggle == '0') {
         stageToggle = '1';
 
@@ -25,12 +25,8 @@ function toggleStatea(home, room, device, stageToggle, phanloai_tb, tenthietbi) 
 
    // console.log(newPushRef)
 
-    newPush_trangthai = database.ref("ADMIN").child(home).child(room).child(device)
-    newPush_trangthai.set({
-            namethietbi: tenthietbi,
-            phanloai: phanloai_tb,
-            trangthai: stageToggle
-        });
+    newPush_trangthai = database.ref("ADMIN").child(home).child(room).child(device).child("trangthai")
+    newPush_trangthai.set(stageToggle);
   //  newPushRef.set(newPushRef);
 
 }
@@ -73,7 +69,7 @@ database.ref("ADMIN").on('value', async function(snap) {
                                     <td>${name_thietbi_fb}</td>
                                     <td>${phanloai}</td>
                                     <td>${trangthai}</td>
-                                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${trangthai}', '${phanloai}', '${name_thietbi_fb}' )"><i class="fas fa-power-off"></i></button>
+                                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${trangthai}')"><i class="fas fa-power-off"></i></button>
                                         <button class="btn-outline-dark" onclick = "deleteDevice( '${Home}', '${Room}','${Device}')"><i class="far fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`
@@ -107,10 +103,10 @@ function showHome() {
                             <div class="card">
                                 <h5 class="card-header btn " style ="text-align: left"><b><i class="fas fa-building"></i> ${name_nha_fb}</b></h5>
                                 <h5></h5>
-                                <h6><button id="idhome" class="btncus" onclick="showRoom('${id_nha_fb}')"><i class="fas fa-home"></i></button>
-                                <button class="btncus" onclick="addnewRoom('${id_nha_fb}','${name_nha_fb}')"><i class="far fa-plus-square"></i></button>
-                                <button class="btncus" onclick = "deleteHome( '${id_nha_fb}')"><i class="fa fa-close"></i></button>
-                                <button class="btncus" data-toggle="collapse" data-target="#rename_home${id_nha_fb}"><i class="fa fa-pencil-square-o"></i></button> </h6>
+                                <h6><button id="idhome" class="btncus" onclick="showRoom('${id_nha_fb}')" data-toggle="tooltip" title="Hiển thị phòng!" ><i class="fas fa-home"></i></button>
+                                <button class="btncus" onclick="addnewRoom('${id_nha_fb}','${name_nha_fb}')"  data-toggle="tooltip" title="Thêm phòng!"><i class="far fa-plus-square"></i></button>
+                                <button class="btncus" onclick = "deleteHome( '${id_nha_fb}')" data-toggle="tooltip" title="Xóa nhà!"><i class="fa fa-close"></i></button>
+                                <button class="btncus" data-toggle="collapse" data-toggle="tooltip" title="Sửa tên nhà!" data-target="#rename_home${id_nha_fb}"><i class="fa fa-pencil-square-o"></i></button> </h6>
                                 <div id="rename_home${id_nha_fb}" class="collapse">
                                     <input id="input${id_nha_fb}" type="nameHome" style="width:80%" placeholder="Nhập tên nhà mới"><button class="btncus" id="check${id_nha_fb}" onclick="checknewname_home('${id_nha_fb}')"><i class="fad fa-check"></i></button>
                                 </div>  
@@ -158,10 +154,10 @@ function showRoom(Rhome) {
                 <div class="card">
                         <h5 id= "tennhahienthitenphong${Room}"class="card-header btn" style="text-align: left"><b><i class="fas fa-building"></i> ${name_nha_fb} - <i class="fas fa-home"></i> ${name_phong_fb}</b></h5>
                         <h5></h5>
-                        <h6><button id = "idroom${Rhome}${Room}"class="btncus" onclick="showDevice('${Rhome}','${Room}')"><i class="far fa-lightbulb"></i></button> 
-                        <button class="btncus" onclick = "addnewdevice( '${Rhome}','${name_nha_fb}', '${Room}','${name_phong_fb}','${phanloai_thietbi_fb}')"><i class="far fa-plus-square"></i></button>
-                        <button class="btncus" onclick = "deleteRoom( '${Rhome}', '${Room}')"><i class="fa fa-close"></i></button> 
-                        <button class="btncus" data-toggle="collapse" data-target="#rename_room${Rhome}${Room}"><i class="fa fa-pencil-square-o"></i></button> </h6>
+                        <h6><button id = "idroom${Rhome}${Room}"class="btncus" onclick="showDevice('${Rhome}','${Room}')"  data-toggle="tooltip" title="Hiển thị thiết bị!"><i class="far fa-lightbulb"></i></button> 
+                        <button class="btncus" onclick = "addnewdevice( '${Rhome}','${name_nha_fb}', '${Room}','${name_phong_fb}','${phanloai_thietbi_fb}')"  data-toggle="tooltip" title="Thêm thiết bị!"><i class="far fa-plus-square"></i></button>
+                        <button class="btncus" onclick = "deleteRoom( '${Rhome}', '${Room}')"  data-toggle="tooltip" title="Xóa phòng!"><i class="fa fa-close"></i></button> 
+                        <button class="btncus" data-toggle="collapse" data-target="#rename_room${Rhome}${Room}"><i class="fa fa-pencil-square-o"  data-toggle="tooltip" title="Đổi tên phòng!"></i></button> </h6>
                         <div id="rename_room${Rhome}${Room}" class="collapse">
                             <input id="input${Rhome}${Room}" type="nameHome" style="width:80%" placeholder="Nhập tên phòng mới"><button class="btncus" id="check${Rhome}${Room}" onclick="checknewname_room('${Rhome}','${Room}')"><i class="fad fa-check"></i></button>
                         </div>     
@@ -199,14 +195,17 @@ function showDevice(Dhome, Droom) {
                 thietbi_fb = ketqualangnghe[Device]
                 name_thietbi_fb = thietbi_fb.namethietbi
                 phanloai_thietbi_fb = thietbi_fb.phanloai
+                trangthai_thietbi_fb = thietbi_fb.trangthai
                 deviceName.innerHTML += `     
                    <div class="card">
                         <h5 class="card-header btn" style="text-align: left" ><b><i class="fas fa-home"></i> ${name_phong_fb} - <i class="fad fa-fan-table"></i> ${name_thietbi_fb} - <i class="fas fa-clipboard-list-check"></i> ${phanloai_thietbi_fb}</b></h5>
                         <h5></h5>
-                        <h6><button class="btncus"><i class="fa fa-close" onclick = "deleteDevice( '${Dhome}', '${Droom}','${Device}')"></i></button>
-                          <button class="btncus"><i class="fas fa-exclamation"></i></button>
-                          <button class="btncus" data-toggle="collapse" data-target="#rename_device${Dhome}${Droom}${Device}"><i class="fa fa-pencil-square-o"></i></button> 
-                          <button class="btncus" data-toggle="collapse" data-target="#retype_device${Dhome}${Droom}${Device}"><i class="fas fa-sunset"></i></button> </h6>
+                        <h6><button class="btncus"><i class="fa fa-close" onclick = "deleteDevice( '${Dhome}', '${Droom}','${Device}')"  data-toggle="tooltip" title="Xóa thiết bị!"></i></button>
+
+                          <button class="btncus" data-toggle="collapse" data-target="#rename_device${Dhome}${Droom}${Device}"  data-toggle="tooltip" title="Đổi tên thiết bị!"><i class="fa fa-pencil-square-o"></i></button> 
+                          <button class="btncus" data-toggle="collapse" data-target="#retype_device${Dhome}${Droom}${Device}"  data-toggle="tooltip" title="Phân loại thiết bị!"><i class="fas fa-sunset"></i></button> 
+                          
+                          <button class="btncus"  data-toggle="tooltip" title="Chưa cập nhật tính năng, thêm vào cho đẹp thôi :v !"><i class="fas fa-shield-check" onclick="swal('Chào bạn!', 'Nút nhấn sẽ được cập nhật tính năng gì đấy trong tương lai! :)', 'error')"></i></button> </h6>
 
 
                             <div id="rename_device${Dhome}${Droom}${Device}" class="collapse">
@@ -214,9 +213,10 @@ function showDevice(Dhome, Droom) {
                             </div> 
 
                             <div class="form-check collapse" id="retype_device${Dhome}${Droom}${Device}">
-                              <h5 class="btncheck">  <label><input type="radio" name="radgroup" value="Thiết bị"> Thiết bị</label>
-                                <label><input type="radio" name="radgroup" value="Cảm biến"> Cảm biến</label>
-                                <button class="btncusbotron" id="checktype${Dhome}${Droom}${Device}" onclick="checktype_device('${Dhome}','${Droom}','${Device}')"><i class="fad fa-check"></i></button></h5>
+
+                              <h5 class="btncheck">  
+                                <label><input type="radio" name="radgroup"  onclick="if(this.checked){checktype_device1('${Dhome}','${Droom}','${Device}')}"> Thiết bị</label>
+                                <label><input type="radio" name="radgroup"  onclick="if(this.checked){checktype_device2('${Dhome}','${Droom}','${Device}')}"> Cảm biến</label></h5>
                             </div>
 
                     </div> 
@@ -351,6 +351,7 @@ function addnewdevice(Idnha, nameNha, Idphong, namePhong) {
 function closeAddnewHome() {
     document.getElementById('addHome').style.display = 'none' 
     document.getElementById("idhome").click();
+    showHome()
 }
 ////////////////////////////////
 function decRoom() {
@@ -626,5 +627,18 @@ function checknewname_device(id_nha, id_phong, id_device_rename){
     newPush_nameDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device_rename).child("namethietbi")
     newPush_nameDevice.set(newname_device);
     swal("Tốt lắm!", "Bạn đã đổi tên thiết bị thành công!", "success");
+    showDevice(id_nha, id_phong)
+}
+
+function checktype_device1(id_nha, id_phong, id_device_retype) {
+    newtype_device = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device_retype).child("phanloai")
+    newtype_device.set("Thiết bị"); 
+    swal("Tốt lắm!", "Bạn đã chọn phân loại là thiết bị!", "success");
+    showDevice(id_nha, id_phong)
+} 
+function checktype_device2(id_nha, id_phong, id_device_retype) {
+    newtype_device = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device_retype).child("phanloai")
+    newtype_device.set("Cảm biến"); 
+    swal("Tốt lắm!", "Bạn đã chọn phân loại là cảm biến!", "success");
     showDevice(id_nha, id_phong)
 }
