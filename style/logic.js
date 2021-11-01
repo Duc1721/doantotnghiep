@@ -103,7 +103,7 @@ function showHome() {
                             <div class="card">
                                 <h5 class="card-header btn " style ="text-align: left"><b><i class="fas fa-building"></i> ${name_nha_fb}</b></h5>
                                 <h5></h5>
-                                <h6><button id="idhome" class="btncus" onclick="showRoom('${id_nha_fb}')" data-toggle="tooltip" title="Hiển thị phòng!" ><i class="fas fa-home"></i></button>
+                                <h6><button id="idhome${id_nha_fb}" class="btncus btn-add-home" onclick="showRoom('${id_nha_fb}')" data-toggle="tooltip" title="Hiển thị phòng!" ><i class="fas fa-home"></i></button>
                                 <button class="btncus" onclick="addnewRoom('${id_nha_fb}','${name_nha_fb}')"  data-toggle="tooltip" title="Thêm phòng!"><i class="far fa-plus-square"></i></button>
                                 <button class="btncus" onclick = "deleteHome( '${id_nha_fb}')" data-toggle="tooltip" title="Xóa nhà!"><i class="fa fa-close"></i></button>
                                 <button class="btncus" data-toggle="collapse" data-toggle="tooltip" title="Sửa tên nhà!" data-target="#rename_home${id_nha_fb}"><i class="fa fa-pencil-square-o"></i></button> </h6>
@@ -123,10 +123,12 @@ romeName = document.getElementById("RName");
 deviceName = document.getElementById("DName");
 /////////////////// hiển thị phòng
 function showRoom(Rhome) {
-   
-    // idhome = document.getElementById("idhome" + Rhome);
-    // idhome.innerHTML = ""
-
+    xoa_mau_home = document.getElementsByClassName("btn-add-home")
+    for (var i = 0; i < xoa_mau_home.length; i++) {
+        xoa_mau_home[i].style.backgroundColor = "transparent";
+    }
+    idhome = document.getElementById("idhome" + Rhome);
+    idhome.style.backgroundColor = "red";
     database.ref("ADMIN").child(Rhome).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         romeName.innerHTML = "";
@@ -154,7 +156,7 @@ function showRoom(Rhome) {
                 <div class="card">
                         <h5 id= "tennhahienthitenphong${Room}"class="card-header btn" style="text-align: left"><b><i class="fas fa-building"></i> ${name_nha_fb} - <i class="fas fa-home"></i> ${name_phong_fb}</b></h5>
                         <h5></h5>
-                        <h6><button id = "idroom${Rhome}${Room}"class="btncus" onclick="showDevice('${Rhome}','${Room}')"  data-toggle="tooltip" title="Hiển thị thiết bị!"><i class="far fa-lightbulb"></i></button> 
+                        <h6><button id = "idroom${Rhome}${Room}"class="btncus btn-add-room" onclick="showDevice('${Rhome}','${Room}')"  data-toggle="tooltip" title="Hiển thị thiết bị!"><i class="far fa-lightbulb"></i></button> 
                         <button class="btncus" onclick = "addnewdevice( '${Rhome}','${name_nha_fb}', '${Room}','${name_phong_fb}','${phanloai_thietbi_fb}')"  data-toggle="tooltip" title="Thêm thiết bị!"><i class="far fa-plus-square"></i></button>
                         <button class="btncus" onclick = "deleteRoom( '${Rhome}', '${Room}')"  data-toggle="tooltip" title="Xóa phòng!"><i class="fa fa-close"></i></button> 
                         <button class="btncus" data-toggle="collapse" data-target="#rename_room${Rhome}${Room}"><i class="fa fa-pencil-square-o"  data-toggle="tooltip" title="Đổi tên phòng!"></i></button> </h6>
@@ -177,7 +179,13 @@ function showRoom(Rhome) {
 ////////// hiển thị thiết bị
 function showDevice(Dhome, Droom) {
     //Dhome:idnha | Droom: id phòng | D_namehome: tên nhà
-    idroom = document.getElementById("idroom" + Dhome + Droom);
+    xoa_mau = document.getElementsByClassName("btn-add-room")
+    for (var i = 0; i < xoa_mau.length; i++) {
+        xoa_mau[i].style.backgroundColor = "transparent";
+    }
+    idroom = document.getElementById("idroom" + Dhome + Droom);   
+    idroom.style.backgroundColor = "red";
+
   //  idroom.style.backgroundColor = "greenyellow";
     database.ref("ADMIN").child(Dhome).child(Droom).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
@@ -383,122 +391,128 @@ nameRoom = document.getElementById("nameRoom");
 var mang_chua_cac_obj = []
 
 function roomPlus(conentaoidhaykhong,id_room) {
-    name_home = document.getElementById("name_home").value
-    id_home = document.getElementById("idnewHome").textContent
-    nameRoom_new = document.getElementById("nameRoom").value;
-    num_device = document.getElementById("valueRoomNumber").value;
-    document.getElementById('themroom').innerHTML = ""
-    if(conentaoidhaykhong=='1'){
-        var newidroom = randomString(4, "N")
-        document.getElementById("idnewphong").innerHTML = newidroom
-    } 
-    else{
-        newidroom = id_room;
-    }
-    var biendemthietbi=0
-    database.ref("ADMIN").child(id_home).child(newidroom).once('value', async function(snap) {
-        var ketqualangnghe = await snap.val();        
-        for (idthietbi in ketqualangnghe){
-            biendemthietbi ++
-            
-        }
-
-
-        if(biendemthietbi < 0){biendemthietbi=1}
-        if(+num_device +biendemthietbi <= 9){
-
-        mang_chua_cac_obj = []
-        object_nha = {
-            name_nha: name_home,
-            id_nha: id_home 
-        }
-        object_phong = {
-            name_phong: nameRoom_new,
-            id_phong: newidroom
-        }
-        
-        mang_chua_cac_obj.push(object_nha)
-        mang_chua_cac_obj.push(object_phong)
-        for (var i = biendemthietbi ; i < +num_device +biendemthietbi; i++) {
-          //  console.log (num_device)
-            var newNameThietbi = 'id="Thiết bị ' + i + '"';
-            var idNew_NameThietbi = "Thiết bị " + i;
-            var newithietbi = "TB" + i;
-            id = 'id="TB' + i + '"';
-            id_phanloai = "phanloaithietbi" + i;
-            divPhanLoai = `<div class="form-select" style= "width:10%">
-                              <select id="phanloaithietbi${i}">
-                                <option value="Thiết bị">Thiết bị</option>
-                                <option value="Cảm biến">Cảm biến</option>
-                              </select>
-                            </div>`
-            divIDThietbi = '<input disabled type="nameHome" ' + id + 'style="width:70%">'
-            divNameThietbi = '<input type="nameHome" ' + newNameThietbi + ' style="width:20%;color:black;background-color:#47aedb87">'
-                //< input disabled type = "nameHome" value = ""id = "{F8uu"} "></input>
-            document.getElementById('themroom').innerHTML += divNameThietbi + divIDThietbi + divPhanLoai;
-            document.getElementById(idNew_NameThietbi).setAttribute('value', idNew_NameThietbi)
-            document.getElementById(newithietbi).setAttribute('value', "ID: " + newithietbi)
-                //document.getElementById(idnumDev).setAttribute('value', "ID Room: " + idnumDev)   
-    
-            // object_tonghop += { thietbi: newithietbi }
-            object_thietbi = {
-                id_name_device: idNew_NameThietbi,
-                id_device: newithietbi,
-                id_phanloai: id_phanloai
-            }
-            mang_chua_cac_obj.push(object_thietbi)
-                // console.log(name_home + "--" + id_home + "--" + nameRoom_new + "--" + newidroom + id_phanloai + newithietbi + idNew_NameThietbi)
-    
-        }
-
-
-    }
-    else{
-        swal("Cảnh báo!", "Số lượng thiết bị vượt giới hạn, bạn chỉ có thể có tối đa 8 thiết bị trong 1 phòng!")
-    }
-    document.getElementById('themroom').innerHTML += `<br><button class="btnadd1" onclick="oke_firebase()"><b>LƯU THÔNG TIN PHÒNG</b></button>`   
-    });   
   
-        // tên phòng: nameRoom_new   ----- id phòng:newidroom
+    name_home = document.getElementById("name_home").value
+    if(name_home.length > 5){
+        id_home = document.getElementById("idnewHome").textContent
+        nameRoom_new = document.getElementById("nameRoom").value;
+        if(nameRoom_new.length > 5){
+            num_device = document.getElementById("valueRoomNumber").value;
+            document.getElementById('themroom').innerHTML = ""
+            if(conentaoidhaykhong=='1'){
+                var newidroom = randomString(4, "N")
+                document.getElementById("idnewphong").innerHTML = newidroom
+            } 
+            else{
+                newidroom = id_room;
+            }
+            var biendemthietbi=0
+            database.ref("ADMIN").child(id_home).child(newidroom).once('value', async function(snap) {
+                var ketqualangnghe = await snap.val();        
+                for (idthietbi in ketqualangnghe){
+                    biendemthietbi ++
+                    
+                }
 
-    
+                if(biendemthietbi < 0){biendemthietbi=1}
+                if(+num_device +biendemthietbi <= 9){
+
+                mang_chua_cac_obj = []
+                object_nha = {
+                    name_nha: name_home,
+                    id_nha: id_home 
+                }
+                object_phong = {
+                    name_phong: nameRoom_new,
+                    id_phong: newidroom
+                }
+                
+                mang_chua_cac_obj.push(object_nha)
+                mang_chua_cac_obj.push(object_phong)
+                for (var i = biendemthietbi ; i < +num_device +biendemthietbi; i++) {
+                //  console.log (num_device)
+                    var newNameThietbi = 'id="Thiết bị ' + i + '"';
+
+                    var idNew_NameThietbi = "Thiết bị " + i;
+                    var newithietbi = "PL" + i;
+                    id = 'id="PL' + i + '"';
+                    id_phanloai = "phanloaithietbi" + i;
+                    divPhanLoai = `<div class="form-select" style= "width:10%">
+                                    <select id="phanloaithietbi${i}">
+                                        <option value="Thiết bị">Thiết bị</option>
+                                        <option value="Cảm biến">Cảm biến</option>
+                                    </select>
+                                    </div>`
+                    divIDThietbi = '<input disabled type="nameHome" ' + id + 'style="width:70%">'
+                    divNameThietbi = '<input type="nameHome" ' + newNameThietbi + ' style="width:20%;color:black;background-color:#47aedb87">'
+                        //< input disabled type = "nameHome" value = ""id = "{F8uu"} "></input>
+                    document.getElementById('themroom').innerHTML += divNameThietbi + divIDThietbi + divPhanLoai;
+                    document.getElementById(idNew_NameThietbi).setAttribute('value', idNew_NameThietbi)
+                    document.getElementById(newithietbi).setAttribute('value', "ID: " + newithietbi)
+                        //document.getElementById(idnumDev).setAttribute('value', "ID Room: " + idnumDev)   
+            
+                    // object_tonghop += { thietbi: newithietbi }
+                    object_thietbi = {
+                        id_name_device: idNew_NameThietbi,
+                        id_device: newithietbi,
+                        id_phanloai: id_phanloai
+                    }
+                    mang_chua_cac_obj.push(object_thietbi)
+                }
+
+            }
+            else{
+                swal("Cảnh báo!", "Số lượng thiết bị vượt giới hạn, bạn chỉ có thể có tối đa 8 thiết bị trong 1 phòng!")
+            }
+                document.getElementById('themroom').innerHTML += `<br><button class="btnadd1" onclick="oke_firebase()"><b>LƯU THÔNG TIN PHÒNG</b></button>`   
+            });   
+        } else {
+            swal("Lưu ý!", "Tên phòng phải lớn hơn 5 ký tự!", "error");
+        } 
+    } else {
+        swal("Lưu ý!", "Tên nhà phải lớn hơn 5 ký tự!", "error");
+    }   
 }
 
 function oke_firebase() {
-    
-    swal("Tốt lắm!", "Bạn đã lưu thông tin phòng!", "success");
-    document.getElementById('name_home').disabled = true;
-  //  console.log(mang_chua_cac_obj)
     name_phong = document.getElementById("nameRoom").value;
-    name_nha = mang_chua_cac_obj[0].name_nha
-    id_nha = mang_chua_cac_obj[0].id_nha
-    //name_phong = mang_chua_cac_obj[1].name_phong
-    id_phong = mang_chua_cac_obj[1].id_phong
-    document.getElementById("nameRoom").value = "";
-    for (let i = 2; i < mang_chua_cac_obj.length; i++) {
-        id_name_device = mang_chua_cac_obj[i].id_name_device
-        id_device = mang_chua_cac_obj[i].id_device
-        id_phanloai = mang_chua_cac_obj[i].id_phanloai
-        name_device = document.getElementById(id_name_device).value;
-        phanloai = document.getElementById(id_phanloai).value;
-  //      console.log("nhà:" + name_nha + "idnha:" + id_nha + "phòng:" + name_phong + "idphong:" + id_phong + "thietbi:" + name_device + "id_device:" + id_device + "loại:" + phanloai)
-        newPushDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device)
-        newPushDevice.set({
-            namethietbi: name_device,
-            phanloai: phanloai,
-            trangthai: "Đợi cập nhật từ GATEWAY"
-        });
-        newPushHome = database.ref("ADMIN").child(id_nha).child("namenha")
-        newPushHome.set(name_nha);
-        newPushRoom = database.ref("ADMIN").child(id_nha).child(id_phong).child("namephong")
-        newPushRoom.set(name_phong);
+    name_nha = document.getElementById("name_home").value;
+    if(name_nha.length>5 && name_phong.length>5){
+        swal("Tốt lắm!", "Bạn đã lưu thông tin phòng!", "success");
+        document.getElementById('name_home').disabled = true;
+    //  console.log(mang_chua_cac_obj)
+        name_phong = document.getElementById("nameRoom").value;
+        name_nha = mang_chua_cac_obj[0].name_nha
+        id_nha = mang_chua_cac_obj[0].id_nha
+        //name_phong = mang_chua_cac_obj[1].name_phong
+        id_phong = mang_chua_cac_obj[1].id_phong
+        document.getElementById("nameRoom").value = "";
+        for (let i = 2; i < mang_chua_cac_obj.length; i++) {
+            id_name_device = mang_chua_cac_obj[i].id_name_device
+            id_device = mang_chua_cac_obj[i].id_device
+            id_phanloai = mang_chua_cac_obj[i].id_phanloai
+            name_device = document.getElementById(id_name_device).value;
+            phanloai = document.getElementById(id_phanloai).value;
+    //      console.log("nhà:" + name_nha + "idnha:" + id_nha + "phòng:" + name_phong + "idphong:" + id_phong + "thietbi:" + name_device + "id_device:" + id_device + "loại:" + phanloai)
+            newPushDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device)
+            newPushDevice.set({
+                namethietbi: name_device,
+                phanloai: phanloai,
+                trangthai: "Đợi cập nhật từ GATEWAY"
+            });
+            newPushHome = database.ref("ADMIN").child(id_nha).child("namenha")
+            newPushHome.set(name_nha);
+            newPushRoom = database.ref("ADMIN").child(id_nha).child(id_phong).child("namephong")
+            newPushRoom.set(name_phong);
 
+        }
+        document.getElementById('themroom').innerHTML = "";
+        document.getElementById("idnewphong").innerHTML = "";
+        showRoom(id_nha)
+        showDevice(id_nha, id_phong)
+    } else {
+        swal("Lưu ý", "Tên nhà và tên phòng phải lớn hơn 5 ký tự!", "error");
     }
-    document.getElementById('themroom').innerHTML = "";
-    document.getElementById("idnewphong").innerHTML = "";
-    showRoom(id_nha)
-    showDevice(id_nha, id_phong)
-
 }
 
 function deleteHome(home){
@@ -601,33 +615,42 @@ function checknewname_home(id_nha_rename){
     id_input_home = "input"+id_nha_rename;
    // console.log(id_input_home)
     newname_home = document.getElementById(id_input_home).value
-    newPush_nameHome = database.ref("ADMIN").child(id_nha_rename).child("namenha")
-    newPush_nameHome.set(newname_home);
-    swal("Tốt lắm!", "Bạn đã đổi tên nhà thành công!", "success");
-    showHome()
-    showRoom(id_nha_rename)
-
+    if(newname_home.length > 5){
+        newPush_nameHome = database.ref("ADMIN").child(id_nha_rename).child("namenha")
+        newPush_nameHome.set(newname_home);
+        swal("Tốt lắm!", "Bạn đã đổi tên nhà thành công!", "success");
+        showHome()
+        showRoom(id_nha_rename)
+    } else {
+        swal("Lưu ý!", "Tên nhà phải lớn hơn 5 ký tự!", "error");
+    }
 
 }
 function checknewname_room(id_nha, id_phong_rename){
     id_input_room = "input"+id_nha+id_phong_rename;
     //console.log(id_input_room)
     newname_room = document.getElementById(id_input_room).value
-    newPush_nameRoom = database.ref("ADMIN").child(id_nha).child(id_phong_rename).child("namephong")
-    newPush_nameRoom.set(newname_room);
-    swal("Tốt lắm!", "Bạn đã đổi tên phòng thành công!", "success");
-    showRoom(id_nha)
-    showDevice(id_nha, id_phong_rename)
+    if(newname_room.length > 5){
+        newPush_nameRoom = database.ref("ADMIN").child(id_nha).child(id_phong_rename).child("namephong")
+        newPush_nameRoom.set(newname_room);
+        swal("Tốt lắm!", "Bạn đã đổi tên phòng thành công!", "success");
+        showRoom(id_nha)
+        showDevice(id_nha, id_phong_rename)
+    } else {
+        swal("Lưu ý!", "Tên phòng phải lớn hơn 5 ký tự!", "error");
+    }
 }
 function checknewname_device(id_nha, id_phong, id_device_rename){
     id_input_device = "input"+id_nha+id_phong+id_device_rename;
-   // console.log(id_input_device)
     newname_device = document.getElementById(id_input_device).value
-  //  console.log(newname_device)
+    if(newname_device.length > 5){
     newPush_nameDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device_rename).child("namethietbi")
     newPush_nameDevice.set(newname_device);
     swal("Tốt lắm!", "Bạn đã đổi tên thiết bị thành công!", "success");
     showDevice(id_nha, id_phong)
+    } else {
+        swal("Lưu ý!", "Tên thiết bị phải lớn hơn 5 ký tự!", "error");
+    }
 }
 
 function checktype_device1(id_nha, id_phong, id_device_retype) {
