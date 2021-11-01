@@ -12,7 +12,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 var database = firebase.database();
-/////////////// toogle state
 function toggleStatea(home, room, device, stageToggle) {
     if (stageToggle == '0') {
         stageToggle = '1';
@@ -22,18 +21,10 @@ function toggleStatea(home, room, device, stageToggle) {
     } else {
         swal("CMM", "CẬP NHẬT DỮ LIỆU NHANH LÊN!", "error");
     }
-
-   // console.log(newPushRef)
-
     newPush_trangthai = database.ref("ADMIN").child(home).child(room).child(device).child("trangthai")
     newPush_trangthai.set(stageToggle);
-  //  newPushRef.set(newPushRef);
-
 }
 
-
-
-//////cập nhật bảng trạng thái
 tableReportAll = document.getElementById("tablestate");
 tableHomeAll = document.getElementById("homeName");
 database.ref("ADMIN").on('value', async function(snap) {
@@ -48,10 +39,8 @@ database.ref("ADMIN").on('value', async function(snap) {
         maubang = maubang + 1
         maubang = maubang%2
         for (var Room in nhathemS) {
-            // console.log(Room)
             phongthemS = nhathemS[Room]
             name_phong_fb = phongthemS.namephong
-                // console.log(phongthemS)
             if (Room != "namenha") {
                 for (var Device in phongthemS) {
                     if (Device != "namephong") {
@@ -87,7 +76,6 @@ database.ref("ADMIN").on('value', async function(snap) {
 });
 
 homeName = document.getElementById("HName");
-//////////////////////// hiển thị nhà
 function showHome() {
     database.ref("ADMIN").once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
@@ -119,9 +107,7 @@ function showHome() {
 }
 
 romeName = document.getElementById("RName");
-
 deviceName = document.getElementById("DName");
-/////////////////// hiển thị phòng
 function showRoom(Rhome) {
     xoa_mau_home = document.getElementsByClassName("btn-add-home")
     for (var i = 0; i < xoa_mau_home.length; i++) {
@@ -133,14 +119,12 @@ function showRoom(Rhome) {
         var ketqualangnghe = await snap.val();
         romeName.innerHTML = "";
         for (var Room in ketqualangnghe) {
-            //console.log(Room)
             if (Room != "namenha") {
                 for (var tennha in ketqualangnghe) {
                     if (tennha == "namenha") { name_nha_fb = ketqualangnghe.namenha }
                 }
                 phong_fb = ketqualangnghe[Room]
                 for (var Device in phong_fb) {
-                    // console.log(Device)
                     if (Device != "namephong") {
                         for (var tenphong in phong_fb) {
                             if (tenphong == "namephong") {
@@ -166,17 +150,12 @@ function showRoom(Rhome) {
                 </div> 
             `
         
-                deviceName.innerHTML = "";
-          //      var id_hcolor = 'id="idhome' + Room + '"';
-         //       console.log(id_hcolor)
-           //     document.getElementById(id_hcolor).style.color='red';
-               
+                deviceName.innerHTML = "";             
             }
         }
     });
 }
 
-////////// hiển thị thiết bị
 function showDevice(Dhome, Droom) {
     //Dhome:idnha | Droom: id phòng | D_namehome: tên nhà
     xoa_mau = document.getElementsByClassName("btn-add-room")
@@ -185,19 +164,14 @@ function showDevice(Dhome, Droom) {
     }
     idroom = document.getElementById("idroom" + Dhome + Droom);   
     idroom.style.backgroundColor = "red";
-
-  //  idroom.style.backgroundColor = "greenyellow";
     database.ref("ADMIN").child(Dhome).child(Droom).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         deviceName.innerHTML = "";
-        // ketqualangnghe
         for (var Device in ketqualangnghe) {
-           // console.log(Device)
             if (Device != "namephong") {
                 for (var tenphong in ketqualangnghe) {
                     if (tenphong == "namephong") {
                         name_phong_fb = ketqualangnghe.namephong
-                  //      console.log(name_phong_fb)  
                     }
                 }
                 thietbi_fb = ketqualangnghe[Device]
@@ -234,7 +208,6 @@ function showDevice(Dhome, Droom) {
     });
 }
 
-// lọc kết quả
 function search() {
     const input = document.getElementById("myInput");
     const inputStr = input.value.toUpperCase();
@@ -245,7 +218,7 @@ function search() {
         else tr.style.display = 'none';
     });
 }
-//////////// open/close tab state
+
 function openState() {
     document.getElementById("tabstate").style.width = "100%";
 }
@@ -253,34 +226,22 @@ function openState() {
 function closeState() {
     document.getElementById("tabstate").style.width = "0";
 }
-/////////// open/close tab home state
-function openRoom(evt, roomName) {
-    // Declare all variables
-    var i, tabcontent, tablinks;
 
-    // Get all elements with class="tabcontent" and hide them
+function openRoom(evt, roomName) {
+    var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
-
-    // Get all elements with class="tablinks" and remove the class "active"
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace("active", "");
     }
-
-    // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(roomName).style.display = "block";
     evt.currentTarget.className += "active";
     showHome()
 }
-// Get the element with id="defaultOpen" and click on it
-//document.getElementById("tabset").click();
 document.getElementById("defaultOpen").click();
-//document.getElementById("btnadd_id").click();
-
-//////////////////random
 function randomString(len, an) {
     an = an && an.toLowerCase();
     var str = "",
@@ -292,16 +253,13 @@ function randomString(len, an) {
         str += String.fromCharCode(r += r > 9 ? r < 36 ? 55 : 61 : 48);
     }
     return str;
-}
- 
-//randomString(10);        // "4Z8iNQag9v"
-//randomString(10, "A");   // "aUkZuHNcWw"
-//randomString(10, "N");   // "9055739230"
-/////////////////// add home
-var formAddHome = document.getElementById('addHome');
+    //randomString(10);        // "4Z8iNQag9v"
+    //randomString(10, "A");   // "aUkZuHNcWw"
+    //randomString(10, "N");   // "9055739230"
+} 
 
-function addnewHome() {
-    
+var formAddHome = document.getElementById('addHome');
+function addnewHome() {  
     conentaoidhaykhong = 1;
     document.getElementById('name_home').disabled = false;
     document.getElementById('nameRoom').disabled = false;
@@ -323,8 +281,6 @@ function addnewHome() {
 
 function addnewRoom(Idnha, nameNha) {
     conentaoidhaykhong = 1;
-   // console.log(Idnha)
-       // Idnha
     document.getElementById('addHome').style.display = 'block'
     document.getElementById("idnewHome").innerHTML = Idnha;
     document.getElementById('themroom').innerHTML = "";
@@ -354,14 +310,12 @@ function addnewdevice(Idnha, nameNha, Idphong, namePhong) {
     `;
 }
 
-
-/////////////////////////
 function closeAddnewHome() {
     document.getElementById('addHome').style.display = 'none' 
     document.getElementById("idhome").click();
     showHome()
 }
-////////////////////////////////
+
 function decRoom() {
     valueRoom = document.getElementById("valueRoomNumber").value;
     minRoom = 1;
@@ -380,12 +334,11 @@ function incRoom() {
     if (valueRoom < maxRoom) {
         valueRoom = parseInt(valueRoom) + 1;
         document.getElementById('valueRoomNumber').setAttribute('value', valueRoom);
-       // console.log(valueRoom)
     } else {
         return valueRoom
     }
 }
-/////////////////////// 
+
 addIDroom = document.getElementById("themroom");
 nameRoom = document.getElementById("nameRoom");
 var mang_chua_cac_obj = []
@@ -430,9 +383,7 @@ function roomPlus(conentaoidhaykhong,id_room) {
                 mang_chua_cac_obj.push(object_nha)
                 mang_chua_cac_obj.push(object_phong)
                 for (var i = biendemthietbi ; i < +num_device +biendemthietbi; i++) {
-                //  console.log (num_device)
                     var newNameThietbi = 'id="Thiết bị ' + i + '"';
-
                     var idNew_NameThietbi = "Thiết bị " + i;
                     var newithietbi = "PL" + i;
                     id = 'id="PL' + i + '"';
@@ -445,13 +396,9 @@ function roomPlus(conentaoidhaykhong,id_room) {
                                     </div>`
                     divIDThietbi = '<input disabled type="nameHome" ' + id + 'style="width:70%">'
                     divNameThietbi = '<input type="nameHome" ' + newNameThietbi + ' style="width:20%;color:black;background-color:#47aedb87">'
-                        //< input disabled type = "nameHome" value = ""id = "{F8uu"} "></input>
                     document.getElementById('themroom').innerHTML += divNameThietbi + divIDThietbi + divPhanLoai;
                     document.getElementById(idNew_NameThietbi).setAttribute('value', idNew_NameThietbi)
                     document.getElementById(newithietbi).setAttribute('value', "ID: " + newithietbi)
-                        //document.getElementById(idnumDev).setAttribute('value', "ID Room: " + idnumDev)   
-            
-                    // object_tonghop += { thietbi: newithietbi }
                     object_thietbi = {
                         id_name_device: idNew_NameThietbi,
                         id_device: newithietbi,
@@ -480,11 +427,9 @@ function oke_firebase() {
     if(name_nha.length>5 && name_phong.length>5){
         swal("Tốt lắm!", "Bạn đã lưu thông tin phòng!", "success");
         document.getElementById('name_home').disabled = true;
-    //  console.log(mang_chua_cac_obj)
         name_phong = document.getElementById("nameRoom").value;
         name_nha = mang_chua_cac_obj[0].name_nha
         id_nha = mang_chua_cac_obj[0].id_nha
-        //name_phong = mang_chua_cac_obj[1].name_phong
         id_phong = mang_chua_cac_obj[1].id_phong
         document.getElementById("nameRoom").value = "";
         for (let i = 2; i < mang_chua_cac_obj.length; i++) {
@@ -493,7 +438,6 @@ function oke_firebase() {
             id_phanloai = mang_chua_cac_obj[i].id_phanloai
             name_device = document.getElementById(id_name_device).value;
             phanloai = document.getElementById(id_phanloai).value;
-    //      console.log("nhà:" + name_nha + "idnha:" + id_nha + "phòng:" + name_phong + "idphong:" + id_phong + "thietbi:" + name_device + "id_device:" + id_device + "loại:" + phanloai)
             newPushDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device)
             newPushDevice.set({
                 namethietbi: name_device,
@@ -541,7 +485,6 @@ function deleteHome(home){
 	});
 }
 
-
 function deleteRoom(home, room){
 	swal({
 		title: "Bạn chắc chắn muốn xóa?",
@@ -567,11 +510,6 @@ function deleteRoom(home, room){
 	});
 }
 
-
-//////////////xóa phòng
-
-
-///////////////////xóa thiết bị
 function deleteDevice(home, room, device) {
     swal({
 		title: "Bạn chắc chắn muốn xóa?",
@@ -596,21 +534,6 @@ function deleteDevice(home, room, device) {
 	});
 }
 
-const button = document.querySelector('.btncus');
-
-//button.addEventListener('click',changeColor);
-
-function changeColor(){
-    const background = document.querySelector('.btncus');
- //   const arrayColor = ['red','yellow','pink','gray','black','orange','blue'];
- //   let random = arrayColor[randomColor(arrayColor)];
-    background.style.backgroundColor = '#221bcb82';
-   
-    // console.log(random);
-}
-//function randomColor(array){
-//    return Math.floor(Math.random()*array.length);
-//}
 function checknewname_home(id_nha_rename){
     id_input_home = "input"+id_nha_rename;
    // console.log(id_input_home)
