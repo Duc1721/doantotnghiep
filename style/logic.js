@@ -19,7 +19,7 @@ function toggleStatea(home, room, device, stageToggle) {
     } else if (stageToggle == '1') {
         stageToggle = '0';
     } else {
-        swal("CMM", "CẬP NHẬT DỮ LIỆU NHANH LÊN!", "error");
+        swal("HUHU!", "CẬP NHẬT DỮ LIỆU NHANH LÊN!", "error");
     }
     newPush_trangthai = database.ref("ADMIN").child(home).child(room).child(device).child("trangthai")
     newPush_trangthai.set(stageToggle);
@@ -588,3 +588,28 @@ function checktype_device2(id_nha, id_phong, id_device_retype) {
     swal("Tốt lắm!", "Bạn đã chọn phân loại là cảm biến!", "success");
     showDevice(id_nha, id_phong)
 }
+
+function export2csv() {
+    let data = "";
+    const tableData = [];
+    const rows = document.querySelectorAll("table tr");
+    for (const row of rows) {
+      const rowData = [];
+      for (const [index, column] of row.querySelectorAll("th, td").entries()) {
+        // To retain the commas in the "Description" column, we can enclose those fields in quotation marks.
+        if ((index + 1) % 3 === 0) {
+          rowData.push('"' + column.innerText + '"');
+        } else {
+          rowData.push(column.innerText);
+        }
+      }
+      tableData.push(rowData.join(","));
+    }
+    data += tableData.join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([data], { type: "text/csv" }));
+    a.setAttribute("download", "data.csv");
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }

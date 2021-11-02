@@ -463,7 +463,7 @@ input[type=search] {
 
 }
 input[type=search]:focus {
-  width: 100%;
+  width: 85%;
 }
 .btn-outline-dark{
   border-radius: 5px;
