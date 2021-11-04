@@ -24,7 +24,6 @@ function toggleStatea(home, room, device, stageToggle) {
     newPush_trangthai = database.ref("ADMIN").child(home).child(room).child(device).child("trangthai")
     newPush_trangthai.set(stageToggle);
 }
-
 tableReportAll = document.getElementById("tablestate");
 tableHomeAll = document.getElementById("homeName");
 database.ref("ADMIN").on('value', async function(snap) {
@@ -74,7 +73,6 @@ database.ref("ADMIN").on('value', async function(snap) {
     }
 
 });
-
 homeName = document.getElementById("HName");
 function showHome() {
     database.ref("ADMIN").once('value', async function(snap) {
@@ -103,7 +101,10 @@ function showHome() {
                     `
         }
     });
-
+    Dname = document.getElementById("DName")
+    Rname = document.getElementById("RName")
+    Rname.innerHTML = ""
+    Dname.innerHTML = ""
 }
 
 romeName = document.getElementById("RName");
@@ -221,6 +222,8 @@ function search() {
 
 function openState() {
     document.getElementById("tabstate").style.width = "100%";
+    document.getElementById("defaultOpen").click();
+    showHome()
 }
 
 function closeState() {
@@ -239,8 +242,8 @@ function openRoom(evt, roomName) {
     }
     document.getElementById(roomName).style.display = "block";
     evt.currentTarget.className += "active";
-    showHome()
 }
+
 document.getElementById("defaultOpen").click();
 function randomString(len, an) {
     an = an && an.toLowerCase();
@@ -268,6 +271,9 @@ function addnewHome() {
     if(tt_id_home == 1){
         var newid = randomString(6, "N")
         tt_id_home = 0
+        new_mk = randomString(8, "N")
+        newPush_account_id= database.ref("ACCOUNT").child("USER").child(newid)
+        newPush_account_id.set(new_mk);
     }
     document.getElementById("idnewHome").innerHTML = newid;
     document.getElementById('themroom').innerHTML = "";
@@ -418,7 +424,8 @@ function roomPlus(conentaoidhaykhong,id_room) {
         } 
     } else {
         swal("Lưu ý!", "Tên nhà phải lớn hơn 5 ký tự!", "error");
-    }   
+    }
+    showHome()
 }
 
 function oke_firebase() {
@@ -452,11 +459,13 @@ function oke_firebase() {
         }
         document.getElementById('themroom').innerHTML = "";
         document.getElementById("idnewphong").innerHTML = "";
+        
         showRoom(id_nha)
         showDevice(id_nha, id_phong)
     } else {
         swal("Lưu ý", "Tên nhà và tên phòng phải lớn hơn 5 ký tự!", "error");
     }
+  
 }
 
 function deleteHome(home){
@@ -478,6 +487,8 @@ function deleteHome(home){
       newRemoteRef.remove();
       romeName.innerHTML = "";
       deviceName.innerHTML = "";
+      newPush_account_dn_id= database.ref("ACCOUNT").child("USER").child(home)
+      newPush_account_dn_id.remove();
       showHome()
     } else {
       swal("Hủy", "Dữ liệu của bạn được bảo toàn!", "error");
@@ -613,3 +624,5 @@ function export2csv() {
     a.click();
     document.body.removeChild(a);
   }
+
+  

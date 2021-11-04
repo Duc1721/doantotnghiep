@@ -7,8 +7,7 @@
     <!-- hiển thị tiếng việt -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Device Control Center</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <!-- <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -33,24 +32,23 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Team</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Nhóm</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="https://www.facebook.com/profile.php?id=100022178348683">Lê Xuân Đức</a>
                             <a class="dropdown-item" href="https://www.facebook.com/hoagle30">Lê Việt Hoàng</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Product</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Về chúng tôi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Dịch vụ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sản phẩm</a></li>
                     <li class="nav-item">
                         <form class="form-inline my-0 my-lg-0">
-                            <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+                            <input class="form-control mr-sm-2" placeholder="Tìm kiếm" aria-label="Search">
                         </form>
+                       
                     </li>
                     <li class="nav-item">
-                        <form class="form-inline" action="/action_page.php">
-                            <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
-                        </form>
+                        <button class="btn btn-success" id="loginAdminUser" onclick="loginOpen()">Đăng nhập</button>
                     </li>
                 </ul>
             </div>
@@ -81,16 +79,18 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <button  onclick="addnewHome()" class="btn1"><i class="fas fa-building"></i><i class="fas fa-plus" style=" font-size: 50%;"></i><h1>Thêm nhà</h1></button>
+                <button  onclick="addnewHome()" class="btn1">
+                    <i class="fas fa-building"></i><i class="fas fa-plus" style=" font-size: 50%;"></i>
+                    <h1>Thêm nhà</h1><h6>[ADMIN]</h6></button>
             </div>
             <div class="col">
-                <button class="btn1"><i class="fa fa-bar-chart"></i><h1>Thống kê</h1></button>
+                <button class="btn1"><i class="fa fa-bar-chart"></i><h1>Thống kê</h1><h6>[ADMIN]</h6></button>
             </div>
             <div class="col" onclick="openState()">
-                <button class="btn1"><i class="fa fa-dashboard"></i><h1>Trạng thái</h1></button>
+                <button class="btn1"><i class="fa fa-dashboard"></i><h1>Trạng thái</h1><h6>[ADMIN]</h6></button>
             </div>
-            <div class="col">
-                <button class="btn1"><i class="fa fa-globe"></i><h1>Bản đồ</h1></button>
+            <div class="col" >
+                <button class="btn1" onclick="openHome()"><i class="far fa-house-user"></i><h1>Nhà riêng</h1><h6>[USER]</h6></button>
             </div>
         </div>
     </div>
@@ -146,25 +146,16 @@
         <!-- chữ phân đều giữa -->
         <div class="row welcome text-center">
             <hr>
-            <!-- gộp 12 cột làm 1 cho các kích thước -->
-            <div class="col-12">
-                <h1 class="display-4">Website is Updating</h1>
-            </div>
-            <!-- Horizontal Rule tức là đường kẻ ngang -->
             <hr>
             <div class="col-12">
-                <p>Welcome to Device Control Center. Wish you a good day!</p>
+                <p>Chào mừng bạn đến với trung tâm điều khiển thiết bị. Chúc bạn một ngày tốt lành!</p>
             </div>
         </div>
     </div>
 
     <div class="container-fluid padding">
         <div class="row text-center padding">
-            <div class="col-12">
-                <h2>Contact us</h2>
-            </div>
             <div class="col-12 social padding">
-                <!--  -->
                 <a href="#"><i class="fab fa-facebook"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-google-plus-g"></i></a>
@@ -179,7 +170,7 @@
             <div class="row text-center">
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Contact information</h5>
+                    <h5>Thông tin liên lạc</h5>
                     <hr class="light">
                     <p>217-595-905</p>
                     <p>DCCDH@gmail.com</p>
@@ -187,7 +178,7 @@
                 </div>
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Working hours</h5>
+                    <h5>Giờ làm việc</h5>
                     <hr class="light">
                     <p>Monday-Friday: 8am - 10pm</p>
                     <p>Weekend: 8am - 12am</p>
@@ -195,7 +186,7 @@
                 </div>
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Department</h5>
+                    <h5>Chi nhánh</h5>
                     <hr class="light">
                     <p>Ottawa, Canada</p>
                     <p>Tokyo, Japan</p>
@@ -213,6 +204,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="./style/logic.js"></script>
+    <script src="./style/login.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div id="addHome" class="formAddHome">
@@ -245,11 +238,74 @@
 
             <div class="container1" style="background-color:#f1f1f1">
                 <button type="button" onclick="closeAddnewHome()" class="btnadd">THOÁT</button>
-                <span class="psw">New? <a href="#">Tutorial</a></span>
+                <span class="psw">Bạn là người mới? <a href="#">Hướng dẫn</a></span>
             </div>
         </div>
     </div>
-    
+<!--    //////////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <div id="formLogin" class="formLoginAU">
+
+        <div>
+            <div class="formLoginAU-content animate">
+                <div class="imgcontainer">
+                    <span onclick="loginClose()" class="closelogin"  style="margin-top: -2%;">&times;</span>
+                   <h2 style="text-align:left;margin-left: 5%;">ĐĂNG NHẬP <span id="wait_dangnhap"></span></h2>
+                </div>
+                <div class="container1">
+                    <button class="btncus2" disabled><i class="fas fa-user"></i></button><input type="inidlogin" placeholder="Nhập ID nhà"  id="id_dangnhap">
+                    <button class="btncus2" disabled><i class="fas fa-key"></i></button><input type="inidlogin" placeholder="Nhập mật khẩu" id="mk_dangnhap">
+                    <h6><input type="checkbox"><label>Nhớ mật khẩu</label>
+                        <button class="btndangnhap" onclick="loginYourhome()" id="btnloginyh">Đăng nhập</button></h6>
+                    <hr class="light" style="width:80%; text-align:center" />
+                    <h6 style="text-align: center">Bạn không có tài khoản? <a href="#" onclick="addnewHome()">Đăng ký</a></h6>
+                    <h6 style="text-align: center">Quên mật khẩu? <a href="#" onclick="change_passOpen()">Đổi mật khẩu</a></h6>
+               
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!--    //////////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <div id="formRegister" class="formLoginAU">
+
+        <div>
+            <div class="formLoginAU-content animate">
+                <div class="imgcontainer">
+                    <span onclick="change_passClose()" class="closelogin" style="margin-top: -2%;"><i class="fad fa-chevron-right" style="font-size: 60%;"></i></span>
+                    <h2 style="text-align:left;margin-left: 5%;" value="" id="titleDangky">ĐỔI MẬT KHẨU <span id="titleDangky_thanhcong"></span></h2>
+                </div>
+                <div class="container1">
+                    <button class="btncus2" disabled><i class="fas fa-user"></i></button><input type="inidlogin" placeholder="Nhập ID nhà"  id="id_dk" value="">
+                    <button class="btncus2" disabled><i class="fas fa-key"></i></button><input type="inidlogin" placeholder="Nhập mật khẩu" id="mk_dk" value="">
+                    <button class="btncus2" disabled><i class="fas fa-key"></i></button><input type="inidlogin" placeholder="Nhập lại mật khẩu" id="remk_dk" value="">
+                    <h6><input type="checkbox"><label>Hiện mật khẩu</label><button class="btndangnhap" onclick="change_passAdd()" id="themtk">Lưu mật khẩu</button></h6>
+                  
+            </div>
+        </div>
+    </div>
+    </div>
+   
+    <!--    //////////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <div id="goHome" class="formHome">
+
+        <div>
+            <div class="formHome-content animate">
+                <div class="imgcontainer">
+                    <span onclick="closeHome()" class="closelogin" style="margin-top: -2%;"><i class="fad fa-chevron-right" style="font-size: 60%;"></i></span>
+                </div>
+                <div class="container1">
+                  
+                  
+                  
+            </div>
+        </div>
+    </div>
+       
+
+    </div>
 </body>
 
 </html>
