@@ -70,4 +70,5 @@ function openHome(){
 }
 function closeHome(){
     document.getElementById('goHome').style.display = 'none' 
+    console.log("hello")
 }

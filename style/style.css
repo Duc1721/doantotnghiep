@@ -194,7 +194,7 @@ hr.light {
   }
   100% {
     opacity: 1;
-    transform: perspective(800px) rotateX(0);
+    transform: perspective(800px) rotateX(0); 
   }
 }
 
