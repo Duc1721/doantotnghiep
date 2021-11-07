@@ -198,4 +198,4 @@ function showDevice_user(Dhome, Droom) {
             }
         }
     });
-}
+}    
