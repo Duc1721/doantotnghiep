@@ -25,7 +25,6 @@ function toggleStatea(home, room, device, stageToggle) {
     newPush_trangthai.set(stageToggle);
 }
 tableReportAll = document.getElementById("tablestate");
-tableHomeAll = document.getElementById("homeName");
 database.ref("ADMIN").on('value', async function(snap) {
     var ketqualangnghe = await snap.val();
     tableReportAll.innerHTML = ''
@@ -71,9 +70,12 @@ database.ref("ADMIN").on('value', async function(snap) {
         }
 
     }
+    search()
 
 });
 homeName = document.getElementById("HName");
+romeName = document.getElementById("RName");
+deviceName = document.getElementById("DName");
 function showHome() {
     database.ref("ADMIN").once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
@@ -85,9 +87,10 @@ function showHome() {
             id_nha_fb = Home
             
             homeName.innerHTML += `
+
                    
                             <div class="card">
-                                <h5 class="card-header btn " style ="text-align: left"><b><i class="fas fa-building"></i> ${name_nha_fb}</b></h5>
+                                <h5 class="card-header btn"><b><i class="fas fa-building"></i> ${name_nha_fb}</b></h5>
                                 <h5></h5>
                                 <h6><button id="idhome${id_nha_fb}" class="btncus btn-add-home" onclick="showRoom('${id_nha_fb}')" data-toggle="tooltip" title="Hiển thị phòng!" ><i class="fas fa-home"></i></button>
                                 <button class="btncus" onclick="addnewRoom('${id_nha_fb}','${name_nha_fb}')"  data-toggle="tooltip" title="Thêm phòng!"><i class="far fa-plus-square"></i></button>
@@ -96,19 +99,13 @@ function showHome() {
                                 <div id="rename_home${id_nha_fb}" class="collapse">
                                     <input id="input${id_nha_fb}" type="nameHome" style="width:80%" placeholder="Nhập tên nhà mới"><button class="btncus" id="check${id_nha_fb}" onclick="checknewname_home('${id_nha_fb}')"><i class="fad fa-check"></i></button>
                                 </div>  
-                            </div>  
-                      
-                    `
+                            </div>   `
+         
         }
     });
-    Dname = document.getElementById("DName")
-    Rname = document.getElementById("RName")
-    Rname.innerHTML = ""
-    Dname.innerHTML = ""
+    romeName.innerHTML = ""
+    deviceName.innerHTML = ""
 }
-
-romeName = document.getElementById("RName");
-deviceName = document.getElementById("DName");
 function showRoom(Rhome) {
     xoa_mau_home = document.getElementsByClassName("btn-add-home")
     for (var i = 0; i < xoa_mau_home.length; i++) {
@@ -139,7 +136,7 @@ function showRoom(Rhome) {
                 }
                 romeName.innerHTML += `
                 <div class="card">
-                        <h5 id= "tennhahienthitenphong${Room}"class="card-header btn" style="text-align: left"><b><i class="fas fa-building"></i> ${name_nha_fb} - <i class="fas fa-home"></i> ${name_phong_fb}</b></h5>
+                        <h5 id= "tennhahienthitenphong${Room}"class="card-header btn"><b><i class="fas fa-building"></i> ${name_nha_fb} - <i class="fas fa-home"></i> ${name_phong_fb}</b></h5>
                         <h5></h5>
                         <h6><button id = "idroom${Rhome}${Room}"class="btncus btn-add-room" onclick="showDevice('${Rhome}','${Room}')"  data-toggle="tooltip" title="Hiển thị thiết bị!"><i class="far fa-lightbulb"></i></button> 
                         <button class="btncus" onclick = "addnewdevice( '${Rhome}','${name_nha_fb}', '${Room}','${name_phong_fb}','${phanloai_thietbi_fb}')"  data-toggle="tooltip" title="Thêm thiết bị!"><i class="far fa-plus-square"></i></button>
@@ -181,7 +178,7 @@ function showDevice(Dhome, Droom) {
                 trangthai_thietbi_fb = thietbi_fb.trangthai
                 deviceName.innerHTML += `     
                    <div class="card">
-                        <h5 class="card-header btn" style="text-align: left" ><b><i class="fas fa-home"></i> ${name_phong_fb} - <i class="fad fa-fan-table"></i> ${name_thietbi_fb} - <i class="fas fa-clipboard-list-check"></i> ${phanloai_thietbi_fb}</b></h5>
+                        <h5 class="card-header btn"><b><i class="fas fa-home"></i> ${name_phong_fb} - <i class="fad fa-fan-table"></i> ${name_thietbi_fb} - <i class="fas fa-clipboard-list-check"></i> ${phanloai_thietbi_fb}</b></h5>
                         <h5></h5>
                         <h6><button class="btncus"><i class="fa fa-close" onclick = "deleteDevice( '${Dhome}', '${Droom}','${Device}')"  data-toggle="tooltip" title="Xóa thiết bị!"></i></button>
 
@@ -270,10 +267,10 @@ function addnewHome() {
     var tt_id_home = 1;
     if(tt_id_home == 1){
         var newid = randomString(6, "N")
-        tt_id_home = 0
-        new_mk = randomString(8, "N")
-        newPush_account_id= database.ref("ACCOUNT").child("USER").child(newid)
-        newPush_account_id.set(new_mk);
+     //   new_mk = randomString(8, "N")
+     //   newPush_account_id= database.ref("ACCOUNT").child("USER").child(newid)
+    //    newPush_account_id.set(new_mk);
+        tt_id_home = 0  
     }
     document.getElementById("idnewHome").innerHTML = newid;
     document.getElementById('themroom').innerHTML = "";

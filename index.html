@@ -86,8 +86,8 @@
             <div class="col">
                 <button class="btn1"><i class="fa fa-bar-chart"></i><h1>Thống kê</h1><h6>[ADMIN]</h6></button>
             </div>
-            <div class="col" onclick="openState()">
-                <button class="btn1"><i class="fa fa-dashboard"></i><h1>Trạng thái</h1><h6>[ADMIN]</h6></button>
+            <div class="col">
+                <button class="btn1" onclick="openState()"><i class="fa fa-dashboard"></i><h1>Trạng thái</h1><h6>[ADMIN]</h6></button>
             </div>
             <div class="col" >
                 <button class="btn1" onclick="openHome()"><i class="far fa-house-user"></i><h1>Nhà riêng</h1><h6>[USER]</h6></button>
@@ -113,7 +113,7 @@
                                 <tr class="header" > 
                                     <th>#</th>
                                     <th>ID nhà</th>
-                                    <th id="homeName">Tên nhà</th>
+                                    <th>Tên nhà</th>
                                     <th>Tên phòng</th>  
                                     <th>Tên thiết bị</th>
                                     <th>Phân Loại</th>
@@ -127,19 +127,19 @@
                     </div>
                 </div>
             </div>
+            
             <div id="Room2" class="tabcontent">
                 <div class="row list-inline"> 
                     <div class="col1">
-                    <div class="vertical-menu" id="HName"></div></div>
+                        <div class="vertical-menu" id="HName"></div></div>
                     <div class="col1">
-                    <div class="vertical-menu" id="RName"></div></div>
+                        <div class="vertical-menu" id="RName"></div></div>
                     <div class="col1">
-                    <div class="vertical-menu" id="DName"></div></div>
-            </div> 
+                        <div class="vertical-menu" id="DName"></div></div>
+                </div> 
+            </div>
         </div>
     </div>
-
-</div>
 </div>
 
     <div class="container-fluid padding">
@@ -199,14 +199,7 @@
         </div>
     </footer>
 
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <script src="./style/logic.js"></script>
-    <script src="./style/login.js"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <div id="addHome" class="formAddHome">
 
@@ -218,9 +211,9 @@
             </div>
 
             <div class="container1">
-                <label for="hname"><b>ID NHÀ: </b><b id="idnewHome"></b></label>
+                <label><b>ID NHÀ: </b><b id="idnewHome"></b></label>
                 <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" required>
-                <label style="display:block" for="hname"><b>ID PHÒNG: </b><b id="idnewphong"></b></label>
+                <label style="display:block"><b>ID PHÒNG: </b><b id="idnewphong"></b></label>
                 <input id="nameRoom" type="nameRoom" style="width:67%" placeholder="Nhập tên phòng" name="nameRoom" required>
                 <div class="buttons_added">
                     <input class="form-inde minus" type="button" onclick="decRoom()" value="-">
@@ -256,7 +249,7 @@
                     <button class="btncus2" disabled><i class="fas fa-user"></i></button><input type="inidlogin" placeholder="Nhập ID nhà"  id="id_dangnhap">
                     <button class="btncus2" disabled><i class="fas fa-key"></i></button><input type="inidlogin" placeholder="Nhập mật khẩu" id="mk_dangnhap">
                     <h6><input type="checkbox"><label>Nhớ mật khẩu</label>
-                        <button class="btndangnhap" onclick="loginYourhome()" id="btnloginyh">Đăng nhập</button></h6>
+                        <button class="btndangnhap" onclick="loginYourhome()">Đăng nhập</button></h6>
                     <hr class="light" style="width:80%; text-align:center" />
                     <h6 style="text-align: center">Bạn không có tài khoản? <a href="#" onclick="addnewHome()">Đăng ký</a></h6>
                     <h6 style="text-align: center">Quên mật khẩu? <a href="#" onclick="change_passOpen()">Đổi mật khẩu</a></h6>
@@ -273,7 +266,7 @@
         <div>
             <div class="formLoginAU-content animate">
                 <div class="imgcontainer">
-                    <span onclick="change_passClose()" class="closelogin" style="margin-top: -2%;"><i class="fad fa-chevron-right" style="font-size: 60%;"></i></span>
+                    <span onclick="change_passClose()" class="closelogin" style="margin-top: -4%;"><i class="fad fa-chevron-right" style="font-size: 60%;"></i></span>
                     <h2 style="text-align:left;margin-left: 5%;" value="" id="titleDangky">ĐỔI MẬT KHẨU <span id="titleDangky_thanhcong"></span></h2>
                 </div>
                 <div class="container1">
@@ -288,24 +281,46 @@
     </div>
    
     <!--    //////////////////////////////////////////////////////////////////////////////////////////////-->
-
     <div id="goHome" class="formHome">
-
         <div>
             <div class="formHome-content animate">
                 <div class="imgcontainer">
-                    <span onclick="closeHome()" class="closelogin" style="margin-top: -2%;"><i class="fad fa-chevron-right" style="font-size: 60%;"></i></span>
+                    <span onclick="closeHome()" class="closelogin" style="margin-top: -2%;"><i class="fad fa-times" style="font-size: 90%;color:black"></i></span>
                 </div>
-                <div class="container1">
-                  
-                  
-                  
+                    <span class="btnback" id="btn_back"><i class="fad fa-chevron-left"></i></span>
+                    <h1 class="h1cus" id="ds_user">DANH SÁCH NHÀ</h1>
+                    <div class="grid-container" id="userHome"></div>
+                    <div>
+                        <div class="container1">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="header" id="header_table_user">
+                                    <th>#</th>
+                                    <th>ID nhà</th>
+                                    <th>Tên nhà</th>
+                                    <th>Tên phòng</th>  
+                                    <th>Tên thiết bị</th>
+                                    <th>Phân Loại</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_user">
+                            </tbody>
+                        </table> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-       
 
-    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="./style/logic.js"></script>
+    <script src="./style/login.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
 </body>
 
 </html>

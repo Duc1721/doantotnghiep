@@ -194,7 +194,7 @@ hr.light {
   }
   100% {
     opacity: 1;
-    transform: perspective(800px) rotateX(0); 
+    transform: perspective(800px) rotateX(0);                      
   }
 }
 
@@ -409,39 +409,16 @@ hr.light {
   color: white;
   text-transform:uppercase;
   text-shadow: 1px 2px 2px rgb(0, 0, 0);
+  text-align: center;
 }
 .card-header{
   border-bottom: 3px solid rgba(0, 0, 0, 0.514);
   background-color: #0da8ef73;
-  overflow-x: scroll;
   text-transform:uppercase;
+  text-align: left;
 }
 /*scrollbar*/
-.card-header::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
 
-.card-header::-webkit-scrollbar
-{
-	width: 2px;
-  height:7px;
-	background-color: #F5F5F5;
-}
-
-.card-header::-webkit-scrollbar-thumb
-{
-	background-color: rgb(8, 5, 0);	
-	background-image: -webkit-linear-gradient(45deg,
-	                                          rgba(255, 255, 255, .2) 25%,
-											  transparent 25%,
-											  transparent 50%,
-											  rgba(255, 255, 255, .2) 50%,
-											  rgba(255, 255, 255, .2) 75%,
-											  transparent 75%,
-											  transparent)
-}
 /*///////////////////////////*/
 input[type=search] {
   background-position: 10px 10px; 
@@ -479,7 +456,7 @@ input[type=search]:focus {
 }
 .card{
   border-radius: 10px;
-  overflow-x: scroll;
+
   margin-bottom: 2%;
  
 }
@@ -928,18 +905,114 @@ input[type=checkbox] {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
+  border: 1px solid rgb(30, 134, 219);
 
 } 
 .formHome>div{
   position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #c5c3c3d1;
+  width: 100%;
+  height: 100%;
+  background-color: #c5c3c3d1;
+
 }
 .formHome-content {
   background-color: rgb(255, 255, 255);
   color: white;
+  border: 1px solid #888;
+  height: 100%;
+  overflow-y: scroll;
+  
+}
+.formHome-content::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.formHome-content::-webkit-scrollbar
+{
+	width: 10px;
+  height:7px;
+	background-color: #F5F5F5;
+}
+
+.formHome-content::-webkit-scrollbar-thumb
+{
+	background-color: rgb(54, 201, 238);	
+	background-image: -webkit-linear-gradient(45deg,
+	                                          rgba(255, 255, 255, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(255, 255, 255, .2) 50%,
+											  rgba(255, 255, 255, .2) 75%,
+											  transparent 75%,
+											  transparent)
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 23% 23% 23% 23%;
+  grid-gap: 2%;
+  background-color: #ffffff;
+  padding: 20px;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.grid-container > div {
+  background-color: rgba(253, 253, 253, 0.8);
+  border: 1px solid rgb(30, 134, 219);
+  text-align: left;
+  color: #000;
+  border-radius: 5px;
+  box-shadow: rgba(29, 213, 238, 0.2) 5px 1px;
+}
+
+.containeru {
+  position: relative;
+  width: 100%;
+}
+
+.imageu {
   width: 100%;
   height: 100%;
-  border: 1px solid #888;
+}
+
+.overlayu {
+  position: absolute;
+  bottom:100%;
+  left: 0;
+  right: 0;
+  background-color: #889dbb;
+  overflow: hidden;
+  width: 100%;
+  height:0;
+  transition: .5s ease;
+}
+
+.containeru:hover .overlayu {
+  bottom: 0;
+  height: 100%; 
+}
+
+.textu {
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  margin-top: 5%;
+  margin-left: 5%;
+  text-align: left;
+}
+.h1cus{
+  margin-top: 5%;
+  text-align: center;
+  color: #000;
+  text-transform: uppercase;
+}
+.btnback {
+  position: absolute;
+  left: 2%;
+  top: 0px;
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+  font-weight: bold;
+  text-shadow: rgb(10, 165, 213) 2px 2px;
 }
