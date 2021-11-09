@@ -1016,3 +1016,19 @@ input[type=checkbox] {
   font-weight: bold;
   text-shadow: rgb(10, 165, 213) 2px 2px;
 }
+.btnback:hover{
+  color: #0026fd;
+}
+
+.btn_close{
+  position: absolute;
+  right: 2%;
+  top: 0;
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+  font-weight: bold;
+  text-shadow: rgb(10, 165, 213) 2px 2px;
+}
+.btn_close:hover{
+  color: #0026fd;
+}

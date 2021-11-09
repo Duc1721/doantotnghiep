@@ -13,15 +13,15 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 var database = firebase.database();
 function toggleStatea(home, room, device, stageToggle) {
-    if (stageToggle == '0') {
-        stageToggle = '1';
+    if (stageToggle == 0) {
+        stageToggle = 1;
 
-    } else if (stageToggle == '1') {
-        stageToggle = '0';
+    } else if (stageToggle == 1) {
+        stageToggle = 0;
     } else {
         swal("HUHU!", "CẬP NHẬT DỮ LIỆU NHANH LÊN!", "error");
     }
-    newPush_trangthai = database.ref("ADMIN").child(home).child(room).child(device).child("trangthai")
+    newPush_trangthai = database.ref("ADMIN").child(home).child(room).child(device).child("onoff")
     newPush_trangthai.set(stageToggle);
 }
 tableReportAll = document.getElementById("tablestate");
@@ -47,6 +47,7 @@ database.ref("ADMIN").on('value', async function(snap) {
                         name_thietbi_fb = State.namethietbi
                         phanloai = State.phanloai
                         trangthai = State.trangthai
+                        onoff = State.onoff
                         tableReportAll.innerHTML += `
                                 <tr class = "maubang_${maubang}">
                                     <td>${num}</td>
@@ -56,7 +57,7 @@ database.ref("ADMIN").on('value', async function(snap) {
                                     <td>${name_thietbi_fb}</td>
                                     <td>${phanloai}</td>
                                     <td>${trangthai}</td>
-                                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${trangthai}')"><i class="fas fa-power-off"></i></button>
+                                    <td><button class="btn-outline-dark" onclick = "toggleStatea( '${Home}', '${Room}','${Device}', '${onoff}')"><i class="fas fa-power-off"></i></button>
                                         <button class="btn-outline-dark" onclick = "deleteDevice( '${Home}', '${Room}','${Device}')"><i class="far fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`
@@ -70,7 +71,7 @@ database.ref("ADMIN").on('value', async function(snap) {
         }
 
     }
-    search()
+   
 
 });
 homeName = document.getElementById("HName");
@@ -364,7 +365,8 @@ function roomPlus(conentaoidhaykhong,id_room) {
             }
             var biendemthietbi=0
             database.ref("ADMIN").child(id_home).child(newidroom).once('value', async function(snap) {
-                var ketqualangnghe = await snap.val();        
+                var ketqualangnghe = await snap.val();    
+                    
                 for (idthietbi in ketqualangnghe){
                     biendemthietbi ++
                     
@@ -432,7 +434,7 @@ function oke_firebase() {
         swal("Tốt lắm!", "Bạn đã lưu thông tin phòng!", "success");
         document.getElementById('name_home').disabled = true;
         name_phong = document.getElementById("nameRoom").value;
-        name_nha = mang_chua_cac_obj[0].name_nha
+        name_nha = document.getElementById("name_home").value;
         id_nha = mang_chua_cac_obj[0].id_nha
         id_phong = mang_chua_cac_obj[1].id_phong
         document.getElementById("nameRoom").value = "";
