@@ -1,4 +1,4 @@
-function encode_data(data) {
+function encode_data(datas) {
     d = 463
     p = 19
     q = 11
@@ -11,7 +11,7 @@ function encode_data(data) {
     c = Math.pow(m, e) % n
     kqmahoa = ''
     j = 1
-
+    data = datas.toString()
     for (i in data) {
         j = j + 1
         somahoaascii = j * m - j + 3
