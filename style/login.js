@@ -7,7 +7,7 @@ function loginClose(){
     document.getElementById("id_dangnhap").value = ""
     document.getElementById("mk_dangnhap").value = ""
     document.getElementById("wait_dangnhap").innerHTML =""
-    document.getElementById('formLogin').style.display = 'none'
+    document.getElementById('formLogin').style.display = 'block'
 }
 function loginYourhome(){
     var in_id = document.getElementById("id_dangnhap").value;
@@ -91,9 +91,8 @@ function showHome_user() {
         for (var Home in ketqualangnghe) {
 
             idnamenha = ketqualangnghe[Home]
-            name_nha_fb = idnamenha.namenha
+            name_nha_fb = decode_data(idnamenha.namenha)
             id_nha_fb = Home
-            
             home_user.innerHTML += `
                                 <div class= "card">
                                     <div class="card-header btn"><b>
@@ -132,14 +131,14 @@ function showRoom_user(Hoom_user) {
         for (var Room in ketqualangnghe) {
             if (Room != "namenha") {
                 for (var tennha in ketqualangnghe) {
-                    if (tennha == "namenha") { name_nha_fb = ketqualangnghe.namenha }
+                    if (tennha == "namenha") { name_nha_fb = decode_data(ketqualangnghe.namenha) }
                 }
                 phong_fb = ketqualangnghe[Room]
                 for (var Device in phong_fb) {
                     if (Device != "namephong") {
                         for (var tenphong in phong_fb) {
                             if (tenphong == "namephong") {
-                                name_phong_fb = phong_fb.namephong
+                                name_phong_fb = decode_data(phong_fb.namephong)
                             }
                         }
                     }
@@ -174,23 +173,23 @@ function showDevice_user(Dhome, Droom) {
             if (Device != "namephong") {
                 for (var tenphong in ketqualangnghe) {
                     if (tenphong == "namephong") {
-                        name_phong_fb = ketqualangnghe.namephong
+                        name_phong_fb = decode_data(ketqualangnghe.namephong)
                     }
                 }
                 thietbi_fb = ketqualangnghe[Device]
-                name_thietbi_fb = thietbi_fb.namethietbi
-                phanloai_thietbi_fb = thietbi_fb.phanloai
-                trangthai_thietbi_fb = thietbi_fb.trangthai
+                name_thietbi_fb = decode_data(thietbi_fb.namethietbi)
+                phanloai_thietbi_fb = decode_data(thietbi_fb.phanloai)
+                trangthai_thietbi_fb = decode_data(thietbi_fb.trangthai)
                 num++
                 tableReport_User.innerHTML += `   
                     <tr style="text-align: center">
                             <td>${num}</td>
-                            <td>${id_nha_fb}</td>
+                            <td>${Dhome}</td>
                             <td>${name_nha_fb}</td>
                             <td>${name_phong_fb}</td>
                             <td>${name_thietbi_fb}</td>
-                            <td>${phanloai}</td>
-                            <td>${trangthai}</td>
+                            <td>${phanloai_thietbi_fb}</td>
+                            <td>${trangthai_thietbi_fb}</td>
                             
                     </tr>
                     `
@@ -199,3 +198,4 @@ function showDevice_user(Dhome, Droom) {
         }
     });
 }        
+

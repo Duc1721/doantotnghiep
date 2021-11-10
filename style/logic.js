@@ -21,33 +21,36 @@ function toggleStatea(home, room, device, stageToggle) {
     } else {
         swal("HUHU!", "CẬP NHẬT DỮ LIỆU NHANH LÊN!", "error");
     }
+    stageToggle_encode = encode_data(stageToggle)
     newPush_trangthai = database.ref("ADMIN").child(home).child(room).child(device).child("onoff")
-    newPush_trangthai.set(stageToggle);
+    newPush_trangthai.set(stageToggle_encode);
 }
 tableReportAll = document.getElementById("tablestate");
 database.ref("ADMIN").on('value', async function(snap) {
     var ketqualangnghe = await snap.val();
     tableReportAll.innerHTML = ''
     num = 0;
+    name_nha_fb = ''
+    name_phong_fb = ''
     maubang = 0;
     for (var Home in ketqualangnghe) {
         nhathemS = ketqualangnghe[Home]
         id_nha_fb = Home
-        name_nha_fb = nhathemS.namenha
+        name_nha_fb = decode_data(nhathemS.namenha)
         maubang = maubang + 1
         maubang = maubang%2
         for (var Room in nhathemS) {
             phongthemS = nhathemS[Room]
-            name_phong_fb = phongthemS.namephong
+            name_phong_fb = decode_data(phongthemS.namephong)
             if (Room != "namenha") {
                 for (var Device in phongthemS) {
                     if (Device != "namephong") {
                         num++;
                         State = phongthemS[Device]
-                        name_thietbi_fb = State.namethietbi
-                        phanloai = State.phanloai
-                        trangthai = State.trangthai
-                        onoff = State.onoff
+                        name_thietbi_fb = decode_data(State.namethietbi)
+                        phanloai = decode_data(State.phanloai)
+                        trangthai = decode_data(State.trangthai)
+                        onoff = decode_data(State.onoff)
                         tableReportAll.innerHTML += `
                                 <tr class = "maubang_${maubang}">
                                     <td>${num}</td>
@@ -61,17 +64,15 @@ database.ref("ADMIN").on('value', async function(snap) {
                                         <button class="btn-outline-dark" onclick = "deleteDevice( '${Home}', '${Room}','${Device}')"><i class="far fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`
-                                
+                            }
+     
+                        }
+                        
                     }
-
+                    
                 }
-
-            }
-
-        }
-
     }
-   
+    search()
 
 });
 homeName = document.getElementById("HName");
@@ -84,7 +85,7 @@ function showHome() {
         for (var Home in ketqualangnghe) {
 
             idnamenha = ketqualangnghe[Home]
-            name_nha_fb = idnamenha.namenha
+            name_nha_fb = decode_data(idnamenha.namenha)
             id_nha_fb = Home
             
             homeName.innerHTML += `
@@ -112,27 +113,26 @@ function showRoom(Rhome) {
     for (var i = 0; i < xoa_mau_home.length; i++) {
         xoa_mau_home[i].style.backgroundColor = "transparent";
     }
-    idhome = document.getElementById("idhome" + Rhome);
-    idhome.style.backgroundColor = "red";
+
     database.ref("ADMIN").child(Rhome).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         romeName.innerHTML = "";
         for (var Room in ketqualangnghe) {
             if (Room != "namenha") {
                 for (var tennha in ketqualangnghe) {
-                    if (tennha == "namenha") { name_nha_fb = ketqualangnghe.namenha }
+                    if (tennha == "namenha") { name_nha_fb =decode_data( ketqualangnghe.namenha) }
                 }
                 phong_fb = ketqualangnghe[Room]
                 for (var Device in phong_fb) {
                     if (Device != "namephong") {
                         for (var tenphong in phong_fb) {
                             if (tenphong == "namephong") {
-                                name_phong_fb = phong_fb.namephong
+                                name_phong_fb = decode_data(phong_fb.namephong)
                             }
                         }
                         thietbi_fb = phong_fb[Device]
-                        name_thietbi_fb = thietbi_fb.namethietbi
-                        phanloai_thietbi_fb = thietbi_fb.phanloai
+                        name_thietbi_fb = decode_data(thietbi_fb.namethietbi)
+                        phanloai_thietbi_fb = decode_data(thietbi_fb.phanloai)
                     }
                 }
                 romeName.innerHTML += `
@@ -153,6 +153,8 @@ function showRoom(Rhome) {
             }
         }
     });
+    idhome = document.getElementById("idhome" + Rhome);
+    idhome.style.backgroundColor = "red";    
 }
 
 function showDevice(Dhome, Droom) {
@@ -161,8 +163,7 @@ function showDevice(Dhome, Droom) {
     for (var i = 0; i < xoa_mau.length; i++) {
         xoa_mau[i].style.backgroundColor = "transparent";
     }
-    idroom = document.getElementById("idroom" + Dhome + Droom);   
-    idroom.style.backgroundColor = "red";
+
     database.ref("ADMIN").child(Dhome).child(Droom).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         deviceName.innerHTML = "";
@@ -170,13 +171,13 @@ function showDevice(Dhome, Droom) {
             if (Device != "namephong") {
                 for (var tenphong in ketqualangnghe) {
                     if (tenphong == "namephong") {
-                        name_phong_fb = ketqualangnghe.namephong
+                        name_phong_fb = decode_data(ketqualangnghe.namephong)
                     }
                 }
                 thietbi_fb = ketqualangnghe[Device]
-                name_thietbi_fb = thietbi_fb.namethietbi
-                phanloai_thietbi_fb = thietbi_fb.phanloai
-                trangthai_thietbi_fb = thietbi_fb.trangthai
+                name_thietbi_fb = decode_data(thietbi_fb.namethietbi)
+                phanloai_thietbi_fb = decode_data(thietbi_fb.phanloai)
+                trangthai_thietbi_fb =decode_data( thietbi_fb.trangthai)
                 deviceName.innerHTML += `     
                    <div class="card">
                         <h5 class="card-header btn"><b><i class="fas fa-home"></i> ${name_phong_fb} - <i class="fad fa-fan-table"></i> ${name_thietbi_fb} - <i class="fas fa-clipboard-list-check"></i> ${phanloai_thietbi_fb}</b></h5>
@@ -205,6 +206,8 @@ function showDevice(Dhome, Droom) {
             }
         }
     });
+    idroom = document.getElementById("idroom" + Dhome + Droom);   
+    idroom.style.backgroundColor = "red";
 }
 
 function search() {
@@ -268,9 +271,6 @@ function addnewHome() {
     var tt_id_home = 1;
     if(tt_id_home == 1){
         var newid = randomString(6, "N")
-     //   new_mk = randomString(8, "N")
-     //   newPush_account_id= database.ref("ACCOUNT").child("USER").child(newid)
-    //    newPush_account_id.set(new_mk);
         tt_id_home = 0  
     }
     document.getElementById("idnewHome").innerHTML = newid;
@@ -316,10 +316,8 @@ function addnewdevice(Idnha, nameNha, Idphong, namePhong) {
 
 function closeAddnewHome() {
     document.getElementById('addHome').style.display = 'none' 
-    document.getElementById("idhome").click();
     showHome()
 }
-
 function decRoom() {
     valueRoom = document.getElementById("valueRoomNumber").value;
     minRoom = 1;
@@ -409,6 +407,8 @@ function roomPlus(conentaoidhaykhong,id_room) {
                         id_device: newithietbi,
                         id_phanloai: id_phanloai
                     }
+                    newPush_account_id= database.ref("ACCOUNT").child("USER").child(id_home)
+                    newPush_account_id.set(id_home);
                     mang_chua_cac_obj.push(object_thietbi)
                 }
 
@@ -446,21 +446,22 @@ function oke_firebase() {
             phanloai = document.getElementById(id_phanloai).value;
             newPushDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device)
             newPushDevice.set({
-                namethietbi: name_device,
-                phanloai: phanloai,
-                trangthai: "Đợi cập nhật từ GATEWAY"
+                namethietbi: encode_data(name_device),
+                phanloai:  encode_data(phanloai),
+                onoff:  encode_data("onoff"),
+                trangthai:  encode_data("Đợi cập nhật từ GATEWAY")
             });
             newPushHome = database.ref("ADMIN").child(id_nha).child("namenha")
-            newPushHome.set(name_nha);
+            newPushHome.set( encode_data(name_nha));
             newPushRoom = database.ref("ADMIN").child(id_nha).child(id_phong).child("namephong")
-            newPushRoom.set(name_phong);
+            newPushRoom.set( encode_data(name_phong));
 
         }
         document.getElementById('themroom').innerHTML = "";
         document.getElementById("idnewphong").innerHTML = "";
         
         showRoom(id_nha)
-        showDevice(id_nha, id_phong)
+        // showDevice(id_nha, id_phong)
     } else {
         swal("Lưu ý", "Tên nhà và tên phòng phải lớn hơn 5 ký tự!", "error");
     }
@@ -550,7 +551,7 @@ function checknewname_home(id_nha_rename){
     newname_home = document.getElementById(id_input_home).value
     if(newname_home.length > 5){
         newPush_nameHome = database.ref("ADMIN").child(id_nha_rename).child("namenha")
-        newPush_nameHome.set(newname_home);
+        newPush_nameHome.set(encode_data(newname_home));
         swal("Tốt lắm!", "Bạn đã đổi tên nhà thành công!", "success");
         showHome()
         showRoom(id_nha_rename)
@@ -565,7 +566,7 @@ function checknewname_room(id_nha, id_phong_rename){
     newname_room = document.getElementById(id_input_room).value
     if(newname_room.length > 5){
         newPush_nameRoom = database.ref("ADMIN").child(id_nha).child(id_phong_rename).child("namephong")
-        newPush_nameRoom.set(newname_room);
+        newPush_nameRoom.set(encode_data(newname_room));
         swal("Tốt lắm!", "Bạn đã đổi tên phòng thành công!", "success");
         showRoom(id_nha)
         showDevice(id_nha, id_phong_rename)
@@ -578,7 +579,7 @@ function checknewname_device(id_nha, id_phong, id_device_rename){
     newname_device = document.getElementById(id_input_device).value
     if(newname_device.length > 5){
     newPush_nameDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device_rename).child("namethietbi")
-    newPush_nameDevice.set(newname_device);
+    newPush_nameDevice.set(encode_data(newname_device));
     swal("Tốt lắm!", "Bạn đã đổi tên thiết bị thành công!", "success");
     showDevice(id_nha, id_phong)
     } else {
@@ -588,13 +589,13 @@ function checknewname_device(id_nha, id_phong, id_device_rename){
 
 function checktype_device1(id_nha, id_phong, id_device_retype) {
     newtype_device = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device_retype).child("phanloai")
-    newtype_device.set("Thiết bị"); 
+    newtype_device.set(encode_data("Thiết bị")); 
     swal("Tốt lắm!", "Bạn đã chọn phân loại là thiết bị!", "success");
     showDevice(id_nha, id_phong)
 } 
 function checktype_device2(id_nha, id_phong, id_device_retype) {
     newtype_device = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device_retype).child("phanloai")
-    newtype_device.set("Cảm biến"); 
+    newtype_device.set(encode_data("Cảm biến")); 
     swal("Tốt lắm!", "Bạn đã chọn phân loại là cảm biến!", "success");
     showDevice(id_nha, id_phong)
 }

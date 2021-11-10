@@ -48,7 +48,7 @@
                        
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-success" id="loginAdminUser" onclick="loginOpen()">Đăng nhập</button>
+                        <button class="btn btn-success" id="loginAdminUser" onclick="loginOpen()"><i class="far fa-search"></i></button>
                     </li>
                 </ul>
             </div>
@@ -68,13 +68,13 @@
             </div>
         </div>
         <div class="carousel-item-active">
-            <img src="https://dizibrand-19a1e.kxcdn.com/wp-content/uploads/2021/03/IoT-Dizibrand-3.jpg"></div>
+            <img src="http://cce.hcmute.edu.vn/cce/wp-content/uploads/2020/05/Slide03.jpg?fbclid=IwAR2BtSJrsgsQHFoQbfRX4LqDOckwKGAypCddkSZ8lnWSKEajq8VDcRJwL7s"></div>
     </div>
     <div id="mySidenav" class="sidenav">
-        <a href="#" id="home">Home</a>
-        <a href="#" id="notice">Notice</a>
-        <a href="#" id="projects">Project</a>
-        <a href="#" id="time">Calendar</a>
+        <a href="#" id="home">Trang chủ</a>
+        <a href="#" id="notice">Thông báo</a>
+        <a href="#" id="projects">Dự án</a>
+        <a href="#" id="time">Lịch trình</a>
     </div>
     <div class="container">
         <div class="row">
@@ -84,7 +84,7 @@
                     <h1>Thêm nhà</h1><h6>[ADMIN]</h6></button>
             </div>
             <div class="col">
-                <button class="btn1"><i class="fa fa-bar-chart"></i><h1>Thống kê</h1><h6>[ADMIN]</h6></button>
+                <button class="btn1"><i class="far fa-comment-alt-exclamation"></i><h1>Thông báo</h1><h6>[ADMIN]</h6></button>
             </div>
             <div class="col">
                 <button class="btn1" onclick="openState()"><i class="fa fa-dashboard"></i><h1>Trạng thái</h1><h6>[ADMIN]</h6></button>
@@ -212,9 +212,9 @@
 
             <div class="container1">
                 <label><b>ID NHÀ: </b><b id="idnewHome"></b></label>
-                <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" required>
+                <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" maxlength="30">
                 <label style="display:block"><b>ID PHÒNG: </b><b id="idnewphong"></b></label>
-                <input id="nameRoom" type="nameRoom" style="width:67%" placeholder="Nhập tên phòng" name="nameRoom" required>
+                <input id="nameRoom" type="nameRoom" style="width:67%" placeholder="Nhập tên phòng" name="nameRoom" maxlength="30">
                 <div class="buttons_added">
                     <input class="form-inde minus" type="button" onclick="decRoom()" value="-">
                     <input class="input-qty" type="numbershow" value="5" id="valueRoomNumber">
@@ -235,51 +235,6 @@
             </div>
         </div>
     </div>
-<!--    //////////////////////////////////////////////////////////////////////////////////////////////-->
-
-    <div id="formLogin" class="formLoginAU">
-
-        <div>
-            <div class="formLoginAU-content animate">
-                <div class="imgcontainer">
-                    <span onclick="loginClose()" class="closelogin"  style="margin-top: -2%;">&times;</span>
-                   <h2 style="text-align:left;margin-left: 5%;">ĐĂNG NHẬP <span id="wait_dangnhap"></span></h2>
-                </div>
-                <div class="container1">
-                    <button class="btncus2" disabled><i class="fas fa-user"></i></button><input type="inidlogin" placeholder="Nhập ID nhà"  id="id_dangnhap">
-                    <button class="btncus2" disabled><i class="fas fa-key"></i></button><input type="inidlogin" placeholder="Nhập mật khẩu" id="mk_dangnhap">
-                    <h6><input type="checkbox"><label>Nhớ mật khẩu</label>
-                        <button class="btndangnhap" onclick="loginYourhome()">Đăng nhập</button></h6>
-                    <hr class="light" style="width:80%; text-align:center" />
-                    <h6 style="text-align: center">Bạn không có tài khoản? <a href="#" onclick="addnewHome()">Đăng ký</a></h6>
-                    <h6 style="text-align: center">Quên mật khẩu? <a href="#" onclick="change_passOpen()">Đổi mật khẩu</a></h6>
-               
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!--    //////////////////////////////////////////////////////////////////////////////////////////////-->
-
-    <div id="formRegister" class="formLoginAU">
-
-        <div>
-            <div class="formLoginAU-content animate">
-                <div class="imgcontainer">
-                    <span onclick="change_passClose()" class="closelogin" style="margin-top: -4%;"><i class="fad fa-chevron-right" style="font-size: 60%;"></i></span>
-                    <h2 style="text-align:left;margin-left: 5%;" value="" id="titleDangky">ĐỔI MẬT KHẨU <span id="titleDangky_thanhcong"></span></h2>
-                </div>
-                <div class="container1">
-                    <button class="btncus2" disabled><i class="fas fa-user"></i></button><input type="inidlogin" placeholder="Nhập ID nhà"  id="id_dk" value="">
-                    <button class="btncus2" disabled><i class="fas fa-key"></i></button><input type="inidlogin" placeholder="Nhập mật khẩu" id="mk_dk" value="">
-                    <button class="btncus2" disabled><i class="fas fa-key"></i></button><input type="inidlogin" placeholder="Nhập lại mật khẩu" id="remk_dk" value="">
-                    <h6><input type="checkbox"><label>Hiện mật khẩu</label><button class="btndangnhap" onclick="change_passAdd()" id="themtk">Lưu mật khẩu</button></h6>
-                  
-            </div>
-        </div>
-    </div>
-    </div>
-   
     <!--    //////////////////////////////////////////////////////////////////////////////////////////////-->
     <div id="goHome" class="formHome">
         <div>
@@ -315,6 +270,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="./style/dencode.js"></script>
     <script src="./style/logic.js"></script>
     <script src="./style/login.js"></script>
     
