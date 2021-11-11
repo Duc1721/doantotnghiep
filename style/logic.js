@@ -663,7 +663,7 @@ function closeHome(){
 home_user = document.getElementById('userHome')
 header_tab_user = document.getElementById('header_table_user')
 ds_user = document.getElementById('ds_user')
-btn_back = document.getElementById('btn_back')
+btn_back = document.getElementById('btn_back')    
 function showHome_user() {
     home_user.style.display = 'grid';
     home_user.innerHTML = "";
