@@ -651,7 +651,7 @@ function export2csv() {
     document.body.removeChild(a);
   }
 
-  function openHome(){
+function openHome(){
     document.getElementById('goHome').style.display = 'block' 
     document.getElementById("goHome").click();
     showHome_user()
@@ -784,13 +784,3 @@ function showDevice_user(Dhome, Droom) {
         }
     });
 }    
-
-function openHome(){
-    document.getElementById('goHome').style.display = 'block' 
-    document.getElementById("goHome").click();
-    showHome_user()
-}
-function closeHome(){
-    document.getElementById('goHome').style.display = 'none' 
-   
-}
