@@ -24,12 +24,23 @@
     <!--    //////////////////////////////////////////////////////////////////////////////////////////////-->
 
     <div id="formRegister" class="formLoginAU">
-        <div>
+        <div style="background-image: url('bglogin1.jpg');">
             <div class="formLoginAU-content animate">
                 <div class="imgcontainer">
                     <span onclick="change_passClose()" class="closelogin" style="margin-top: -4%;"><i class="fad fa-chevron-right" style="font-size: 60%;"></i></span>
+                    
                     <h2 style="text-align:left;margin-left: 5%;" value="" id="titleDangky">ĐỔI MẬT KHẨU <span id="titleDangky_thanhcong"></span></h2>
+                    
                 </div>
+                <hr>
+                <label class="formRadio">Quản lý
+                    <input type="radio" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="formRadio">Khách hàng
+                    <input type="radio" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
                 <div class="container1">
                     <button class="btncus2" disabled><i class="fas fa-user"></i></button><input type="inidlogin" placeholder="Nhập ID nhà"  id="id_dk" value="">
                     <button class="btncus2" disabled><i class="fas fa-key"></i></button><input type="inidlogin" placeholder="Nhập mật khẩu" id="mk_dk" value="">
@@ -45,7 +56,7 @@
 
     <div id="formLogin" class="formLoginAU">
         <div style="background-image: url('bglogin1.jpg');">
-            <div class="formLoginAU-content animate">
+            <div class="formLoginAU-content">
                 <div class="imgcontainer">
                    <h2 style="text-align:left;margin-left: 5%;">ĐĂNG NHẬP <span id="wait_dangnhap"></span></h2>
                    <hr>
@@ -62,9 +73,9 @@
                     <button class="btncus2" disabled><i class="fas fa-user"></i></button><input type="inidlogin" placeholder="Nhập ID nhà"  id="id_dangnhap">
                     <button class="btncus2" disabled><i class="fas fa-key"></i></button><input type="inidlogin" placeholder="Nhập mật khẩu" id="mk_dangnhap">
                     <h6><input type="checkbox"><label>Nhớ mật khẩu</label>
-                        <button class="btndangnhap" onclick="loginYourhome()">Đăng nhập</button></h6>
+                        <button class="btndangnhap" onclick="login()">Đăng nhập</button></h6>
                     <hr class="light" style="width:80%; text-align:center" />
-                    <h6 style="text-align: center">Bạn không có tài khoản? <a href="#" onclick="addnewHome()">Đăng ký</a></h6>
+                    <h6 style="text-align: center">Bạn không có tài khoản? <a href="#">Đăng ký</a></h6>
                     <h6 style="text-align: center">Quên mật khẩu? <a href="#" onclick="change_passOpen()">Đổi mật khẩu</a></h6>
                
             </div>
@@ -76,7 +87,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <script src="./style/logic.js"></script>
     <script src="./style/login.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    

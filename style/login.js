@@ -1,14 +1,3 @@
-var btnLogin = document.getElementById('loginAdminUser');
-function loginOpen(){
-    document.getElementById('formLogin').style.display = 'block'
-    change_passClose()
-}
-function loginClose(){
-    document.getElementById("id_dangnhap").value = ""
-    document.getElementById("mk_dangnhap").value = ""
-    document.getElementById("wait_dangnhap").innerHTML =""
-    document.getElementById('formLogin').style.display = 'block'
-}
 function loginYourhome(){
     var in_id = document.getElementById("id_dangnhap").value;
     var in_mk = document.getElementById("mk_dangnhap").value;
@@ -18,7 +7,6 @@ function loginYourhome(){
         var ketqualangnghe = await snap.val();
         console.log(ketqualangnghe)
          if(ketqualangnghe=='OK' && in_id != "" && in_mk != ""){
-             loginClose()
              document.getElementById("wait_dangnhap").innerHTML =""
              swal("Đăng nhập thành công","","success") 
          } else if (ketqualangnghe== 'FAIL'){
@@ -33,15 +21,15 @@ function loginYourhome(){
 }
 
 function change_passOpen(){
-    document.getElementById('formRegister').style.display = 'block' 
-    loginClose()
+    document.getElementById('formRegister').style.display = 'block'
+    document.getElementById('formLogin').style.display = 'none' 
 }
 
 function change_passClose(){
    // document.getElementById('titleDoipass_thanhcong').innerText = ""
     document.getElementById('formRegister').style.display = 'none'
+    document.getElementById('formLogin').style.display = 'block' 
     document.getElementById('themtk').disabled = false;
-    loginOpen()
    
   
 }
@@ -146,7 +134,7 @@ function showRoom_user(Hoom_user) {
                 home_user.innerHTML += `
                 <div class="card">
                         <h5 class="card-header btn" style="text-align: left"><b><i class="fas fa-building"></i> ${name_nha_fb} - <i class="fas fa-home"></i> ${name_phong_fb}</b></h5>
-                        <div class="card-header btn"><b>
+                        <div class="containeru"><b>
                                     <div class="containeru" onclick="showDevice_user('${Hoom_user}','${Room}')">
                                         <img src="avt.jpg" class="imageu">
                                      </div>
@@ -197,5 +185,30 @@ function showDevice_user(Dhome, Droom) {
             }
         }
     });
-}        
+}    
 
+
+
+function login()
+{
+    vid_dangnhap = document.getElementById('id_dangnhap').value
+    vmk_dangnhap = document.getElementById('mk_dangnhap').value
+    var req = new XMLHttpRequest();
+    req.open("POST", "http://127.0.0.1:5500/index.html", true);
+    req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    req.send(JSON.stringify({
+            "id": vid_dangnhap,
+            "pass": vmk_dangnhap
+      }));
+      req.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            swal("thành công","","success")
+            window.location.href = './index.html';
+              
+          } else {
+            swal("thất bại","","error")
+          }
+        
+      };
+      return false;
+}

@@ -272,6 +272,10 @@ function addnewHome() {
     if(tt_id_home == 1){
         var newid = randomString(6, "N")
         tt_id_home = 0  
+        if( tt_id_home == 0){
+            tt_tao_mk = 1
+        } else{}
+            
     }
     document.getElementById("idnewHome").innerHTML = newid;
     document.getElementById('themroom').innerHTML = "";
@@ -310,8 +314,7 @@ function addnewdevice(Idnha, nameNha, Idphong, namePhong) {
     document.getElementById("nameRoom").value = namePhong;
     document.getElementById("nameRoom").disabled = true;
     document.getElementById("add_device_modal").innerHTML = `
-    <button onclick="roomPlus(${conentaoidhaykhong},'${Idphong}')" class="btnadd" for="psw" name="psw" required>XÁC NHẬN SỐ THIẾT BỊ</button>
-    `;
+    <button onclick="roomPlus(${conentaoidhaykhong},'${Idphong}')" class="btnadd">XÁC NHẬN SỐ THIẾT BỊ</button>`
 }
 
 function closeAddnewHome() {
@@ -364,7 +367,7 @@ function roomPlus(conentaoidhaykhong,id_room) {
             var biendemthietbi=0
             database.ref("ADMIN").child(id_home).child(newidroom).once('value', async function(snap) {
                 var ketqualangnghe = await snap.val();    
-                    
+                  
                 for (idthietbi in ketqualangnghe){
                     biendemthietbi ++
                     
@@ -407,9 +410,8 @@ function roomPlus(conentaoidhaykhong,id_room) {
                         id_device: newithietbi,
                         id_phanloai: id_phanloai
                     }
-                    newPush_account_id= database.ref("ACCOUNT").child("USER").child(id_home)
-                    newPush_account_id.set(id_home);
                     mang_chua_cac_obj.push(object_thietbi)
+                   
                 }
 
             }
@@ -426,7 +428,28 @@ function roomPlus(conentaoidhaykhong,id_room) {
     }
     showHome()
 }
-
+khac = 1
+tt_tao_mk = 1
+function taomatkhau(){
+    database.ref("ADMIN").once('value', async function(snap) {
+        var ketqualangnghe = await snap.val();
+        id_home = document.getElementById("idnewHome").textContent
+        for (var Home in ketqualangnghe) {
+            if(id_home!=Home){
+                khac++
+            } else khac = 1
+                if (khac*tt_tao_mk==1){
+                    tt_tao_mk = 0
+                    new_mk = id_home
+                    newPush_mk = database.ref("PASS").child(id_home)
+                    newPush_mk.set(new_mk);
+                } else if(khac*tt_tao_mk==0){
+                    tt_tao_mk = 2
+                    khac = 1
+                } else {}
+            }
+    })
+}
 function oke_firebase() {
     name_phong = document.getElementById("nameRoom").value;
     name_nha = document.getElementById("name_home").value;
@@ -459,12 +482,15 @@ function oke_firebase() {
         }
         document.getElementById('themroom').innerHTML = "";
         document.getElementById("idnewphong").innerHTML = "";
-        
-        showRoom(id_nha)
+
+
+
+        // showRoom(id_nha)
         // showDevice(id_nha, id_phong)
     } else {
         swal("Lưu ý", "Tên nhà và tên phòng phải lớn hơn 5 ký tự!", "error");
     }
+    taomatkhau()
   
 }
 
@@ -624,5 +650,15 @@ function export2csv() {
     a.click();
     document.body.removeChild(a);
   }
-    
+
+var req = new XMLHttpRequest();
+req.open("GET", "http://127.0.0.1:5500/login.html", true);
+req.send(null);
+console.log(req.responseText)
+//////////////
+function logout()
+{
+  localStorage.removeItem('id_dangnhap');
+  window.location.href="login.html";
+}
   
