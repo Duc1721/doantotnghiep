@@ -1,0 +1,77 @@
+.grid {
+  margin: 6%;
+  color: #fff;
+  font: 2em Sansita, sans-serif;
+  display: grid;
+  grid-gap: 2%;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: minmax(100px, auto);
+  grid-auto-flow: dense;
+  position:relative;
+}
+
+.grid > * {
+  background-color: rgb(49 39 191 / 54%);
+  text-align: left;
+  outline: outset;
+  position:relative;
+}
+
+.grid > *:nth-child(2n+3) {
+  color: #fff;
+  grid-row: auto / span 2;
+  grid-column: auto / span 2;
+  outline: outset;
+  position:relative;
+}
+
+.grid > *:nth-child(7n+1) {
+  background-color: rgb(49 39 191 / 54%);
+  color: #fff;
+  grid-column: auto / span 2;
+  grid-row: auto / span 2;
+  outline: outset;
+  position:relative;
+
+}
+.grid > *:nth-child(7n+7) {
+    color: #fff;
+    grid-row: auto / span 1;
+    grid-column: auto / span 1;
+    background-color: rgb(49 39 191 / 54%);
+    outline: outset;
+    position:relative;
+}
+.grid > *:nth-child(7n+8) {
+    color: #fff;
+    grid-row: auto / span 1;
+    grid-column: auto / span 1;
+    background-color: rgb(49 39 191 / 54%);
+    outline: outset;
+    position:relative;
+}
+.grid > *:nth-child(7n+6) {
+    background-color: rgb(49 39 191 / 54%);
+    color: #fff;
+    grid-column: auto / span 2;
+    grid-row: auto / span 2;
+    outline: outset;
+    position:relative;
+  }
+.resize {
+    width: 100%;
+    height: auto;
+}
+.chucnang{
+    position:absolute;
+    top: 0;
+    left: 0;
+    background-repeat: repeat-y;
+    padding: 5px;
+    background-color: rgb(49 39 191 / 80%);
+    background-color: none; 
+    box-shadow: 1px 1px;
+    font-size: 20px;
+  }
+
+  

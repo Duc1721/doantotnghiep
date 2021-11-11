@@ -6,28 +6,47 @@
     <meta charset="utf-8">
     <!-- hiển thị tiếng việt -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login to Device Control Center</title>
+    <title>Home User</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="./style/user_style.css">
     <link rel="stylesheet" href="./style/style.css">
     <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
     <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
-
-
 </head>
 
-<body style="background-image: url('bglogin1.jpg');">
-        <div></div>
+<body style="background-image: url('bglogin2.jpg'); background-size: cover;">
+    <div class="grid">
+        <div id="vaonha" onclick="vaonha_user()"
+            style="background-image: url(nha.png);background-repeat: repeat-y;background-size: contain; position: relative;">
+            <label class="chucnang">Nhà của bạn</label>
+        </div>
+        <div><img  class="resize" src="thongke.png">
+            <label class="chucnang">Thống kê</label></div>
+        <div><img  class="resize" src="caidat.png">
+            <label class="chucnang">Cài đặt</label></div>
+        <div><img  class="resize" src="lienhe.png">
+            <label class="chucnang">Liên hệ</label></div>
+        <div><img  class="resize" src="infor.jpg">
+            <label class="chucnang">Giới thiệu công nghệ mới</label></div>
+        <div><img  class="resize" src="huongdan.png">
+            <label class="chucnang">Hướng dẫn</label></div>
+        <div><img  class="resize" src="thongtin.png">
+            <label class="chucnang">Thông tin</label></div>
+        <div><img  class="resize" src="chiase.png">
+            <label class="chucnang">Chia sẽ</label></div>
+      </div>
+
      
 
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <script src="./style/logic.js"></script>
+    <script src="./style/user.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
 </body>

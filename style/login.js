@@ -1,23 +1,60 @@
-function loginYourhome(){
+function login(){
     var in_id = document.getElementById("id_dangnhap").value;
     var in_mk = document.getElementById("mk_dangnhap").value;
     newPush_account_dn_id= database.ref("REQUEST_LOGIN").child("USER").child(in_id)
     newPush_account_dn_id.set(in_mk);
-    database.ref("REQUEST_LOGIN").child("USER").child(in_id).on('value', async function(snap) {
-        var ketqualangnghe = await snap.val();
-        console.log(ketqualangnghe)
-         if(ketqualangnghe=='OK' && in_id != "" && in_mk != ""){
-             document.getElementById("wait_dangnhap").innerHTML =""
-             swal("Đăng nhập thành công","","success") 
-         } else if (ketqualangnghe== 'FAIL'){
-            swal("Thất bại","Tài khoản hoặc mật khẩu không chính xác","error") 
-         } else {
-            document.getElementById("wait_dangnhap").innerHTML = `<h6 class="spinner-grow spinner-grow-sm text-warning"></h6>
-                                                                  <h6 class="spinner-grow spinner-grow-sm text-primary"></h6>
-                                                                  <h6 class="spinner-grow spinner-grow-sm text-success"></h6>
-                                                                  <h6 class="spinner-grow spinner-grow-sm text-danger"></h6>`
+    var checkbox = document.getElementsByName("luachon");
+        for (var i = 0; i < checkbox.length; i++){
+            if (checkbox[i].checked === true){
+                if(checkbox[i].value === "KH"){           
+                    database.ref("REQUEST_LOGIN").child(in_id).on('value', async function(snap) {
+                        var ketqualangnghe = await snap.val();
+                        console.log(ketqualangnghe)
+                        if(ketqualangnghe=='OK' && in_id != "" && in_mk != ""){
+                            document.getElementById("wait_dangnhap").innerHTML =""
+                            window.location.href = './users.html';
+                        } else if (ketqualangnghe== 'FAIL'){
+                            swal("Thất bại","Tài khoản hoặc mật khẩu không chính xác","error") 
+                        } else {   
+                            document.getElementById("wait_dangnhap").innerHTML = `<h6 class="spinner-grow spinner-grow-sm text-warning"></h6>
+                                                                                <h6 class="spinner-grow spinner-grow-sm text-primary"></h6>
+                                                                                <h6 class="spinner-grow spinner-grow-sm text-success"></h6>
+                                                                                <h6 class="spinner-grow spinner-grow-sm text-danger"></h6>`
+                                                                                    
+                            setTimeout(function(){ 
+                            document.getElementById("wait_dangnhap").innerHTML = ``
+                            swal("Thất bại","Hết hạn phản hồi từ máy chủ","error") 
+                        }, 3000)}
+                    });
+                } else if(checkbox[i].value === "QL"){
+                    if(in_id === "admin" && in_mk === "admin"){
+                        window.location.href = './index.html';
+                       
+                    } else  swal("Thất bại","Tài khoản hoặc mật khẩu không chính xác","error") 
+                } else{}
+            }
         }
-    });
+    
+}
+tt_icon = 1
+tt_ht = 1
+function showpass(){
+      mk_dangnhap = document.getElementById('mk_dangnhap')
+      iconshow = document.getElementById('iconshow')
+      if(tt_icon*tt_ht==1){
+        iconshow.onclick = (()=>{
+            mk_dangnhap.type = "text";
+            iconshow.classList.add("hide-btn");
+            tt_ht = 0
+        })
+     } else if(tt_icon*tt_ht==0){
+        iconshow.onclick = (()=>{
+            mk_dangnhap.type = "password";
+            iconshow.classList.remove("hide-btn");
+            tt_ht = 1
+        })
+    }
+       
 }
 
 function change_passOpen(){
@@ -55,7 +92,7 @@ function change_passAdd(){
 
 
 
-function login()
+function logindsad()
 {
     vid_dangnhap = document.getElementById('id_dangnhap').value
     vmk_dangnhap = document.getElementById('mk_dangnhap').value
@@ -74,7 +111,6 @@ function login()
           } else {
             swal("thất bại","","error")
           }
-        
       };
       return false;
 }

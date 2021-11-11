@@ -244,8 +244,6 @@ function openRoom(evt, roomName) {
     document.getElementById(roomName).style.display = "block";
     evt.currentTarget.className += "active";
 }
-
-document.getElementById("defaultOpen").click();
 function randomString(len, an) {
     an = an && an.toLowerCase();
     var str = "",
