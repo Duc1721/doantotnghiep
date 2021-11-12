@@ -677,7 +677,7 @@ function showHome_user() {
             idnamenha = ketqualangnghe[Home]
             name_nha_fb = decode_data(idnamenha.namenha)
             id_nha_fb = Home
-            home_user.innerHTML += `
+            home_user.innerHTML += ` 
                                 <div class= "card">
                                     <div class="card-header btn"><b>
                                         <i class="fas fa-building"></i> ${name_nha_fb}</div></b>
