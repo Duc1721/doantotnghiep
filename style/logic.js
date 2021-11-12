@@ -773,7 +773,7 @@ function showDevice_user(Dhome, Droom) {
                             <td>${name_phong_fb}</td>
                             <td>${name_thietbi_fb}</td>
                             <td>${phanloai_thietbi_fb}</td>
-                            <td>${trangthai_thietbi_fb}</td>
+                            <td>${trangthai_thietbi_fb}</td> 
                     </tr>
                     `
             
