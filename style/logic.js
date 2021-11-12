@@ -72,7 +72,7 @@ database.ref("ADMIN").on('value', async function(snap) {
                     
                 }
     }
-    search()
+    //search()
 
 });
 homeName = document.getElementById("HName");
@@ -99,7 +99,7 @@ function showHome() {
                                 <button class="btncus" onclick = "deleteHome( '${id_nha_fb}')" data-toggle="tooltip" title="Xóa nhà!"><i class="fa fa-close"></i></button>
                                 <button class="btncus" data-toggle="collapse" data-toggle="tooltip" title="Sửa tên nhà!" data-target="#rename_home${id_nha_fb}"><i class="fa fa-pencil-square-o"></i></button> </h6>
                                 <div id="rename_home${id_nha_fb}" class="collapse">
-                                    <input id="input${id_nha_fb}" type="nameHome" style="width:80%" placeholder="Nhập tên nhà mới"><button class="btncus" id="check${id_nha_fb}" onclick="checknewname_home('${id_nha_fb}')"><i class="fad fa-check"></i></button>
+                                    <input id="input${id_nha_fb}"   maxlength="20" type="nameHome" style="width:80%" placeholder="Nhập tên nhà mới"><button class="btncus" id="check${id_nha_fb}" onclick="checknewname_home('${id_nha_fb}')"><i class="fad fa-check"></i></button>
                                 </div>  
                             </div>   `
          
@@ -120,7 +120,7 @@ function showRoom(Rhome) {
         for (var Room in ketqualangnghe) {
             if (Room != "namenha") {
                 for (var tennha in ketqualangnghe) {
-                    if (tennha == "namenha") { name_nha_fb =decode_data( ketqualangnghe.namenha) }
+                    if (tennha == "namenha") { name_nha_fb = decode_data( ketqualangnghe.namenha) }
                 }
                 phong_fb = ketqualangnghe[Room]
                 for (var Device in phong_fb) {
@@ -144,7 +144,7 @@ function showRoom(Rhome) {
                         <button class="btncus" onclick = "deleteRoom( '${Rhome}', '${Room}')"  data-toggle="tooltip" title="Xóa phòng!"><i class="fa fa-close"></i></button> 
                         <button class="btncus" data-toggle="collapse" data-target="#rename_room${Rhome}${Room}"><i class="fa fa-pencil-square-o"  data-toggle="tooltip" title="Đổi tên phòng!"></i></button> </h6>
                         <div id="rename_room${Rhome}${Room}" class="collapse">
-                            <input id="input${Rhome}${Room}" type="nameHome" style="width:80%" placeholder="Nhập tên phòng mới"><button class="btncus" id="check${Rhome}${Room}" onclick="checknewname_room('${Rhome}','${Room}')"><i class="fad fa-check"></i></button>
+                            <input id="input${Rhome}${Room}" type="nameHome" style="width:80%"  maxlength="20" placeholder="Nhập tên phòng mới"><button class="btncus" id="check${Rhome}${Room}" onclick="checknewname_room('${Rhome}','${Room}')"><i class="fad fa-check"></i></button>
                         </div>     
                 </div> 
             `
@@ -191,7 +191,7 @@ function showDevice(Dhome, Droom) {
 
 
                             <div id="rename_device${Dhome}${Droom}${Device}" class="collapse">
-                                <input id="input${Dhome}${Droom}${Device}" type="nameHome" style="width:80%" placeholder="Nhập tên thiết bị mới"><button class="btncus" id="check${Dhome}${Droom}${Device}" onclick="checknewname_device('${Dhome}','${Droom}','${Device}')"><i class="fad fa-check"></i></button>
+                                <input id="input${Dhome}${Droom}${Device}" type="nameHome" style="width:80%"  maxlength="20" placeholder="Nhập tên thiết bị mới"><button class="btncus" id="check${Dhome}${Droom}${Device}" onclick="checknewname_device('${Dhome}','${Droom}','${Device}')"><i class="fad fa-check"></i></button>
                             </div> 
 
                             <div class="form-check collapse" id="retype_device${Dhome}${Droom}${Device}">
@@ -774,7 +774,6 @@ function showDevice_user(Dhome, Droom) {
                             <td>${name_thietbi_fb}</td>
                             <td>${phanloai_thietbi_fb}</td>
                             <td>${trangthai_thietbi_fb}</td>
-                            
                     </tr>
                     `
             

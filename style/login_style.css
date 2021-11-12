@@ -134,11 +134,11 @@ label{
     transform: scale(1.5);
   }
   .btndangnhap{
-    display: inline-block;
+    position:absolute;
     border-radius: 5px;
     padding: 10px;
-    margin-top: 2%;
-    margin-left: 39%;
+    right: 0;
+    top: -20%;
     background-color: #FFC312; 
     margin-bottom: 2%;
     outline:none;

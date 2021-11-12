@@ -841,7 +841,6 @@ select::after {
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   border: 1px solid rgb(30, 134, 219);
-
 } 
 .formHome>div{
   position: absolute;

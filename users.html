@@ -18,9 +18,9 @@
     <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 </head>
 
-<body style="background-image: url('bglogin2.jpg'); background-size: cover;">
-    <div class="grid">
-        <div id="vaonha" onclick="vaonha_user()"
+<body style="background-image: url('bglogin2.jpg'); background-size:160%;height: 160%;">
+    <div class="grid" id = "trangchu">
+        <div onclick="vaonha()"
             style="background-image: url(nha.png);background-repeat: repeat-y;background-size: contain; position: relative;">
             <label class="chucnang">Nhà của bạn</label>
         </div>
@@ -37,9 +37,40 @@
         <div><img  class="resize" src="thongtin.png">
             <label class="chucnang">Thông tin</label></div>
         <div><img  class="resize" src="chiase.png">
-            <label class="chucnang">Chia sẽ</label></div>
+            <label class="chucnang">Chia sẻ</label></div>
       </div>
-
+     
+      <div id="roomuser" class="phonguser slideleft">
+        <div style="background-image: url('bglogin2.jpg');background-size:cover;">
+            <span class="btnback" style="font-size: 3rem;color: rgb(0, 0, 0);text-shadow: white 2px 2px;top:2.5%" onclick="thoatnha()"><i class="fad fa-chevron-left"></i></span>
+            <div><h1 class="h1cus" style="color:yellow;" id="getten"></h1></div>
+            <hr>
+            <div class="gridroom" id="phong">
+            </div>
+        </div>
+    </div>
+    <div style="display: none;" id="aaaa">
+        <div id="tablestate"></div>
+    </div>
+    <div class="tablecus">
+    <div class="table-responsive" >
+        <table class="table table-bordered" style="position: relative; background-color: rgba(255, 255, 255, 0.432);" >
+            <thead>
+                <tr class="header" id="headerbang"> 
+                    <th>#</th>
+                    <th>ID nhà</th>
+                    <th>Tên nhà</th>
+                    <th>Tên phòng</th>  
+                    <th>Tên thiết bị</th>
+                    <th>Phân Loại</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody id="bangthietbi">
+            </tbody>
+        </table>
+    </div>
+</div>
      
 
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
@@ -47,6 +78,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="./style/user.js"></script>
+    <script src="./style/logic.js"></script>
+    <script src="./style/dencode.js"></script>
+   
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
 </body>
