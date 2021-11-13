@@ -108,7 +108,9 @@ function showHome() {
     romeName.innerHTML = ""
     deviceName.innerHTML = ""
 }
+tennhaht = document.getElementById("nhaht")
 function showRoom(Rhome) {
+    window.scrollTo(0, 0);
     xoa_mau_home = document.getElementsByClassName("btn-add-home")
     for (var i = 0; i < xoa_mau_home.length; i++) {
         xoa_mau_home[i].style.backgroundColor = "transparent";
@@ -120,7 +122,10 @@ function showRoom(Rhome) {
         for (var Room in ketqualangnghe) {
             if (Room != "namenha") {
                 for (var tennha in ketqualangnghe) {
-                    if (tennha == "namenha") { name_nha_fb = decode_data( ketqualangnghe.namenha) }
+                    if (tennha == "namenha") { 
+                        name_nha_fb = decode_data( ketqualangnghe.namenha) 
+                        tennhaht.innerHTML = "#"+name_nha_fb
+                    }
                 }
                 phong_fb = ketqualangnghe[Room]
                 for (var Device in phong_fb) {
@@ -137,7 +142,7 @@ function showRoom(Rhome) {
                 }
                 romeName.innerHTML += `
                 <div class="card">
-                        <h5 id= "tennhahienthitenphong${Room}"class="card-header btn"><b><i class="fas fa-building"></i> ${name_nha_fb} - <i class="fas fa-home"></i> ${name_phong_fb}</b></h5>
+                        <h5 id= "tennhahienthitenphong${Room}"class="card-header btn"><b><i class="fas fa-home"></i> ${name_phong_fb}</b></h5>
                         <h5></h5>
                         <h6><button id = "idroom${Rhome}${Room}"class="btncus btn-add-room" onclick="showDevice('${Rhome}','${Room}')"  data-toggle="tooltip" title="Hiển thị thiết bị!"><i class="far fa-lightbulb"></i></button> 
                         <button class="btncus" onclick = "addnewdevice( '${Rhome}','${name_nha_fb}', '${Room}','${name_phong_fb}','${phanloai_thietbi_fb}')"  data-toggle="tooltip" title="Thêm thiết bị!"><i class="far fa-plus-square"></i></button>
@@ -156,7 +161,7 @@ function showRoom(Rhome) {
     idhome = document.getElementById("idhome" + Rhome);
     idhome.style.backgroundColor = "red";    
 }
-
+tenphonght = document.getElementById("phonght")
 function showDevice(Dhome, Droom) {
     //Dhome:idnha | Droom: id phòng | D_namehome: tên nhà
     xoa_mau = document.getElementsByClassName("btn-add-room")
@@ -172,6 +177,7 @@ function showDevice(Dhome, Droom) {
                 for (var tenphong in ketqualangnghe) {
                     if (tenphong == "namephong") {
                         name_phong_fb = decode_data(ketqualangnghe.namephong)
+                        tenphonght.innerHTML = "#"+name_phong_fb
                     }
                 }
                 thietbi_fb = ketqualangnghe[Device]
@@ -180,7 +186,7 @@ function showDevice(Dhome, Droom) {
                 trangthai_thietbi_fb =decode_data( thietbi_fb.trangthai)
                 deviceName.innerHTML += `     
                    <div class="card">
-                        <h5 class="card-header btn"><b><i class="fas fa-home"></i> ${name_phong_fb} - <i class="fad fa-fan-table"></i> ${name_thietbi_fb} - <i class="fas fa-clipboard-list-check"></i> ${phanloai_thietbi_fb}</b></h5>
+                        <h5 class="card-header btn"><b><i class="fad fa-fan-table"></i> ${name_thietbi_fb} - <i class="fas fa-clipboard-list-check"></i> ${phanloai_thietbi_fb}</b></h5>
                         <h5></h5>
                         <h6><button class="btncus"><i class="fa fa-close" onclick = "deleteDevice( '${Dhome}', '${Droom}','${Device}')"  data-toggle="tooltip" title="Xóa thiết bị!"></i></button>
 
@@ -197,7 +203,7 @@ function showDevice(Dhome, Droom) {
                             <div class="form-check collapse" id="retype_device${Dhome}${Droom}${Device}">
 
                               <h5 class="btncheck">  
-                                <label><input type="radio" name="radgroup"  onclick="if(this.checked){checktype_device1('${Dhome}','${Droom}','${Device}')}"> Thiết bị</label>
+                                <label><input type="radio" name="radgroup"  onclick="if(this.checked){checktype_device1('${Dhome}','${Droom}','${Device}')}" checked> Thiết bị</label>
                                 <label><input type="radio" name="radgroup"  onclick="if(this.checked){checktype_device2('${Dhome}','${Droom}','${Device}')}"> Cảm biến</label></h5>
                             </div>
 
@@ -281,7 +287,7 @@ function addnewHome() {
     document.getElementById("name_home").value = "";
     document.getElementById("nameRoom").value = "";
     document.getElementById("add_device_modal").innerHTML = `
-    <button onclick="roomPlus(${conentaoidhaykhong},0)" class="btnadd" for="psw" name="psw" required>XÁC NHẬN SỐ THIẾT BỊ</button>
+    <button onclick="roomPlus(${conentaoidhaykhong},0)" class="btnadd">XÁC NHẬN SỐ THIẾT BỊ</button>
     `;
 }
 
@@ -316,8 +322,8 @@ function addnewdevice(Idnha, nameNha, Idphong, namePhong) {
 }
 
 function closeAddnewHome() {
-    document.getElementById('addHome').style.display = 'none' 
     showHome()
+    document.getElementById('addHome').style.display = 'none'
 }
 function decRoom() {
     valueRoom = document.getElementById("valueRoomNumber").value;
@@ -424,7 +430,8 @@ function roomPlus(conentaoidhaykhong,id_room) {
     } else {
         swal("Lưu ý!", "Tên nhà phải lớn hơn 5 ký tự!", "error");
     }
-    showHome()
+    //showHome()
+
 }
 khac = 1
 tt_tao_mk = 1
@@ -480,15 +487,11 @@ function oke_firebase() {
         }
         document.getElementById('themroom').innerHTML = "";
         document.getElementById("idnewphong").innerHTML = "";
-
-
-
-        // showRoom(id_nha)
-        // showDevice(id_nha, id_phong)
     } else {
         swal("Lưu ý", "Tên nhà và tên phòng phải lớn hơn 5 ký tự!", "error");
     }
     taomatkhau()
+    vaonha()
   
 }
 
@@ -663,13 +666,12 @@ header_tab_user = document.getElementById('header_table_user')
 ds_user = document.getElementById('ds_user')
 btn_back = document.getElementById('btn_back')    
 function showHome_user() {
-    home_user.style.display = 'grid';
     home_user.innerHTML = "";
+    home_user.style.display = 'grid';
     tableReport_User.innerHTML ="";
     ds_user.innerHTML = 'DANH SÁCH NHÀ';
     header_tab_user.style.display = 'none';
     btn_back.style.display = 'none';
-    // console.log(home_user)
     database.ref("ADMIN").once('value', async function(snap) {
         var ketqualangnghe = await snap.val();               
         for (var Home in ketqualangnghe) {
@@ -678,28 +680,19 @@ function showHome_user() {
             name_nha_fb = decode_data(idnamenha.namenha)
             id_nha_fb = Home
             home_user.innerHTML += ` 
-                                <div class= "card">
-                                    <div class="card-header btn"><b>
-                                        <i class="fas fa-building"></i> ${name_nha_fb}</div></b>
-                                    <div class="containeru">
-                                        <img src="avt.jpg" class="imageu">
-                                        <div class="overlayu" onclick="showRoom_user('${id_nha_fb}')">
-                                          <h3 style="text-align:center" class="btnadd">Thông tin chủ nhà</h3>
-                                          <div class="textu">Họ và tên: Trống</div>
-                                          <div class="textu">Giới tính: Nam/Nữ</div>
-                                          <div class="textu">Ngày sinh: Ngày/Tháng/Năm</div>
-                                          <div class="textu">Địa chỉ: Thôn, xã, huyện, tỉnh, quốc gia</div>
-                                          <div class="textu">Số CMND: XXXXXXXXX</div>
-                                          <div class="textu">Số điện thoại: +84XXXXXXXX</div>
-                                        </div>
-                                      </div>
+                                <div class= "card" onclick="showRoom_user('${id_nha_fb}')">
+                                    <div class="card-header btn">
+                                         <b><i class="fas fa-building"></i> ${name_nha_fb}</b>
+                                    </div>
+                                    <img src="./phongkhach.jpg" class="resize" >
                                 </div>
                           `
          
         }
+        home_user.innerHTML += '<div onclick="addnewHome()" style="filter: brightness(0.8)"><img  class="resize" src="them.png" style="filter: hue-rotate(286deg);"></div>'
     });
+    
 }
-
 function showRoom_user(Hoom_user) {
     btn_back.style.display = 'block';
     btn_back.addEventListener('click', function(e) {
@@ -707,7 +700,6 @@ function showRoom_user(Hoom_user) {
       });
     home_user.innerHTML =""
     tableReport_User.innerHTML ="";
-    ds_user.innerHTML = 'DANH SÁCH PHÒNG';
     idhome = document.getElementById("idhome" + Hoom_user);
     database.ref("ADMIN").child(Hoom_user).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
@@ -728,16 +720,17 @@ function showRoom_user(Hoom_user) {
                     }
                 }
                 home_user.innerHTML += `
-                <div class="card">
-                        <h5 class="card-header btn" style="text-align: left"><b><i class="fas fa-building"></i> ${name_nha_fb} - <i class="fas fa-home"></i> ${name_phong_fb}</b></h5>
-                        <div class="containeru"><b>
-                                    <div class="containeru" onclick="showDevice_user('${Hoom_user}','${Room}')">
-                                        <img src="avt.jpg" class="imageu">
-                                     </div>
+                <div class="card"  onclick="showDevice_user('${Hoom_user}','${Room}')">
+                    <div class="card-header btn">
+                       <b><i class="fas fa-home"></i> ${name_phong_fb}</b>
+                    </div>
+                        <img src="./phongmacdinh.jpg" class="resize">                
                 </div> 
             `     
             }
         }
+        ds_user.innerHTML = name_nha_fb + ': DANH SÁCH PHÒNG';
+        home_user.innerHTML += `<div onclick="addnewRoom('${Hoom_user}','${name_nha_fb}')" style="filter: brightness(0.8)"><img  class="resize" src="them.png" style="filter: hue-rotate(286deg);"></div>`
     });
 }
 tableReport_User = document.getElementById("table_user");

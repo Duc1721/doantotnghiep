@@ -1,23 +1,29 @@
+table_device = document.getElementById("tablestate");
 document.getElementById('headerbang').style.display = 'none'
-document.getElementById('bangthietbi').style.display = 'none' 
+document.getElementById('tablestate').style.display = 'none' 
 iduser =  localStorage.getItem("in_id")
-function vaonha(){
-    document.getElementById('headerbang').style.display = 'none' 
-    document.getElementById('bangthietbi').style.display = 'none'
-    document.getElementById('trangchu').style.display = 'none' 
-    document.getElementById('roomuser').style.display = 'block' 
-    hienthiphong() 
-}
+trove = document.getElementById('btnthoat')
+
 function thoatnha(){
     document.getElementById('headerbang').style.display = 'none' 
-    document.getElementById('bangthietbi').style.display = 'none'
+    document.getElementById('tablestate').style.display = 'none'
     document.getElementById('roomuser').style.display = 'none' 
     document.getElementById('trangchu').style.display = '' 
+    window.scrollTo(0, 0);
+
 }
+
 room = document.getElementById("phong");
-function hienthiphong(){
-    room.innerHTML = ''
+function vaonha(){
+    window.scrollTo(0, 0);
+    trove.addEventListener('click', function(e) {
+        thoatnha()
+      });
     document.getElementById('headerbang').style.display = 'none' 
+    document.getElementById('tablestate').style.display = 'none'
+    document.getElementById('trangchu').style.display = 'none' 
+    document.getElementById('roomuser').style.display = 'block' 
+    room.innerHTML = ''
     document.getElementById('phong').style.display = ''
     database.ref("ADMIN").child(iduser).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
@@ -29,23 +35,29 @@ function hienthiphong(){
                     if (tenphong == "namephong") {
                         tenphong_user = decode_data(phong_fb.namephong)
                         document.getElementById("getten").innerText = tennha + ": DANH SÁCH PHÒNG"
-                        room.innerHTML += `<div style="background-image: url(phongmacdinh.jpg);background-repeat: repeat-y;background-size: contain; " 
-                                                class="resize" onclick="hienthithietbi('${iduser}','${tennha}','${idphong_user}')" >
-                        <h5  class="chucnang" style="top:-16%; font-size: 17px;" ><b>${tenphong_user}</b></h5>
-                        </div>`   
+                        room.innerHTML += `<div style="background-image: url(phongmacdinh.jpg);background-size: contain;" 
+                                                class="resize" onclick="vaophong('${iduser}','${tennha}','${idphong_user}')" >
+                                                <h5  class="chucnang" style="font-size: 17px;" ><b>${tenphong_user}</b></h5>
+                        </div>
+                        ` 
+                        
             } 
         }
     }
     }
+    room.innerHTML += `<div onclick="addnewRoom('${iduser}','${tennha}')" style="filter: brightness(0.8)"><img  class="resize" src="them.png" style="filter: hue-rotate(286deg);"></div>`
 })
 }
-table_device = document.getElementById("bangthietbi");
-function hienthithietbi(idhu, tennha, idru){
+function vaophong(idhu, tennha, idru){
+    trove.addEventListener('click', function(e) {
+        vaonha()
+      });
     num=0
+    window.scrollTo(0, 0);
     table_device.innerHTML ="";
     document.getElementById('phong').style.display = 'none'
     document.getElementById('headerbang').style.display = '' 
-    document.getElementById('bangthietbi').style.display = ''
+    document.getElementById('tablestate').style.display = ''
     database.ref("ADMIN").child(idhu).child(idru).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         for (var Device in ketqualangnghe) {
@@ -72,8 +84,7 @@ function hienthithietbi(idhu, tennha, idru){
                        
                         
                     }
-                    console.log(table_device)
-            
         }
+        document.getElementById("getten").innerText = "BẢNG DANH SÁCH THIẾT BỊ"
     });
 }

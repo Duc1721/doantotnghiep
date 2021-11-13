@@ -13,6 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/user_style.css">
     <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
     <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 
@@ -45,7 +46,6 @@
                         <form class="form-inline my-0 my-lg-0">
                             <input class="form-control mr-sm-2" placeholder="Tìm kiếm" aria-label="Search">
                         </form>
-                       
                     </li>
                     <li class="nav-item">
                         <button class="btn btn-success" id="loginAdminUser" onclick="logout()"><i class="far fa-search"></i></button>
@@ -76,24 +76,16 @@
         <a href="#" id="projects">Dự án</a>
         <a href="#" id="time">Lịch trình</a>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <button  onclick="addnewHome()" class="btn1">
+    <div class="container-gridcus">
+        <div class="gridcus">
+                <button onclick="addnewHome()">
                     <i class="fas fa-building"></i><i class="fas fa-plus" style=" font-size: 50%;"></i>
-                    <h1>Thêm nhà</h1><h6>[ADMIN]</h6></button>
-            </div>
-            <div class="col">
-                <button class="btn1"><i class="far fa-comment-alt-exclamation"></i><h1>Thông báo</h1><h6>[ADMIN]</h6></button>
-            </div>
-            <div class="col">
-                <button class="btn1" onclick="openState()"><i class="fa fa-dashboard"></i><h1>Trạng thái</h1><h6>[ADMIN]</h6></button>
-            </div>
-            <div class="col" >
-                <button class="btn1" onclick="openHome()"><i class="far fa-house-user"></i><h1>Nhà riêng</h1><h6>[USER]</h6></button>
+                    <h1>Thêm nhà</h1></button>
+                <button onclick="openState()"><i class="fa fa-dashboard"></i><h1>Trạng thái</h1></button>
+                <button onclick="openHome()"><i class="far fa-house-user"></i><h1>Nhà riêng</h1></button>
+                <button><i class="far fa-comment-alt-exclamation"></i><h1>Thông báo</h1></button>
             </div>
         </div>
-    </div>
     <div id="tabstate" class="state1">
         <div class="container">
             <div class="tab">    
@@ -104,7 +96,7 @@
             <div id="Room1" class="tabcontent">
                 <div class="container">
                     <form class="form-inline">
-                        <button class ="btncus" onclick="export2csv()">Download as CSV</button>
+                        <button class ="btnadd" onclick="export2csv()">Download as CSV</button>
                         <input type="search" id="myInput" onkeyup="search()" placeholder="  Search" aria-label="Search">
                     </form>
                     <div class="table-responsive " >
@@ -127,23 +119,24 @@
                     </div>
                 </div>
             </div>
-            
             <div id="Room2" class="tabcontent">
+                <div class="container">
                 <div class="row list-inline"> 
                     <div class="col1">
+                        <h4 class="h4cus">DANH SÁCH NHÀ</h4>
                         <div class="vertical-menu" id="HName"></div></div>
                     <div class="col1">
+                        <h4 class="h4cus" id="nhaht">#</h4>
                         <div class="vertical-menu" id="RName"></div></div>
                     <div class="col1">
+                        <h4 class="h4cus" id="phonght">#</h4>
                         <div class="vertical-menu" id="DName"></div></div>
-                </div> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
     <div class="container-fluid padding">
-        <!-- chữ phân đều giữa -->
         <div class="row welcome text-center">
             <hr>
             <hr>
@@ -164,7 +157,6 @@
             </div>
         </div>
     </div>
-    <!-- footer là phần ở cuối web -->
     <footer>
         <div class="container-fluid padding">
             <div class="row text-center">
@@ -205,33 +197,22 @@
 
         <div class="formAddHome-content animate">
             <div class="imgcontainer">
-                <span onclick="closeAddnewHome()" class="close" title="Close Modal">&times;</span>
-                <img src="https://scontent.fdad2-1.fna.fbcdn.net/v/t1.6435-9/197898388_972468156835787_603737600879346251_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=idtLdJmcb8EAX9ffqQu&_nc_ht=scontent.fdad2-1.fna&oh=1f00d8bdbf310b62a1902cedd9eba772&oe=619F6EF7"
-                    alt="Avatar" class="avatar">
+                <span onclick="closeAddnewHome()" class="btnback2" title="Thoát">&times;</span>
+                <img src="./phongngu.png" alt="Avatar" class="avatar">
             </div>
 
             <div class="container1">
                 <label><b>ID NHÀ: </b><b id="idnewHome"></b></label>
-                <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" maxlength=20">
+                <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" maxlength="20">
                 <label style="display:block"><b>ID PHÒNG: </b><b id="idnewphong"></b></label>
                 <input id="nameRoom" type="nameRoom" style="width:67%" placeholder="Nhập tên phòng" name="nameRoom" maxlength="20">
                 <div class="buttons_added">
-                    <input class="form-inde minus" type="button" onclick="decRoom()" value="-">
-                    <input class="input-qty" type="numbershow" value="5" id="valueRoomNumber">
-                    <input class="form-inde plus" type="button" onclick="incRoom()" value="+">
+                   <input class="form-inde" type="button" onclick="decRoom()" value="-">
+                    <input class="input-qty" value="5" id="valueRoomNumber">
+                    <input class="form-inde" type="button" onclick="incRoom()" value="+">
                 </div>
-                <div id="add_device_modal">
-
-                </div>
-                
+                <div id="add_device_modal"></div>
                 <div id="themroom"></div>
-
-                </label>
-            </div>
-
-            <div class="container1" style="background-color:#f1f1f1">
-                <button type="button" onclick="closeAddnewHome()" class="btnadd">THOÁT</button>
-                <span class="psw">Bạn là người mới? <a href="#">Hướng dẫn</a></span>
             </div>
         </div>
     </div>
@@ -239,7 +220,7 @@
     <div id="goHome" class="formHome">
         <div>
             <div class="formHome-content animate">
-                    <span class="btn_close" onclick="closeHome()"><i class="fad fa-times"></i></span>
+                    <span class="btnback" onclick="closeHome()"><i class="fad fa-chevron-left"></i></span>
                     <span class="btnback" id="btn_back"><i class="fad fa-chevron-left"></i></span>
                     <h1 class="h1cus" id="ds_user">DANH SÁCH NHÀ</h1>
                     <div class="grid-container" id="userHome"></div>    
@@ -272,7 +253,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="./style/dencode.js"></script>
     <script src="./style/logic.js"></script>
-    
+    <script src="./style/user.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
 </body>
 

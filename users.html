@@ -18,7 +18,7 @@
     <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 </head>
 
-<body style="background-image: url('bglogin2.jpg'); background-size:160%;height: 160%;">
+<body style="background-size:cover;background-image: url('bglogin2.jpg');">
     <div class="grid" id = "trangchu">
         <div onclick="vaonha()"
             style="background-image: url(nha.png);background-repeat: repeat-y;background-size: contain; position: relative;">
@@ -39,22 +39,19 @@
         <div><img  class="resize" src="chiase.png">
             <label class="chucnang">Chia sẻ</label></div>
       </div>
-     
       <div id="roomuser" class="phonguser slideleft">
         <div style="background-image: url('bglogin2.jpg');background-size:cover;">
-            <span class="btnback" style="font-size: 3rem;color: rgb(0, 0, 0);text-shadow: white 2px 2px;top:2.5%" onclick="thoatnha()"><i class="fad fa-chevron-left"></i></span>
+            <span class="btnback1" id="btnthoat"><i class="fad fa-chevron-left"></i></span>
             <div><h1 class="h1cus" style="color:yellow;" id="getten"></h1></div>
             <hr>
             <div class="gridroom" id="phong">
+              
             </div>
         </div>
     </div>
-    <div style="display: none;" id="aaaa">
-        <div id="tablestate"></div>
-    </div>
     <div class="tablecus">
-    <div class="table-responsive" >
-        <table class="table table-bordered" style="position: relative; background-color: rgba(255, 255, 255, 0.432);" >
+    <div class="table-responsive" style="position:absolute;">
+        <table class="table table-bordered" style="position: relative; background-color: rgba(255, 255, 255, 0.774);" >
             <thead>
                 <tr class="header" id="headerbang"> 
                     <th>#</th>
@@ -66,9 +63,34 @@
                     <th>Trạng thái</th>
                 </tr>
             </thead>
-            <tbody id="bangthietbi">
+            <tbody id="tablestate">
             </tbody>
         </table>
+    </div>
+</div>
+
+<div id="addHome" class="formAddHome">
+
+    <div class="formAddHome-content animate">
+        <div class="imgcontainer">
+            <span onclick="closeAddnewHome()" class="btnback2" title="Thoát">&times;</span>
+            <img src="phongngu.png"
+                alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container1">
+            <label><b>ID NHÀ: </b><b id="idnewHome"></b></label>
+            <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" maxlength=20">
+            <label style="display:block"><b>ID PHÒNG: </b><b id="idnewphong"></b></label>
+            <input id="nameRoom" type="nameRoom" style="width:67%" placeholder="Nhập tên phòng" name="nameRoom" maxlength="20">
+            <div class="buttons_added">
+                <input class="form-inde minus" type="button" onclick="decRoom()" value="-">
+                <input class="input-qty" type="numbershow" value="5" id="valueRoomNumber">
+                <input class="form-inde plus" type="button" onclick="incRoom()" value="+">
+            </div>
+            <div id="add_device_modal"></div>
+            <div id="themroom"></div>
+        </div>
     </div>
 </div>
      
