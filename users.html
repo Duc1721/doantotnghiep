@@ -18,8 +18,9 @@
     <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 </head>
 
-<body style="background-size:cover;background-image: url('bglogin2.jpg');">
+<body style="background-image: linear-gradient(to right, rgb(174, 207, 207),rgb(107, 139, 228));">
     <div class="grid" id = "trangchu">
+
         <div onclick="vaonha()"
             style="background-image: url(nha.png);background-repeat: repeat-y;background-size: contain; position: relative;">
             <label class="chucnang">Nhà của bạn</label>
@@ -39,20 +40,19 @@
         <div><img  class="resize" src="chiase.png">
             <label class="chucnang">Chia sẻ</label></div>
       </div>
+   
       <div id="roomuser" class="phonguser slideleft">
-        <div style="background-image: url('bglogin2.jpg');background-size:cover;">
+        <div style="background-image: linear-gradient(to right, rgb(174, 207, 207),rgb(107, 139, 228));">
             <span class="btnback1" id="btnthoat"><i class="fad fa-chevron-left"></i></span>
-            <div><h1 class="h1cus" style="color:yellow;" id="getten"></h1></div>
-            <hr>
-            <div class="gridroom" id="phong">
-              
-            </div>
+            <div><h1 class="h1custom" id="getten"></h1></div>
+            <div class="gridroom" id="phong"></div>
         </div>
     </div>
+
     <div class="tablecus">
     <div class="table-responsive" style="position:absolute;">
         <table class="table table-bordered" style="position: relative; background-color: rgba(255, 255, 255, 0.774);" >
-            <thead>
+            <thead> 
                 <tr class="header" id="headerbang"> 
                     <th>#</th>
                     <th>ID nhà</th>
@@ -61,40 +61,39 @@
                     <th>Tên thiết bị</th>
                     <th>Phân Loại</th>
                     <th>Trạng thái</th>
+                    <th>Cài đặt</th>
                 </tr>
             </thead>
-            <tbody id="tablestate">
+            <tbody id="tablestate1" class="slideleft">
             </tbody>
         </table>
     </div>
 </div>
+    <div id="tablestate" style="display:none">thêm để khỏi lỗi chéo hàm</div>
 
 <div id="addHome" class="formAddHome">
 
     <div class="formAddHome-content animate">
         <div class="imgcontainer">
-            <span onclick="closeAddnewHome()" class="btnback2" title="Thoát">&times;</span>
-            <img src="phongngu.png"
-                alt="Avatar" class="avatar">
+            <span onclick="closeAddnewHomeuser()" class="btnback2" title="Thoát">&times;</span>
+            <img src="./phongngu.png" alt="Avatar" class="avatar">
         </div>
 
         <div class="container1">
             <label><b>ID NHÀ: </b><b id="idnewHome"></b></label>
-            <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" maxlength=20">
+            <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" maxlength="20">
             <label style="display:block"><b>ID PHÒNG: </b><b id="idnewphong"></b></label>
             <input id="nameRoom" type="nameRoom" style="width:67%" placeholder="Nhập tên phòng" name="nameRoom" maxlength="20">
             <div class="buttons_added">
-                <input class="form-inde minus" type="button" onclick="decRoom()" value="-">
-                <input class="input-qty" type="numbershow" value="5" id="valueRoomNumber">
-                <input class="form-inde plus" type="button" onclick="incRoom()" value="+">
+               <input class="form-inde" type="button" onclick="decRoom()" value="-">
+                <input class="input-qty" value="5" id="valueRoomNumber">
+                <input class="form-inde" type="button" onclick="incRoom()" value="+">
             </div>
             <div id="add_device_modal"></div>
             <div id="themroom"></div>
         </div>
     </div>
 </div>
-     
-
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>

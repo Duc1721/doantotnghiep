@@ -110,6 +110,7 @@ function showHome() {
 }
 tennhaht = document.getElementById("nhaht")
 function showRoom(Rhome) {
+    tenphonght.innerHTML = "#"
     window.scrollTo(0, 0);
     xoa_mau_home = document.getElementsByClassName("btn-add-home")
     for (var i = 0; i < xoa_mau_home.length; i++) {
@@ -234,6 +235,8 @@ function openState() {
 }
 
 function closeState() {
+    tennhaht.innerHTML = "#"
+    tenphonght.innerHTML = "#"
     document.getElementById("tabstate").style.width = "0";
 }
 
@@ -265,7 +268,7 @@ function randomString(len, an) {
     //randomString(10, "A");   // "aUkZuHNcWw"
     //randomString(10, "N");   // "9055739230"
 } 
-
+tt_tao_mk = 1
 var formAddHome = document.getElementById('addHome');
 function addnewHome() {  
     conentaoidhaykhong = 1;
@@ -278,8 +281,7 @@ function addnewHome() {
         tt_id_home = 0  
         if( tt_id_home == 0){
             tt_tao_mk = 1
-        } else{}
-            
+        }  
     }
     document.getElementById("idnewHome").innerHTML = newid;
     document.getElementById('themroom').innerHTML = "";
@@ -431,10 +433,8 @@ function roomPlus(conentaoidhaykhong,id_room) {
         swal("Lưu ý!", "Tên nhà phải lớn hơn 5 ký tự!", "error");
     }
     //showHome()
-
 }
 khac = 1
-tt_tao_mk = 1
 function taomatkhau(){
     database.ref("ADMIN").once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
@@ -491,10 +491,8 @@ function oke_firebase() {
         swal("Lưu ý", "Tên nhà và tên phòng phải lớn hơn 5 ký tự!", "error");
     }
     taomatkhau()
-    vaonha()
-  
+    vaonha() 
 }
-
 function deleteHome(home){
 	swal({
 		title: "Bạn chắc chắn muốn xóa?",
@@ -514,8 +512,8 @@ function deleteHome(home){
       newRemoteRef.remove();
       romeName.innerHTML = "";
       deviceName.innerHTML = "";
-      newPush_account_dn_id= database.ref("ACCOUNT").child("USER").child(home)
-      newPush_account_dn_id.remove();
+      opendelRoom()
+      vaonha()
       showHome()
     } else {
       swal("Hủy", "Dữ liệu của bạn được bảo toàn!", "error");

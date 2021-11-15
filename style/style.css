@@ -235,7 +235,7 @@ hr.light {
 }
 
 
-@media (max-width: 768px){  
+@media (max-width: 48rem){  
   .carousel-caption {
     top: 20%;
   }
@@ -251,7 +251,7 @@ hr.light {
     padding: 0.5rem 0.875rem;
   }
 }
-@media (max-width: 576px){
+@media (max-width: 36rem){
   .carousel-caption {
     top: 10%;
   }
@@ -283,7 +283,7 @@ hr.light {
 }
 .state1::-webkit-scrollbar-track
 {
-	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
+	-webkit-box-shadow: inset 0 0.063rem 0.063rem rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
 }
 
@@ -331,7 +331,7 @@ hr.light {
   text-shadow: rgb(255, 255, 255) 0.1rem 0.1rem;
 }
 
-@media screen and (max-height: 450px) {
+@media screen and (max-height: 28.125rem) {
   .state1 {padding-top: 0.938rem;}
   .state1 a {font-size: 1.125em;}
 }
