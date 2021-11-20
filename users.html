@@ -18,31 +18,10 @@
     <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 </head>
 
-<body style="background-image: linear-gradient(to right, rgb(174, 207, 207),rgb(107, 139, 228));">
-    <div class="grid" id = "trangchu">
-
-        <div onclick="vaonha()"
-            style="background-image: url(nha.png);background-repeat: repeat-y;background-size: contain; position: relative;">
-            <label class="chucnang">Nhà của bạn</label>
-        </div>
-        <div><img  class="resize" src="thongke.png">
-            <label class="chucnang">Thống kê</label></div>
-        <div><img  class="resize" src="caidat.png">
-            <label class="chucnang">Cài đặt</label></div>
-        <div><img  class="resize" src="lienhe.png">
-            <label class="chucnang">Liên hệ</label></div>
-        <div><img  class="resize" src="infor.jpg">
-            <label class="chucnang">Giới thiệu công nghệ mới</label></div>
-        <div><img  class="resize" src="huongdan.png">
-            <label class="chucnang">Hướng dẫn</label></div>
-        <div><img  class="resize" src="thongtin.png">
-            <label class="chucnang">Thông tin</label></div>
-        <div><img  class="resize" src="chiase.png">
-            <label class="chucnang">Chia sẻ</label></div>
-      </div>
-   
-      <div id="roomuser" class="phonguser slideleft">
-        <div style="background-image: linear-gradient(to right, rgb(174, 207, 207),rgb(107, 139, 228));">
+<body>
+      <div id="roomuser" class="phonguser">
+        <div style="background-color: white">
+            <span class="btndangxuat" onclick="dangxuat()"><i class="fal fa-sign-out-alt"></i></span>
             <span class="btnback1" id="btnthoat"><i class="fad fa-chevron-left"></i></span>
             <div><h1 class="h1custom" id="getten"></h1></div>
             <div class="gridroom" id="phong"></div>
@@ -51,7 +30,7 @@
 
     <div class="tablecus">
     <div class="table-responsive" style="position:absolute;">
-        <table class="table table-bordered" style="position: relative; background-color: rgba(255, 255, 255, 0.774);" >
+        <table class="table table-bordered" style="position: relative; background-color: rgba(255, 255, 255, 0.774);">
             <thead> 
                 <tr class="header" id="headerbang"> 
                     <th>#</th>
@@ -64,12 +43,13 @@
                     <th>Cài đặt</th>
                 </tr>
             </thead>
-            <tbody id="tablestate1" class="slideleft">
+            <tbody id="tablestate1">
             </tbody>
         </table>
     </div>
 </div>
-    <div id="tablestate" style="display:none">thêm để khỏi lỗi chéo hàm</div>
+    <div id="tablestate" style="display:none"></div>
+    <div id="userHome" style="display:none"></div>
 
 <div id="addHome" class="formAddHome">
 
@@ -99,7 +79,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="./style/user.js"></script>
-    <script src="./style/logic.js"></script>
     <script src="./style/dencode.js"></script>
    
     

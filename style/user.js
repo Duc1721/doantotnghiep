@@ -4,29 +4,65 @@ document.getElementById('tablestate1').style.display = 'none'
 iduser =  localStorage.getItem("in_id")
 trove = document.getElementById('btnthoat')
 roomuser = document.getElementById('roomuser')
-function thoatnha(){
-    document.getElementById('headerbang').style.display = 'none' 
-    document.getElementById('tablestate1').style.display = 'none'
-    document.getElementById('roomuser').style.display = 'none' 
-    document.getElementById('trangchu').style.display = '' 
-    window.scrollTo(0, 0);
+const firebaseConfig = {
+    apiKey: "AIzaSyAEqi81NFMPBJGxWRy7QtQv961efPzL9LA",
+    authDomain: "hellodatn.firebaseapp.com",
+    databaseURL: "https://hellodatn-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "hellodatn",
+    storageBucket: "hellodatn.appspot.com",
+    messagingSenderId: "559705579450",
+    appId: "1:559705579450:web:3421e5377912259256c783",
+    measurementId: "G-YK901S5FXQ"
+};
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+var database = firebase.database();
+function toggleStatea(idnha, idphong, idthietbi, trangthai) {
+    if (trangthai == 0) {
+        trangthai = 1;
 
+    } else if (trangthai == 1) {
+        trangthai = 0;
+    } else {
+        swal("HUHU!", "CẬP NHẬT DỮ LIỆU NHANH LÊN!", "error");
+    }
+    trangthai_mahoa = encode_data(trangthai)
+    newPush_trangthai = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi).child("onoff")
+    newPush_trangthai.set(trangthai_mahoa);
+}
+window.onload = function()
+{
+   vaonha()
+};
+function dangxuat(){
+    swal({
+		title: "Xác nhận đăng xuất",
+		showCancelButton: true,
+		confirmButtonColor: '#DD6B55',
+		confirmButtonText: 'Đồng ý',
+		cancelButtonText: "Không, hủy yêu cầu!",
+		closeOnConfirm: true,
+		closeOnCancel: true
+	},
+	function(isConfirm){
+    if (isConfirm){
+        window.location.href = './login.html';
+    } else {}
+	});
+   
 }
 
 room = document.getElementById("phong");
 function vaonha(){
-    room.innerHTML = ''
     window.scrollTo(0, 0);
-    trove.addEventListener('click', function(e) {
-        thoatnha()
-      });
+    document.getElementById('btnthoat').style.display = 'none' 
     document.getElementById('headerbang').style.display = 'none' 
     document.getElementById('tablestate1').style.display = 'none'
-    document.getElementById('trangchu').style.display = 'none' 
     document.getElementById('roomuser').style.display = 'block' 
     document.getElementById('phong').style.display = ''
     database.ref("ADMIN").child(iduser).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
+        room.innerHTML = ''
         for (var idphong_user in ketqualangnghe) {
             tennha = decode_data(ketqualangnghe.namenha)
             if (idphong_user != "namenha") {
@@ -48,15 +84,16 @@ function vaonha(){
                                                         <input id="input${iduser}"   maxlength="20" style="width:80%;" placeholder="Nhập tên nhà mới">
                                                         <button onclick="luutennha('${iduser}')"><i class="fad fa-check"></i></button>
                                                     </div>`
+                                                    
     
     room.innerHTML += `<div class="gridchucnang">
-                            <div onclick="addnewRoom('${iduser}','${tennha}')" class="nutchucnang">
+                            <div onclick="addnewRoom1('${iduser}','${tennha}')" class="nutchucnang">
                                 <i class="fas fa-plus" title="Thêm phòng"></i></div>
-                            <div onclick="opendelRoom('${iduser}','${tennha}')" class="nutchucnang">
+                            <div onclick="opendelRoom()" class="nutchucnang">
                                  <i class="fas fa-trash" title="Xóa phòng"></i></div>
-                            <div onclick="openeditRoom('${iduser}','${tennha}')" class="nutchucnang">
+                            <div onclick="openeditRoom()" class="nutchucnang">
                                  <i class="fas fa-pen" title="Đổi tên phòng"></i></div>
-                            <div onclick="openadddevice('${iduser}','${idphong_user}')" class="nutchucnang">
+                            <div onclick="openadddevice()" class="nutchucnang">
                                  <i class="fas fa-plug" title="Thêm thiết bị"></i></div>
                        </div>`
            
@@ -65,10 +102,11 @@ function vaonha(){
 function vaophong(idnha, tennha, idphong){
     trove.addEventListener('click', function(e) {
         vaonha()
-      });
+    });
     stt=0
     window.scrollTo(0, 0);
     table_device.innerHTML ="";
+    document.getElementById('btnthoat').style.display = 'block'
     document.getElementById('phong').style.display = 'none'
     document.getElementById('headerbang').style.display = '' 
     document.getElementById('tablestate1').style.display = ''
@@ -86,18 +124,54 @@ function vaophong(idnha, tennha, idphong){
                         phanloai_thietbi_fb = decode_data(thietbi_fb.phanloai)
                         trangthai_thietbi_fb = decode_data(thietbi_fb.trangthai)
                         stt++
-                        table_device.innerHTML +=  `<tr style="text-align: center">
-                                                        <td>${stt}</td>
-                                                        <td>${idnha}</td>
-                                                        <td>${tennha}</td>
-                                                        <td>${name_phong_fb}</td>
-                                                        <td>${name_thietbi_fb}</td>
-                                                        <td>${phanloai_thietbi_fb}</td>
-                                                        <td>${trangthai_thietbi_fb}</td>
-                                                        <td><button class="btn-outline-dark"><i class="fas fa-power-off"></i></button>
-                                                        <button class="btn-outline-dark"><i class="far fa-trash-alt" onclick="xoathietbi('${idnha}', '${tennha}', '${idphong}','${idthietbi}')"></i></button></td>
-                                                    </tr>`
-                       
+                        if(phanloai_thietbi_fb == "Thiết bị"){
+                            table_device.innerHTML +=  `<tr style="text-align: center">
+                                                            <td>${stt}</td>
+                                                            <td>${idnha}</td>
+                                                            <td>${tennha}</td>
+                                                            <td>${name_phong_fb}</td>
+                                                            <td>${name_thietbi_fb}</td>
+                                                            <td>${phanloai_thietbi_fb}</td>
+                                                            <td>${trangthai_thietbi_fb}</td>
+                                                            <td><button class="btn-outline-dark"><i class="fas fa-power-off" onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}','${trangthai_thietbi_fb}')" title="Bật-tắt thiết bị"></i></button>
+                                                            <button class="btn-outline-dark" data-toggle="collapse" data-target="#retype_device${idnha}${idphong}${idthietbi}" title="Phân loại"><i class="fas fa-sunset"></i></button> 
+                                                            <button class="btn-outline-dark"><i class="far fa-trash-alt" onclick="xoathietbi('${idnha}', '${tennha}', '${idphong}','${idthietbi}')" title="Xóa thiết bị"></i></button>
+                                                            <button class="btn-outline-dark" ><i class="fas fa-pen" data-toggle="collapse" data-target="#rename_device${idnha}${idphong}${idthietbi}" title="Đổi tên thiết bị"></i></button>
+                                                            <div id="rename_device${idnha}${idphong}${idthietbi}" class="collapse">
+                                                                <input id="input${idnha}${idphong}${idthietbi}"  style="width:80%;height:2.4rem"  maxlength="20" placeholder="Nhập tên thiết bị mới"><button class="btncus" id="check${idnha}${idphong}${idthietbi}" onclick="doitenthietbi('${idnha}','${idphong}','${idthietbi}', '${tennha}')"><i class="fad fa-check"></i></button>
+                                                            </div>
+                                                            <div class="collapse" id="retype_device${idnha}${idphong}${idthietbi}">
+                                                            <h5 class="h5custom">  
+                                                                <label><input type="radio" name="radgroup"  onclick="if(this.checked){phanloaithietbi('${idnha}','${idphong}','${idthietbi}','${tennha}')}" checked> Thiết bị</label>
+                                                                <label><input type="radio" name="radgroup"  onclick="if(this.checked){phanloaicambien('${idnha}','${idphong}','${idthietbi}','${tennha}')}"> Cảm biến</label></h5>
+                                                            </div>
+                                                            </td>
+                                                        </tr>`
+                        } else {
+                            table_device.innerHTML +=  `<tr style="text-align: center">
+                            <td>${stt}</td>
+                            <td>${idnha}</td>
+                            <td>${tennha}</td>
+                            <td>${name_phong_fb}</td>
+                            <td>${name_thietbi_fb}</td>
+                            <td>${phanloai_thietbi_fb}</td>
+                            <td>${trangthai_thietbi_fb}</td>
+                            <td><button class="btn-outline-dark" ><i class="far fa-trash-alt" onclick="xoathietbi('${idnha}', '${tennha}', '${idphong}','${idthietbi}')" title="Xóa thiết bị"></i></button>
+                            <button class="btn-outline-dark" data-toggle="collapse" data-target="#retype_device${idnha}${idphong}${idthietbi}" title="Phân loại"><i class="fas fa-sunset"></i></button> 
+                            <button class="btn-outline-dark" ><i class="fas fa-pen" data-toggle="collapse" data-target="#rename_device${idnha}${idphong}${idthietbi}" title="Đổi tên thiết bị"></i></button>
+                            <div id="rename_device${idnha}${idphong}${idthietbi}" class="collapse">
+                                <input id="input${idnha}${idphong}${idthietbi}" style="width:80%;height:2.4rem"  maxlength="20" placeholder="Nhập tên thiết bị mới"><button class="btncus" id="check${idnha}${idphong}${idthietbi}" onclick="doitenthietbi('${idnha}','${idphong}','${idthietbi}', '${tennha}')"><i class="fad fa-check"></i></button>
+                            </div>
+                            <div class="collapse" id="retype_device${idnha}${idphong}${idthietbi}">
+                              <h5 class="h5custom">  
+                                <label><input type="radio" name="radgroup"  onclick="if(this.checked){phanloaithietbi('${idnha}','${idphong}','${idthietbi}','${tennha}')}" checked> Thiết bị</label>
+                                <label><input type="radio" name="radgroup"  onclick="if(this.checked){phanloaicambien('${idnha}','${idphong}','${idthietbi}','${tennha}')}"> Cảm biến</label></h5>
+                            </div>
+
+                            </td>
+                        </tr>`
+                            
+                        }
                         
                     }
         }
@@ -109,9 +183,9 @@ function closeAddnewHomeuser() {
     document.getElementById('addHome').style.display = 'none'
 }
 function opendelRoom(){
-    room.innerHTML = ''
     database.ref("ADMIN").child(iduser).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
+        room.innerHTML = ''
         for (var idphong_user in ketqualangnghe) {
             tennha = decode_data(ketqualangnghe.namenha)
             if (idphong_user != "namenha") {
@@ -128,13 +202,13 @@ function opendelRoom(){
             }
         }
         room.innerHTML += `<div class="gridchucnang">
-        <div onclick="addnewRoom('${iduser}','${tennha}')" class="nutchucnang">
+        <div onclick="addnewRoom1('${iduser}','${tennha}')" class="nutchucnang">
             <i class="fas fa-plus" title="Thêm phòng"></i></div>
         <div onclick="vaonha()" class="nutchucnang">
             <i class="fas fa-trash" title="Tắt xóa phòng" style="color: black;"></i></div>
-        <div onclick="openeditRoom('${iduser}','${tennha}')" class="nutchucnang">
+        <div onclick="openeditRoom()" class="nutchucnang">
             <i class="fas fa-pen" title="Sửa tên phòng"></i></div>
-        <div onclick="openadddevice('${iduser}','${idphong_user}')" class="nutchucnang">
+        <div onclick="openadddevice()" class="nutchucnang">
             <i class="fas fa-plug" title="Thêm thiết bị"></i></div>
         </div>`
     })  
@@ -164,9 +238,9 @@ function deleteRoomU(home, room){
 	});
 }
 function openeditRoom(){
-    room.innerHTML = ''
     database.ref("ADMIN").child(iduser).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
+        room.innerHTML = ''
         for (var idphong_user in ketqualangnghe) {
             tennha = decode_data(ketqualangnghe.namenha)
             if (idphong_user != "namenha") {
@@ -185,13 +259,13 @@ function openeditRoom(){
             }
         }
         room.innerHTML += `<div class="gridchucnang">
-        <div onclick="addnewRoom('${iduser}','${tennha}')" class="nutchucnang">
+        <div onclick="addnewRoom1('${iduser}','${tennha}')" class="nutchucnang">
             <i class="fas fa-plus" title="Thêm phòng"></i></div>
         <div onclick="opendelRoom()" class="nutchucnang">
             <i class="fas fa-trash" title="Xóa phòng"></i></div>
         <div onclick="vaonha()" class="nutchucnang">
             <i class="fas fa-pen" title="Tắt sửa tên phòng"  style="color: black;"></i></div>
-        <div onclick="openadddevice('${iduser}','${idphong_user}')" class="nutchucnang">
+        <div onclick="openadddevice()" class="nutchucnang">
             <i class="fas fa-plug" title="Thêm thiết bị"></i></div>
         </div>`
     })
@@ -243,9 +317,9 @@ function luutennha(idnha){
 }
 
 function openadddevice() {
-    room.innerHTML = ''
     database.ref("ADMIN").child(iduser).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
+        room.innerHTML = ''
         for (var idphong_user in ketqualangnghe) {
             tennha = decode_data(ketqualangnghe.namenha)
             if (idphong_user != "namenha") {
@@ -264,7 +338,7 @@ function openadddevice() {
             }
         }
         room.innerHTML += `<div class="gridchucnang">
-        <div onclick="addnewRoom('${iduser}','${tennha}')" class="nutchucnang">
+        <div onclick="addnewRoom1('${iduser}','${tennha}')" class="nutchucnang">
             <i class="fas fa-plus" title="Thêm phòng"></i></div>
         <div onclick="opendelRoom()" class="nutchucnang">
             <i class="fas fa-trash" title="Xóa phòng"></i></div>
@@ -309,8 +383,8 @@ function themthietbi(idnha, idphong){
             swal("Cảnh báo!", "Số lượng thiết bị vượt giới hạn, bạn chỉ có thể có tối đa 8 thiết bị trong 1 phòng!")
         } else {
             for(var i = sothietbidaco; i < sothietbithem+sothietbidaco; i++){
-                idthietbi = "PL" + randomString(4, "N"); 
-                name_device = "Thiết bị" + " " + randomString(4, "N");
+                idthietbi = "PL" + randomString1(4, "N"); 
+                name_device = "Thiết bị" + " " + randomString1(4, "N");
                 phanloai = "Thiết bị"
                 newPushDevice = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi)
                 newPushDevice.set({
@@ -348,4 +422,172 @@ function xoathietbi(idnha, tennha, idphong, idthietbi) {
       swal("Hủy", "Dữ liệu được bảo toàn!", "error");
     }
 	});
+}
+function doitenthietbi(idnha, idphong, idthietbi, tennha){
+    idnhaptenmoi = "input"+idnha+idphong+idthietbi;
+    tenmoi = document.getElementById(idnhaptenmoi).value
+    if(tenmoi.length > 5){
+    newPush_nameDevice = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi).child("namethietbi")
+    newPush_nameDevice.set(encode_data(tenmoi));
+    vaophong(idnha, tennha, idphong)
+    swal("Thành công!", "Tên thiết bị đã được đổi!", "success");
+    } else {
+        swal("Lưu ý!", "Tên thiết bị phải lớn hơn 5 ký tự!", "error");
+    }
+}
+function phanloaithietbi(idnha, idphong, idthietbi, tennha) {
+    newPush_phanloai = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi).child("phanloai")
+    newPush_phanloai.set(encode_data("Thiết bị")); 
+    swal("Thành công!", "Thay đổi phân loại là thiết bị!", "success");
+    vaophong(idnha, tennha, idphong)
+} 
+function phanloaicambien(idnha, idphong, idthietbi, tennha) {
+    newPush_phanloai = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi).child("phanloai")
+    newPush_phanloai.set(encode_data("Cảm biến")); 
+    swal("Thành công!", "Thay đổi phân loại là cảm biến!", "success");
+    vaophong(idnha, tennha, idphong)
+}
+
+function randomString1(len, an) {
+    an = an && an.toLowerCase();
+    var str = "",
+        i = 0,
+        min = an == "a" ? 10 : 0,
+        max = an == "n" ? 10 : 62;
+    for (; i++ < len;) {
+        var r = Math.random() * (max - min) + min << 0;
+        str += String.fromCharCode(r += r > 9 ? r < 36 ? 55 : 61 : 48);
+    }
+    return str;
+} 
+function addnewRoom1(idnha, nameNha) {
+    conentaoidhaykhong = 1;
+    document.getElementById('addHome').style.display = 'block'
+    document.getElementById("idnewHome").innerHTML = idnha;
+    document.getElementById('themroom').innerHTML = "";
+    document.getElementById("idnewphong").innerHTML = "";
+    document.getElementById("name_home").value = nameNha;
+    document.getElementById('name_home').disabled = true;
+    document.getElementById('nameRoom').disabled = false;
+    document.getElementById("nameRoom").value = "";
+    document.getElementById("add_device_modal").innerHTML = `
+    <button onclick="roomPlus1(${conentaoidhaykhong},0)" class="btnadd" required>XÁC NHẬN SỐ THIẾT BỊ</button>
+    `;    
+}
+var allmang = []
+function roomPlus1(conentaoidhaykhong,id_room) {
+    name_home = document.getElementById("name_home").value
+    if(name_home.length > 5){
+        id_home = document.getElementById("idnewHome").textContent
+        nameRoom_new = document.getElementById("nameRoom").value;
+        if(nameRoom_new.length > 5){
+            num_device = document.getElementById("valueRoomNumber").value;
+            document.getElementById('themroom').innerHTML = ""
+            if(conentaoidhaykhong=='1'){
+                var newidroom = randomString1(4, "N")
+                document.getElementById("idnewphong").innerHTML = newidroom
+            } 
+            else{
+                newidroom = id_room;
+            }
+            var biendemthietbi=0
+            database.ref("ADMIN").child(id_home).child(newidroom).once('value', async function(snap) {
+                var ketqualangnghe = await snap.val();    
+                  
+                for (idthietbi in ketqualangnghe){
+                    biendemthietbi ++
+                    
+                }
+
+                if(biendemthietbi < 0){biendemthietbi=1}
+                if(+num_device +biendemthietbi <= 9){
+
+                allmang = []
+                object_nha = {
+                    name_nha: name_home,
+                    id_nha: id_home 
+                }
+                object_phong = {
+                    name_phong: nameRoom_new,
+                    id_phong: newidroom
+                }
+                
+                allmang.push(object_nha)
+                allmang.push(object_phong)
+                for (var i = biendemthietbi ; i < +num_device +biendemthietbi; i++) {
+                    var newNameThietbi = 'id="Thiết bị ' + i + '"';
+                    var idNew_NameThietbi = "Thiết bị " + i;
+                    var newithietbi = "PL" + i;
+                    id = 'id="PL' + i + '"';
+                    id_phanloai = "phanloaithietbi" + i;
+                    divPhanLoai = `<div class="form-select" style= "width:10%">
+                                    <select id="phanloaithietbi${i}">
+                                        <option value="Thiết bị">Thiết bị</option>
+                                        <option value="Cảm biến">Cảm biến</option>
+                                    </select>
+                                    </div>`
+                    divIDThietbi = '<input disabled type="nameHome" ' + id + 'style="width:70%">'
+                    divNameThietbi = '<input type="nameHome" ' + newNameThietbi + ' style="width:20%;color:black;background-color:#47aedb87">'
+                    document.getElementById('themroom').innerHTML += divNameThietbi + divIDThietbi + divPhanLoai;
+                    document.getElementById(idNew_NameThietbi).setAttribute('value', idNew_NameThietbi)
+                    document.getElementById(newithietbi).setAttribute('value', "ID: " + newithietbi)
+                    object_thietbi = {
+                        id_name_device: idNew_NameThietbi,
+                        id_device: newithietbi,
+                        id_phanloai: id_phanloai
+                    }
+                    allmang.push(object_thietbi)
+                   
+                }
+
+            }
+            else{
+                swal("Cảnh báo!", "Số lượng thiết bị vượt giới hạn, bạn chỉ có thể có tối đa 8 thiết bị trong 1 phòng!")
+            }
+                document.getElementById('themroom').innerHTML += `<br><button class="btnadd1" onclick="oke_firebase1()"><b>LƯU THÔNG TIN PHÒNG</b></button>`   
+            });   
+        } else {
+            swal("Lưu ý!", "Tên phòng phải lớn hơn 5 ký tự!", "error");
+        } 
+    } else {
+        swal("Lưu ý!", "Tên nhà phải lớn hơn 5 ký tự!", "error");
+    }
+}
+
+function oke_firebase1() {
+    name_phong = document.getElementById("nameRoom").value;
+    name_nha = document.getElementById("name_home").value;
+    if(name_nha.length>5 && name_phong.length>5){
+        swal("Tốt lắm!", "Bạn đã lưu thông tin phòng!", "success");
+        document.getElementById('name_home').disabled = true;
+        name_phong = document.getElementById("nameRoom").value;
+        name_nha = document.getElementById("name_home").value;
+        id_nha = allmang[0].id_nha
+        id_phong = allmang[1].id_phong
+        document.getElementById("nameRoom").value = "";
+        for (let i = 2; i < allmang.length; i++) {
+            id_name_device = allmang[i].id_name_device
+            id_device = allmang[i].id_device
+            id_phanloai = allmang[i].id_phanloai
+            name_device = document.getElementById(id_name_device).value;
+            phanloai = document.getElementById(id_phanloai).value;
+            newPushDevice = database.ref("ADMIN").child(id_nha).child(id_phong).child(id_device)
+            newPushDevice.set({
+                namethietbi: encode_data(name_device),
+                phanloai:  encode_data(phanloai),
+                onoff:  encode_data("onoff"),
+                trangthai:  encode_data("Đợi cập nhật từ GATEWAY")
+            });
+            newPushHome = database.ref("ADMIN").child(id_nha).child("namenha")
+            newPushHome.set( encode_data(name_nha));
+            newPushRoom = database.ref("ADMIN").child(id_nha).child(id_phong).child("namephong")
+            newPushRoom.set( encode_data(name_phong));
+
+        }
+        document.getElementById('themroom').innerHTML = "";
+        document.getElementById("idnewphong").innerHTML = "";
+        vaonha()
+    } else {
+        swal("Lưu ý", "Tên nhà và tên phòng phải lớn hơn 5 ký tự!", "error");
+    }
 }

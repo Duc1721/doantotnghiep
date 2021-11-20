@@ -1,3 +1,4 @@
+
 function login(){
     var in_id = document.getElementById("id_dangnhap").value;
     var in_mk = document.getElementById("mk_dangnhap").value;
@@ -7,7 +8,7 @@ function login(){
                 if(chon_checkbox[i].value === "KH"){           
                     database.ref("PASS").child(in_id).once('value', async function(snap) {
                         var ketqualangnghe = await snap.val();
-                        if(ketqualangnghe== in_mk){
+                        if(ketqualangnghe == in_mk){
                             localStorage.setItem("in_id", in_id);
                             window.location.href = './users.html';
                         } else {

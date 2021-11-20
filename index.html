@@ -121,21 +121,21 @@
             </div>
             <div id="Room2" class="tabcontent">
                 <div class="container">
-                <div class="row list-inline"> 
-                    <div class="col1">
-                        <h4 class="h4cus">DANH SÁCH NHÀ</h4>
-                        <div class="vertical-menu" id="HName"></div></div>
-                    <div class="col1">
-                        <h4 class="h4cus" id="nhaht">#</h4>
-                        <div class="vertical-menu" id="RName"></div></div>
-                    <div class="col1">
-                        <h4 class="h4cus" id="phonght">#</h4>
-                        <div class="vertical-menu" id="DName"></div></div>
+                    <div class="row list-inline"> 
+                        <div class="col1">
+                            <h4 class="h4cus">DANH SÁCH NHÀ</h4>
+                            <div class="vertical-menu" id="HName"></div></div>
+                        <div class="col1">
+                            <h4 class="h4cus" id="nhaht">#</h4>
+                            <div class="vertical-menu" id="RName"></div></div>
+                        <div class="col1">
+                            <h4 class="h4cus" id="phonght">#</h4>
+                            <div class="vertical-menu" id="DName"></div></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <div class="container-fluid padding">
         <div class="row welcome text-center">
             <hr>
@@ -194,13 +194,11 @@
 
 
     <div id="addHome" class="formAddHome">
-
         <div class="formAddHome-content animate">
             <div class="imgcontainer">
                 <span onclick="closeAddnewHome()" class="btnback2" title="Thoát">&times;</span>
                 <img src="./phongngu.png" alt="Avatar" class="avatar">
             </div>
-
             <div class="container1">
                 <label><b>ID NHÀ: </b><b id="idnewHome"></b></label>
                 <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" maxlength="20">
@@ -220,10 +218,10 @@
     <div id="goHome" class="formHome">
         <div>
             <div class="formHome-content animate">
-                    <span class="btnback" onclick="closeHome()"><i class="fad fa-chevron-left"></i></span>
-                    <span class="btnback" id="btn_back"><i class="fad fa-chevron-left"></i></span>
+                    <span class="btnback1" onclick="closeHome()"><i class="fad fa-chevron-left"></i></span>
+                    <span class="btnback1" id="btn_back"><i class="fad fa-chevron-left"></i></span>
                     <h1 class="h1cus" id="ds_user">DANH SÁCH NHÀ</h1>
-                    <div class="grid-container" id="userHome"></div>    
+                    <div class="gridroom" id="userHome"></div>    
                     <div>
                         <div class="container1">
                         <table class="table table-bordered">
@@ -236,6 +234,7 @@
                                     <th>Tên thiết bị</th>
                                     <th>Phân Loại</th>
                                     <th>Trạng thái</th>
+                                    <th>Cài đặt</th>
                                 </tr>
                             </thead>
                             <tbody id="table_user">
@@ -246,14 +245,12 @@
             </div>
         </div>
     </div>
-
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="./style/dencode.js"></script>
     <script src="./style/logic.js"></script>
-    <script src="./style/user.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
 </body>
 

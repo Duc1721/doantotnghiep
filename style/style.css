@@ -866,10 +866,16 @@ select::after {
   grid-column: auto / span 2;
 }
 .h1cus{
-  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
   text-align: center;
-  color: #000;
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
+  background-color: #50a0ab;
+  padding: 2rem;
+  border-bottom: 0.063rem solid rgb(0, 0, 0);
+  text-shadow:  black 0.1rem 0.1rem;
 }
 .h4cus{
   margin: 0.3rem;
