@@ -441,7 +441,7 @@ function taomatkhau(){
             } else khac = 1
                 if (khac*tt_tao_mk==1){
                     tt_tao_mk = 0
-                    new_mk = id_home
+                    new_mk = encode_data(id_home)
                     newPush_mk = database.ref("PASS").child(id_home)
                     newPush_mk.set(new_mk);
                 } else if(khac*tt_tao_mk==0){

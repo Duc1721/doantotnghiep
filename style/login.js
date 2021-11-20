@@ -8,7 +8,7 @@ function login(){
                 if(chon_checkbox[i].value === "KH"){           
                     database.ref("PASS").child(in_id).once('value', async function(snap) {
                         var ketqualangnghe = await snap.val();
-                        if(ketqualangnghe == in_mk){
+                        if(decode_data(ketqualangnghe) == in_mk){
                             localStorage.setItem("in_id", in_id);
                             window.location.href = './users.html';
                         } else {
@@ -79,7 +79,7 @@ function doimatkhau(){
                 if (mk == matkhau){
                     swal("Thành công","Tài khoản đã được đổi mật khẩu","success")
                     matkhaumoi = database.ref("PASS").child(taikhoan)
-                    matkhaumoi.set(nhaplaimatkhau);
+                    matkhaumoi.set(encode_data(nhaplaimatkhau));
                     matkhaudoi.innerHTML =''
                     nhaplaimatkhau.innerHTML =''
                 } else swal("Thất bại","Mật khẩu không chính xác","error") 
