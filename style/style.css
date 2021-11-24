@@ -196,7 +196,7 @@ hr.light {
 /* Style the links inside the sidenav */
 #mySidenav a {
   position: absolute; /* Position them relative to the browser window */
-  left: -7.5rem; /* Position them outside of the screen */
+  left: -7.5rem; 
   transition: 0.3s; /* Add transition on hover */
   padding: 0.875rem; /* 0.875rem padding */
   width: 8.125rem; /* Set a specific width */
@@ -331,7 +331,7 @@ hr.light {
   text-shadow: rgb(255, 255, 255) 0.1rem 0.1rem;
 }
 
-@media screen and (max-height: 28.125rem) {
+@media screen and (max-height: 450px) {
   .state1 {padding-top: 0.938rem;}
   .state1 a {font-size: 1.125em;}
 }
@@ -571,7 +571,7 @@ span.psw {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 0.063rem solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%; 
 }
 
 /* Add Zoom Animation */
@@ -591,7 +591,7 @@ span.psw {
 }
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 18.75rem) {
+@media screen and (max-width: 300px) {
   span.psw {
      display: block;
      float: none;
@@ -912,3 +912,4 @@ select::after {
 .btn_close:hover{
   color: #0026fd;
 }
+

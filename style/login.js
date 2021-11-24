@@ -75,7 +75,7 @@ function doimatkhau(){
         database.ref("PASS").child(taikhoan).get().then((snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.val());
-                mk = snapshot.val();
+                mk = decode_data( snapshot.val());
                 if (mk == matkhau){
                     swal("Thành công","Tài khoản đã được đổi mật khẩu","success")
                     matkhaumoi = database.ref("PASS").child(taikhoan)
