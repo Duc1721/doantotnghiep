@@ -1,10 +1,7 @@
 table_device = document.getElementById("tablestate1");
-document.getElementById('headerbang').style.display = 'none'
-document.getElementById('tablestate1').style.display = 'none' 
 iduser =  localStorage.getItem("in_id")
-trove = document.getElementById('btnthoat')
 roomuser = document.getElementById('roomuser')
-thietbi = document.getElementById('thietbi')
+dstenthietbi = document.getElementById('dstenthietbi')
 const firebaseConfig = {
     apiKey: "AIzaSyAEqi81NFMPBJGxWRy7QtQv961efPzL9LA",
     authDomain: "hellodatn.firebaseapp.com",
@@ -25,7 +22,7 @@ function toggleStatea(idnha, idphong, idthietbi, trangthai) {
     } else if (trangthai == 1) {
         trangthai = 0;
     } else {
-        swal("HUHU!", "CẬP NHẬT DỮ LIỆU NHANH LÊN!", "error");
+        swal("LƯU Ý!", "VUI LÒNG CẤU HÌNH GATEWAY!", "error");
     }
     trangthai_mahoa = encode_data(trangthai)
     newPush_trangthai = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi).child("onoff")
@@ -55,12 +52,8 @@ function dangxuat(){
 
 room = document.getElementById("phong");
 function vaonha(){
-    window.scrollTo(0, 0);
-    document.getElementById('btnthoat').style.display = 'none' 
-    document.getElementById('headerbang').style.display = 'none' 
-    document.getElementById('tablestate1').style.display = 'none'
-    document.getElementById('roomuser').style.display = 'block' 
-    document.getElementById('phong').style.display = ''
+    document.getElementById("roomuser").style.display = "block"
+    document.getElementById("tabthietbi").style.display = "none"
     database.ref("ADMIN").child(iduser).once('value', async function(snap) {
         var ketqualangnghe = await snap.val();
         room.innerHTML = ''
@@ -75,18 +68,16 @@ function vaonha(){
                                                 class="resize" onclick="vaophong('${iduser}','${tennha}','${idphong_user}')" >
                                                 <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong_user}</b></h5>
                                             </div>`         
-            } 
+                } 
+            }
         }
     }
-    }
-    document.getElementById("getten").innerText = tennha + ": DANH SÁCH PHÒNG "
-    document.getElementById("getten").innerHTML += `&ensp;<span style="font-size:1.7rem;" class="nutchucnang" id="doitennha" title="Đổi tên nhà" data-toggle="collapse" data-target="#doitennha${iduser}"><i class="fas fa-pen"></i></span>
-                                                    <div id="doitennha${iduser}" class="collapse">
-                                                        <input id="input${iduser}"   maxlength="20" style="width:80%;" placeholder="Nhập tên nhà mới">
-                                                        <button onclick="luutennha('${iduser}')"><i class="fad fa-check"></i></button>
-                                                    </div>`
-                                                    
-    
+    document.getElementById("getten").innerHTML = tennha + ": DANH SÁCH PHÒNG " + `&ensp;<span style="font-size:1.7rem" class="nutchucnang" id="doitennha" title="Đổi tên nhà" data-toggle="collapse" data-target="#doitennha${iduser}"><i class="fas fa-pen"></i></span>
+                                                                                    <div id="doitennha${iduser}" class="collapse">
+                                                                                        <input id="input${iduser}"   maxlength="20" style="width:80%;" placeholder="Nhập tên nhà mới">
+                                                                                        <button onclick="luutennha('${iduser}')"><i class="fad fa-check"></i></button>
+                                                                                    </div>`
+  
     room.innerHTML += `<div class="gridchucnang">
                             <div onclick="addnewRoom1('${iduser}','${tennha}')" class="nutchucnang">
                                 <i class="fas fa-plus" title="Thêm phòng"></i></div>
@@ -97,22 +88,20 @@ function vaonha(){
                             <div onclick="openadddevice()" class="nutchucnang">
                                  <i class="fas fa-plug" title="Thêm thiết bị"></i></div>
                        </div>`
-           
+  
 })
 }
 function vaophong(idnha, tennha, idphong){
-    trove.addEventListener('click', function(e) {
-        vaonha()
-    });
-    stt=0
-    window.scrollTo(0, 0);
-    table_device.innerHTML ="";
-    document.getElementById('btnthoat').style.display = 'block'
-    document.getElementById('phong').style.display = 'none'
-    document.getElementById('headerbang').style.display = '' 
-    document.getElementById('tablestate1').style.display = ''
-    database.ref("ADMIN").child(idnha).child(idphong).once('value', async function(snap) {
+    document.getElementById("them").onclick = hamthemthietbi(idnha, idphong)
+    document.getElementById("tatcathietbi").addEventListener('click', function(e) { hienthitatca(idnha, idphong)})
+    document.getElementById("roomuser").style.display = "none"
+    document.getElementById("tabthietbi").style.display = "block"
+    document.getElementById("mothietbi").style.display="none"
+    database.ref("ADMIN").child(idnha).child(idphong).on('value', async function(snap) {
         var ketqualangnghe = await snap.val();
+        dstenthietbi.innerHTML = "";
+        table_device.innerHTML ="";
+        stt=0
         for (var idthietbi in ketqualangnghe) {
             if (idthietbi != "namephong") {
                 for (var tenphong in ketqualangnghe) {
@@ -136,7 +125,7 @@ function vaophong(idnha, tennha, idphong){
                                                             <td>${trangthai_thietbi_fb}</td>
                                                             <td><button class="btn-outline-dark"><i class="fas fa-power-off" onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}','${trangthai_thietbi_fb}')" title="Bật-tắt thiết bị"></i></button>
                                                             <button class="btn-outline-dark" data-toggle="collapse" data-target="#retype_device${idnha}${idphong}${idthietbi}" title="Phân loại"><i class="fas fa-sunset"></i></button> 
-                                                            <button class="btn-outline-dark"><i class="far fa-trash-alt" onclick="xoathietbi('${idnha}', '${tennha}', '${idphong}','${idthietbi}')" title="Xóa thiết bị"></i></button>
+                                                            <button class="btn-outline-dark"><i class="far fa-trash-alt" onclick="xoathietbi('${idnha}', '${idphong}','${idthietbi}')" title="Xóa thiết bị"></i></button>
                                                             <button class="btn-outline-dark" ><i class="fas fa-pen" data-toggle="collapse" data-target="#rename_device${idnha}${idphong}${idthietbi}" title="Đổi tên thiết bị"></i></button>
                                                             <div id="rename_device${idnha}${idphong}${idthietbi}" class="collapse">
                                                                 <input id="input${idnha}${idphong}${idthietbi}"  style="width:80%;height:2.4rem"  maxlength="20" placeholder="Nhập tên thiết bị mới"><button class="btncus" id="check${idnha}${idphong}${idthietbi}" onclick="doitenthietbi('${idnha}','${idphong}','${idthietbi}', '${tennha}')"><i class="fad fa-check"></i></button>
@@ -157,7 +146,7 @@ function vaophong(idnha, tennha, idphong){
                             <td>${name_thietbi_fb}</td>
                             <td>${phanloai_thietbi_fb}</td>
                             <td>${trangthai_thietbi_fb}</td>
-                            <td><button class="btn-outline-dark" ><i class="far fa-trash-alt" onclick="xoathietbi('${idnha}', '${tennha}', '${idphong}','${idthietbi}')" title="Xóa thiết bị"></i></button>
+                            <td><button class="btn-outline-dark" ><i class="far fa-trash-alt" onclick="xoathietbi('${idnha}', '${idphong}','${idthietbi}')" title="Xóa thiết bị"></i></button>
                             <button class="btn-outline-dark" data-toggle="collapse" data-target="#retype_device${idnha}${idphong}${idthietbi}" title="Phân loại"><i class="fas fa-sunset"></i></button> 
                             <button class="btn-outline-dark" ><i class="fas fa-pen" data-toggle="collapse" data-target="#rename_device${idnha}${idphong}${idthietbi}" title="Đổi tên thiết bị"></i></button>
                             <div id="rename_device${idnha}${idphong}${idthietbi}" class="collapse">
@@ -171,12 +160,16 @@ function vaophong(idnha, tennha, idphong){
 
                             </td>
                         </tr>`
-                       // thietbi.innerHTML += `<div>hello</div>`
+                     
                         }
+                        dstenthietbi.innerHTML += `<li><a href="#" onclick="httbi('${idnha}', '${idphong}', '${idthietbi}')">${name_thietbi_fb}</a></li>`
+                        document.getElementById("thongtinphong").innerHTML = name_phong_fb
                     }
         }
-        document.getElementById("getten").innerText = "BẢNG DANH SÁCH THIẾT BỊ"
+        
     });
+    
+
 }
 
 function closeAddnewHomeuser() {
@@ -400,7 +393,44 @@ function themthietbi(idnha, idphong){
 
     })  
 }
-function xoathietbi(idnha, tennha, idphong, idthietbi) {
+function themthietbi1(idnha, idphong){
+    sothietbidaco = -1
+    idthem = "thietbithem1"+idnha+idphong
+ 
+    var sothietbithem = parseInt(document.getElementById(idthem).value)
+    database.ref("ADMIN").child(idnha).child(idphong).once('value', async function(snap) {
+        var ketqualangnghe = await snap.val();     
+        for (var idthietbi in ketqualangnghe){
+            sothietbidaco++
+        }
+        if((sothietbithem+sothietbidaco)>8){
+            swal("Cảnh báo!", "Số lượng thiết bị vượt giới hạn, bạn chỉ có thể có tối đa 8 thiết bị trong 1 phòng!")
+        } else {
+            for(var i = sothietbidaco; i < sothietbithem+sothietbidaco; i++){
+                idthietbi = "PL" + randomString1(4, "N"); 
+                name_device = "Thiết bị" + " " + randomString1(4, "N");
+                phanloai = "Thiết bị"
+
+                newPushDevice = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi)
+                newPushDevice.set({
+                    namethietbi: encode_data(name_device),
+                    phanloai:  encode_data(phanloai),
+                    onoff:  encode_data("onoff"),
+                    trangthai:  encode_data("Đợi cập nhật từ GATEWAY")
+                
+                });
+            
+                }
+            swal("Thành công!", "Đã thêm thiết bị!", "success");
+
+         
+          
+      
+        }
+
+    })  
+}
+function xoathietbi(idnha, idphong, idthietbi) {
     swal({
 		title: "Bạn chắc chắn muốn xóa?",
 		text: "Bạn sẽ không thể hổi phục lại dữ liệu!",
@@ -417,7 +447,29 @@ function xoathietbi(idnha, tennha, idphong, idthietbi) {
       swal("Thành công!", "Dữ liệu đã được xóa!", "success");
       newRemoteRef = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi)
       newRemoteRef.remove();
-      vaophong(idnha, tennha, idphong)
+    } else {
+      swal("Hủy", "Dữ liệu được bảo toàn!", "error");
+    }
+	});
+}
+function xoathietbi1(idnha, idphong, idthietbi) {
+    swal({
+		title: "Bạn chắc chắn muốn xóa?",
+		text: "Bạn sẽ không thể hổi phục lại dữ liệu!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: '#DD6B55',
+		confirmButtonText: 'Đồng ý, xóa!',
+		cancelButtonText: "Không, hủy yêu cầu!",
+		closeOnConfirm: false,
+		closeOnCancel: false
+	},
+	function(isConfirm){
+    if (isConfirm){
+      swal("Thành công!", "Dữ liệu đã được xóa!", "success");
+      newRemoteRef = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi)
+      newRemoteRef.remove();
+      document.getElementById("mothietbi").style.display = "none"
     } else {
       swal("Hủy", "Dữ liệu được bảo toàn!", "error");
     }
@@ -592,68 +644,189 @@ function oke_firebase1() {
         swal("Lưu ý", "Tên nhà và tên phòng phải lớn hơn 5 ký tự!", "error");
     }
 }
-//////////////////////////////////////////
-var sliders = document.getElementsByClassName("round-slider");
-for (let i = 0; i < sliders.length; i++) {
-	sliders[i].addEventListener("mousedown", function(event) {
-		sliders[i].onmousemove = function(event) {
-			if (event.buttons == 1 || event.buttons == 3) {
-				round_slider_tune(event);
-			}
-		}
-	});
+function hienthidanhsach(){
+    document.getElementById("danhsach").style.display="block"
+    document.getElementById("mothietbi").style.display="none"
+}
+function httbi(idnha, idphong, idthietbi){
+    document.getElementById("mothietbi").style.display=""
+    document.getElementById("danhsach").style.display="none"
+    document.getElementById("ttthietbi").style.display = ""
+    document.getElementById("bonnut").style.display = ""
+    document.getElementById("tcthietbi").style.display = "none"
+    database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi).on('value', async function(snap) {
+        var ketqualangnghe = await snap.val();
+        tenthietbi = decode_data(ketqualangnghe.namethietbi)
+        phanloai = decode_data(ketqualangnghe.phanloai)
+        trangthai = decode_data(ketqualangnghe.trangthai)
+
+  
+    document.getElementById("thongtinten").innerHTML = `<p>Tên thiết bị: ${tenthietbi}</p>
+                                                        <p>Phân loại: ${phanloai}</p>
+                                                        <p>Trạng thái: ${trangthai}</p>
+                                                        <hr>`
+
+    if(trangthai == "Đợi cập nhật từ GATEWAY"){
+        document.getElementById("htnhietdo").innerHTML = ` <div class="gauge">
+                                                                <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai}')"><span id= "nhietdo${idthietbi}"></span>
+                                                                <span class="pl">Không xác định</span></p>
+                                                            </div>`
+        idnhietdo = "nhietdo" + idthietbi
+        document.getElementById(idnhietdo).innerText = "?"
+    } else if(phanloai=="Thiết bị" && trangthai == "1"){
+        document.getElementById("htnhietdo").innerHTML = ` <div class="gauge">
+                                                                <p  style="background-color: greenyellow" onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai}')"><span id= "nhietdo${idthietbi}"></span>
+                                                                <span class="pl">Trạng thái</span></p>
+                                                            </div>`
+        idnhietdo = "nhietdo" + idthietbi
+        document.getElementById(idnhietdo).innerText = "BẬT"
+       
+    }  else if(phanloai=="Thiết bị" && trangthai == "0"){
+        document.getElementById("htnhietdo").innerHTML = ` <div class="gauge" >
+                                                                <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai}')"><span id= "nhietdo${idthietbi}"></span>
+                                                                <span class="pl">Trạng thái</span></p>
+                                                            </div>`
+        idnhietdo = "nhietdo" + idthietbi
+        document.getElementById(idnhietdo).innerText = "TẮT"
+       
+    } else if(phanloai=="Cảm biến" && trangthai !== "Đợi cập nhật từ GATEWAY"){
+        document.getElementById("htnhietdo").innerHTML = ` <div class="gauge">
+                                                                <p><span id= "nhietdo${idthietbi}"></span><span>&deg;C</span>
+                                                                <span class="pl">Nhiệt độ</span></p>
+                                                            </div>`
+        idnhietdo = "nhietdo" + idthietbi
+        document.getElementById(idnhietdo).innerText = trangthai
+       
+    } else {}
+    document.getElementById("xoa").addEventListener('click', function(e) {
+        xoathietbi1(idnha, idphong, idthietbi)
+    });
+    document.getElementById("sua").addEventListener('click', function(e) {
+        document.getElementById("thongtinten").innerHTML = `<p>Tên thiết bị:  <input 
+        style="outline: none;border: none;border-radius: 0.1em;" maxlength="20" id="inten${idnha}${idphong}${idthietbi}"></p>
+        <p>Phân loại:
+            <input type="radio" value="Thiết bị" name="ploai" style="padding: 0em;margin-left: 1em;" checked>
+            <label>Thiết bị</label>
+            <input type="radio" value="Cảm biến"  name="ploai" style="padding: 0em;margin-left: 1em;">
+            <label>Cảm biến</label>
+        </p>
+        <button style="width:100%;color: black;outline:none;border-radius: 0.3em;" onclick="suathongtin('${idnha}','${idphong}','${idthietbi}')">Xác nhận</button>
+        <hr>`
+    });
+
+});
+
 }
 
-function round_slider_tune(event) {
-	let eventDoc = (event.target && event.target.ownerDocument) || document,
-		doc = eventDoc.documentElement,
-		body = eventDoc.body;
-	event.pageX = event.clientX +
-		  (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-		  (doc && doc.clientLeft || body && body.clientLeft || 0);
-	event.pageY = event.clientY +
-		  (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-		  (doc && doc.clientTop  || body && body.clientTop  || 0 );
-	let output = event.target.getElementsByClassName("selection")[0],
-		text = event.target.getElementsByClassName("holder")[0],
-		styleafter = document.head.appendChild(document.createElement("style")),
-		elpos = event.target.getBoundingClientRect(),
-		cX = elpos.width / 2,
-		cY = elpos.height / 2,
-		eX = event.pageX - elpos.left,
-		eY = event.pageY - elpos.top,
-		dX = 0,
-		dY = 0,
-		angle = Math.atan2(cX - eX, cY - eY) * (180 / Math.PI),
-		value = 100;
-	if (Math.abs(eX - cX) >= Math.abs(eY - cY)) { // 110 90
-		dX = 150 / 2 + Math.sign(eX - cX) * 150 / 2;
-		dY = 150 / 2 + (eY - cY) / Math.abs(eX - cX) * 150 / 2;
-	} else {
-		dX = 150 / 2 + (eX - cX) / Math.abs(eY - cY) * 150 / 2;
-		dY = 150 / 2 + Math.sign(eY - cY) * 150 / 2;
-	}
-	dX = Math.round(dX / 150 * 100)
-	dY = Math.round(dY / 150 * 100)
-	if (0 <= dX && dX < 50 && dY == 0) {
-		output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 50% 0%, 50% 50%);";
-		value = Math.round((50 - dX) / 50 * 12.5);
-	} else if (dX == 0 && 0 <= dY && dY <= 100) {
-		output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 0% 0%, 50% 0%, 50% 50%);";
-		value = Math.round(12.5 + dY / 100 * 25);
-	} else if (0 <= dX && dX <= 100 && dY == 100) {
-		output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 0% 100%, 0% 0%, 50% 0%, 50% 50%);";
-		value = Math.round(37.5 + dX / 100 * 25);
-	} else if (dX == 100 && 0 <= dY && dY <= 100) {
-		output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 100% 100%, 0% 100%, 0% 0%, 50% 0%, 50% 50%);";
-		value = Math.round(62.5 + (100 - dY) / 100 * 25);
-	} else if (50 <= dX && dX <= 100 && dY == 0) {
-		output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%, 50% 50%);";
-		value = Math.round(87.5 + (100 - dX) / 50 * 12.5);
-	}
-	styleafter.innerHTML = ".round-slider .selection:after {transform: rotate(" + -angle + "deg);}";
-	let hue = Math.floor(value / 100 * 120),
-		saturation = Math.abs(value - 50);
-	text.innerHTML = value + "%";
-	text.style = "color: hsl(" + hue + ", 100%, " + saturation + "%);";
+function hienthitatca(idnha, idphong){
+    document.getElementById("mothietbi").style.display=""
+    document.getElementById("danhsach").style.display="none"
+    document.getElementById("ttthietbi").style.display = "none"
+    document.getElementById("bonnut").style.display = "none"
+    document.getElementById("tcthietbi").style.display = ""
+    database.ref("ADMIN").child(idnha).child(idphong).on('value', async function(snap) {
+        var ketqualangnghe = await snap.val();
+        document.getElementById("tca").innerHTML =""
+        for (var idthietbi in ketqualangnghe) {
+            if (idthietbi != "namephong") {
+                for (var tenphong in ketqualangnghe) {
+                    if (tenphong == "namephong") {
+                        name_phong_fb = decode_data(ketqualangnghe.namephong)
+                        thietbi_fb = ketqualangnghe[idthietbi]
+            
+                        name_thietbi_fb = decode_data(thietbi_fb.namethietbi)
+                        phanloai_thietbi_fb = decode_data(thietbi_fb.phanloai)
+                        trangthai_thietbi_fb = decode_data(thietbi_fb.trangthai)
+                
+                        if(trangthai_thietbi_fb == "Đợi cập nhật từ GATEWAY"){
+                            document.getElementById("tca").innerHTML += `<div class="gauge1">
+                                                                            <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai_thietbi_fb}')"><span id= "nhietdoall${idthietbi}"></span>
+                                                                            <span class="pl">Không xác định</span></p>
+                                                                        </div>`
+                        
+                            idnhietdo = "nhietdoall" + idthietbi
+                            document.getElementById(idnhietdo).innerText = "?"
+                        } else if(phanloai_thietbi_fb=="Thiết bị" && trangthai_thietbi_fb == "1"){
+                            document.getElementById("tca").innerHTML += `<div class="gauge1">
+                                                                            <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai_thietbi_fb}')" style="background-color: greenyellow"><span id= "nhietdoall${idthietbi}"></span>
+                                                                            <span class="pl">Trạng thái</span></p>
+                                                                        </div>`
+                            idnhietdo = "nhietdoall" + idthietbi
+                            document.getElementById(idnhietdo).innerText = "BẬT"
+                            
+                        }  else if(phanloai_thietbi_fb=="Thiết bị" && trangthai_thietbi_fb == "0"){
+                            document.getElementById("tca").innerHTML += `<div class="gauge1">
+                                                                            <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai_thietbi_fb}')"><span id= "nhietdoall${idthietbi}"></span>
+                                                                            <span class="pl">Trạng thái</span></p>
+                                                                        </div>`
+                            idnhietdo = "nhietdoall" + idthietbi
+                            document.getElementById(idnhietdo).innerText = "TẮT"
+                            
+                        } else if(phanloai_thietbi_fb=="Cảm biến" && trangthai_thietbi_fb !== "Đợi cập nhật từ GATEWAY"){
+                            document.getElementById("tca").innerHTML += `<div class="gauge1">
+                                                                            <p><span id= "nhietdoall${idthietbi}"></span><span>&deg;C</span>
+                                                                            <span class="pl">Nhiệt độ</span></p>
+                                                                        </div>`
+                            idnhietdo = "nhietdoall" + idthietbi
+                            document.getElementById(idnhietdo).innerText = trangthai_thietbi_fb
+                            
+                        } else {}
+                    }
+                }
+            }
+        }
+    })
 }
+
+
+function hamthemthietbi(idnha, idphong){  
+    document.getElementById("inputthem").innerHTML = `<li><input id="thietbithem1${idnha}${idphong}" href="#" type="number" placeholder="Nhập số thiết bị..." max ="8" min= "1" maxlength = "1" style="outline:none;width: 75%;margin: 0.3em;" 
+    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+    <button class="btnthem" onclick="themthietbi1('${idnha}','${idphong}')" ><i class="fad fa-check"></i></button></li>` 
+                                  
+}
+function suathongtin(idnha, idphong, idthietbi){
+    inten = "inten" + idnha + idphong + idthietbi
+    var tenmoi = document.getElementById(inten).value
+    if(tenmoi.length>5){
+        var phanloaimoi = document.querySelector('input[name="ploai"]:checked').value
+        newPush_tenmoi = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi).child("namethietbi")
+        newPush_tenmoi.set(encode_data(tenmoi));
+        newPush_phanloaimoi = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi).child("phanloai")
+        newPush_phanloaimoi.set(encode_data(phanloaimoi));
+    } else {
+        swal("Lưu ý!", "Tên thiết bị phải lớn hơn 5 ký tự!", "error");
+    }
+}
+//////////////////////////////////////////
+jQuery(function ($) {
+
+    $(".sidebar-dropdown > a").click(function() {
+  $(".sidebar-submenu").slideUp(200);
+  if (
+    $(this)
+      .parent()
+      .hasClass("active")
+  ) {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .parent()
+      .removeClass("active");
+  } else {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .next(".sidebar-submenu")
+      .slideDown(200);
+    $(this)
+      .parent()
+      .addClass("active");
+  }
+});
+
+$("#close-sidebar").click(function() {
+  $(".page-wrapper").removeClass("toggled");
+});
+$("#show-sidebar").click(function() {
+  $(".page-wrapper").addClass("toggled");
+});
+});

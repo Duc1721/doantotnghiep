@@ -19,35 +19,199 @@
 </head>
 
 <body>
-      <div id="roomuser" class="phonguser">
-        <div style="background-color: white">
+    <div id="roomuser">
+        <div><h1 class="h1custom" id="getten"></h1>
             <span class="btndangxuat" onclick="dangxuat()"><i class="fal fa-sign-out-alt"></i></span>
-            <span class="btnback1" id="btnthoat"><i class="fad fa-chevron-left"></i></span>
-            <div><h1 class="h1custom" id="getten"></h1></div>
-            <div class="gridroom" id="phong"></div>
         </div>
+        <div class="gridroom" id="phong"></div>
     </div>
-    <div class="gridroom" id="thietbi"></div>
-    <div class="tablecus">
-    <div class="table-responsive" style="position:absolute;">
-        <table class="table table-bordered" style="position: relative; background-color: rgba(255, 255, 255, 0.774);">
-            <thead> 
-                <tr class="header" id="headerbang"> 
-                    <th>#</th>
-                    <th>ID nhà</th>
-                    <th>Tên nhà</th>
-                    <th>Tên phòng</th>  
-                    <th>Tên thiết bị</th>
-                    <th>Phân Loại</th>
-                    <th>Trạng thái</th>
-                    <th>Cài đặt</th>
-                </tr>
-            </thead>
-            <tbody id="tablestate1">
-            </tbody>
-        </table>
+
+    <div id="tabthietbi">
+
+        <div class="page-wrapper chiller-theme toggled">
+            <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+              <i class="fas fa-bars"></i>
+            </a>
+            <nav id="sidebar" class="sidebar-wrapper">
+              <div class="sidebar-content">
+                  
+                <div class="sidebar-brand">
+                    <div id="close-sidebar"> 
+                        <i class="fas fa-times" style="margin-left: 10em;"></i>
+                      </div>
+                </div>
+                <div class="sidebar-header">
+                  <div class="user-pic">
+                    <img src="phongngu.png">
+                  </div>
+                  <div class="user-info">
+                    <span class="user-name" id="thongtinphong"></span>
+                    <span class="user-role">Khách hàng</span>
+                    <span class="user-status">
+                      <i class="fa fa-circle"></i>
+                      <span>Online</span>
+                    </span>
+                  </div>
+                </div>
+                <!-- sidebar-header  -->
+                <div class="sidebar-search">
+                  <div>
+                    <div class="input-group">
+                      <input type="text" class="form-control search-menu" placeholder="Tìm kiếm...">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- sidebar-search  -->
+                <div class="sidebar-menu" id="sidemenu">
+                  <ul>
+                    <li class="header-menu">
+                      <span>Tổng quan</span>
+                    </li>
+                    <li class="sidebar-dropdown">
+                      <a href="#">
+                        <i class="fad fa-tachometer-alt"></i>
+                        <span>Bảng điều khiển</span>
+                        <span class="badge badge-pill badge-warning">Mới</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        <ul id="dstenthietbi"></ul>
+                      </div>
+                    </li>
+                  
+                    <li onclick="hienthidanhsach()">
+                        <a href="#">
+                          <i class="fas fa-list-ol"></i>
+                          <span>Danh sách</span>
+                        </a>
+                      </li>
+                    
+                      <li id="tatcathietbi">
+                        <a href="#">
+                          <i class="fal fa-table"></i>
+                          <span>Tất cả thiết bị</span>
+                        </a>
+                      </li>
+
+                    <li class="header-menu">
+                      <span>Tính năng</span>
+                    </li>
+
+                
+                    <li id="them" class="sidebar-dropdown">
+                      
+                      <a href="#">
+                        <i class="far fa-plus"></i>
+                        <span>Thêm thiết bị</span></a>
+                        <div class="sidebar-submenu">
+                          <ul id="inputthem">
+                            
+                          </ul>
+                        </div>
+                   
+                    </li>
+                  
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-book"></i>
+                        <span>Hướng dẫn</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-calendar"></i>
+                        <span>Lịch</span>
+                      </a>
+                    </li>
+                    <li onclick="vaonha()">
+                      <a href="#">
+                        <i class="fad fa-chevron-left"></i>
+                        <span>Trở về</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- sidebar-menu  -->
+              </div>
+              <!-- sidebar-content  -->
+              <div class="sidebar-footer">
+                <a href="#"></a>
+              </div>
+            </nav>
+            <!-- sidebar-wrapper  -->
+            <main class="page-content">
+              <div class="container-fluid">
+                  <div style="display: none;" id="danhsach">
+                    <h3 id="getten1">BẢNG DANH SÁCH THIẾT BỊ</h3>
+        
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead> 
+                                        <tr class="header"> 
+                                            <th>#</th>
+                                            <th>ID nhà</th>
+                                            <th>Tên nhà</th>
+                                            <th>Tên phòng</th>  
+                                            <th>Tên thiết bị</th>
+                                            <th>Phân Loại</th>
+                                            <th>Trạng thái</th>
+                                            <th>Cài đặt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablestate1">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                <div id="mothietbi">
+                    <h2><strong style="color:#171e1f">XIN CHÀO !</strong></h2>
+                    <hr>
+                    <div class="grid-container1" id="tcthietbi" style="display: none;">
+                          <div id="tca"></div>
+                    </div>
+         
+                    <div class="row" id="ttthietbi">
+                        <div class="form-group col-md-6" id="htnhietdo"></div>
+                    <div class="form-group col-md-6">
+                      <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Thông tin thiết bị</h4>
+                        <hr>
+                        <p id="thongtinten"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" id="bonnut">
+
+                    <div class="form-group col-md-3">
+                      <div class="gauge1"><p></p></div>
+                    </div>
+
+                    <div class="form-group col-md-3" id="sua"> 
+                      <div class="gauge1"><p><i class="fal fa-money-check-edit" title="Sửa"></i></p></div>
+                    </div>
+                   
+               
+
+                    <div class="form-group col-md-3"> 
+                      <div class="gauge1"><p></p></div>
+                    </div>
+                   
+                    <div class="form-group col-md-3" id="xoa">
+                      <div class="gauge1"><p><i class="fal fa-trash" title="Xóa"></i></p></div>
+                    </div>
+                  
+                  </div>
+                </div>
+               
+              </div>
+            </main>
+ 
+          </div>
     </div>
-</div>
 <div id="addHome" class="formAddHome">
     <div class="formAddHome-content animate">
         <div class="imgcontainer">
@@ -73,8 +237,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <script src="./style/user.js"></script>
     <script src="./style/dencode.js"></script>
+    <script src="./style/user.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
 </body>
 

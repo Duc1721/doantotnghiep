@@ -4,7 +4,7 @@ html, body {
     width: 100%; /*full màn*/
     height: 100%; /*full màn*/
     font-family: 'Arial';
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 /*thanh navbar , màu a = 0.9 là độ trong, !important cho phép đè lên các phần tử bootraps*/
@@ -384,6 +384,7 @@ hr.light {
   text-transform:uppercase;
   text-shadow: 0.063rem 0.125em 0.125em rgb(0, 0, 0);
   text-align: center;
+  font-size: 0.8rem;
 }
 .card-header {
   border-bottom: 0.188rem solid rgba(0, 0, 0, 0.514);
@@ -692,7 +693,6 @@ select::after {
    border: 0 !important;
    background: #0084c1;
    background-image: none;
-   border-radius: 0 0.938rem 0 0;
  }
 .form-select {
    position: relative;  
