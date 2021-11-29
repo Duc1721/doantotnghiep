@@ -25,7 +25,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-dark">
         <div class="container-fluid">
             <a class="navbar-branch" href="#">
-                <img src="https://academy.vnnic.vn/data/sites/5ed4c8a606ed3f170d5aeeb5/files/iot.png" height="60">
+                <img src="https://academy.vnnic.vn/data/sites/5ed4c8a606ed3f170d5aeeb5/files/iot.png" style="width:15em;margin-left: -4em;">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
             <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Nhóm</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Nhóm  </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="https://www.facebook.com/profile.php?id=100022178348683">Lê Xuân Đức</a>
                             <a class="dropdown-item" href="https://www.facebook.com/hoagle30">Lê Việt Hoàng</a>
@@ -47,9 +47,7 @@
                             <input class="form-control mr-sm-2" placeholder="Tìm kiếm" aria-label="Search">
                         </form>
                     </li>
-                    <li class="nav-item">
-                        <button class="btn btn-success" id="loginAdminUser" onclick="logout()"><i class="far fa-search"></i></button>
-                    </li>
+                   
                 </ul>
             </div>
         </div>
@@ -68,7 +66,8 @@
             </div>
         </div>
         <div class="carousel-item-active">
-            <img src="sliceadmin.jpg"></div>
+            <img src="sliceadmin.jpg">
+        </div>
     </div>
     <div id="mySidenav" class="sidenav">
         <a href="#" id="home">Trang chủ</a>
@@ -85,6 +84,7 @@
                 <button onclick="openHome()"><i class="far fa-house-user"></i><h1>Nhà riêng</h1></button>
                 <button><i class="far fa-comment-alt-exclaaion"></i><h1>Thông báo</h1></button>
             </div>
+           
         </div>
     <div id="tabstate" class="state1">
         <div class="container">
@@ -95,10 +95,10 @@
             </div>
             <div id="Room1" class="tabcontent">
                 <div class="container">
-                    <form class="form-inline">
+                    <div class="form-inline" style="padding:0.5em">
                         <button class ="btnadd" onclick="export2csv()">Download as CSV</button>
                         <input type="search" id="myInput" onkeyup="search()" placeholder="  Search" aria-label="Search">
-                    </form>
+                    </div>
                     <div class="table-responsive " >
                         <table class="table table-bordered" id="exportMe">
                             <thead>
@@ -136,16 +136,7 @@
                 </div>
             </div>
         </div>
-    <div class="container-fluid padding">
-        <div class="row welcome text-center">
-            <hr>
-            <hr>
-            <div class="col-12">
-                <p>Chào mừng bạn đến với trung tâm điều khiển thiết bị. Chúc bạn một ngày tốt lành!</p>
-            </div>
-        </div>
-    </div>
-
+    <hr>
     <div class="container-fluid padding">
         <div class="row text-center padding">
             <div class="col-12 social padding">
@@ -203,7 +194,7 @@
                 <label><b>ID NHÀ: </b><b id="idnewHome"></b></label>
                 <input id="name_home" type="nameHome" placeholder="Nhập tên nhà" name="uname" maxlength="20">
                 <label style="display:block"><b>ID PHÒNG: </b><b id="idnewphong"></b></label>
-                <input id="nameRoom" type="nameRoom" style="width:67%" placeholder="Nhập tên phòng" name="nameRoom" maxlength="20">
+                <input id="nameRoom" type="nameRoom" placeholder="Nhập tên phòng" name="nameRoom" maxlength="20">
                 <div class="buttons_added">
                    <input class="form-inde" type="button" onclick="decRoom()" value="-">
                     <input class="input-qty" value="5" id="valueRoomNumber">

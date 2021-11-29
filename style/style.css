@@ -4,37 +4,40 @@ html, body {
     width: 100%; /*full màn*/
     height: 100%; /*full màn*/
     font-family: 'Arial';
-    font-size: 0.8rem;
+    font-size: 0.8em;
 }
 
 /*thanh navbar , màu a = 0.9 là độ trong, !important cho phép đè lên các phần tử bootraps*/
 .navbar {
-    background-color: rgba(255,255,255,0.8) !important;
+    background-color:#ffffff;
+    border-bottom: solid 0.2em #fafafa ;
+    color:while;
 }
 /*thẻ a*/
 .navbar li a {
-    color: black!important;
-    margin-left: 0.3125rem;
-    margin-right: 3.125rem;
+    color: rgb(255, 255, 255)!important;
+    margin-left: 0.3125em;
+    margin-right: 3.125em;
+    font-size: 1.3em;
 }
 /*hover là hành động khi di chuột vào thẻ a*/
 .navbar li a:hover {
-    color: black!important;
+    color: rgb(255, 255, 255)!important;
 }
 
 /* Dropdown menu background color*/
 
-.navbar-nav > li > .dropdown-menu {     background-color: rgba(225, 222, 255, 0.99);  }
+.navbar-nav > li > .dropdown-menu {     background-color: rgba(7, 7, 7, 0.8)  }
 
 /* Dropdown menu font color*/ 
 
- .navbar-nav > li > .dropdown-menu a{   color: #fff;  }
+ .navbar-nav > li > .dropdown-menu a{   color: rgb(0, 0, 0);  border: none;}
 
 .dropdown-item{
   width: 94%;
 }
 .dropdown-item:hover{
-  background-color: #aadfe6;
+  background-color: #252525;
 }
 
 /*chỉnh hình full*/
@@ -47,39 +50,38 @@ html, body {
     top: 50%;
 }
 .carousel-caption h1 {
-    font-size: 300%;
+    font-size: 3em;
     text-transform: uppercase;
-    text-shadow: 0.3125rem 0.3125rem 1rem #000;
-    margin-top: 16.875rem;
+    text-shadow: 0.3125em 0.3125em 1em #000;
+    margin-top: 5.875em;
 }
 .carousel-caption h3 {
-    font-size: 150%;    
-    text-shadow: 0.125rem 0.125rem 0.625rem #000;
+    font-size: 1.5em;    
+    text-shadow: 0.125em 0.125em 0.625em #000;
 }
 .btn-primary {
     background-color: rgb(82,64,120);
-    border: 0.063rem solid white;
+    border: 0.063em solid white;
     animation-name: cd-bounce-rotate;
     animation-duration: 1s;
 }
 .btn-primary:hover {
     background-color: rgb(62,44,100);
-    border: 0.063rem solid white;
+    border: 0.063em solid white;
     animation-name: cd-bounce-rotate;
     animation-duration: 1s;
 }
 
-/* viền ở phía trên, solid là thẳng tắp*/
 .welcome hr {
     border-top: 0.125em solid rgba(0,0,0, 0.6);
     width: 95%; 
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
 }
 
 
 .social a {
     font-size: 3em;/*1em = 1rem*/
-    padding: 3rem;/*1rem = 1 "font-size" */
+    padding: 3em;/*1rem = 1 "font-size" */
 }
 .fa-facebook {
     color: #3b5998;
@@ -101,11 +103,11 @@ footer {
     color: #d5d5d5;
 }
 hr.light {
-    border-top: 0.063rem solid #d5d5d5;
+    border-top: 0.063em solid #d5d5d5;
     width: 75%;
 }
 .light-100 {
-    border-top: 0.063rem solid #d5d5d5;
+    border-top: 0.063em solid #d5d5d5;
     width: 100%;
 }
 /* animation*/
@@ -148,11 +150,11 @@ hr.light {
 @keyframes cd-bounce-right {
   0% {
     opacity: .2;
-    transform: translateX(-12.5rem);
+    transform: translateX(-12.5em);
   }
   60% {
     opacity: .7;
-    transform: translateX(0.938rem);
+    transform: translateX(0.938em);
   }
   100% {
     opacity: 1;
@@ -163,11 +165,11 @@ hr.light {
 @keyframes cd-bounce-left {
   0% {
     opacity: .2;
-    transform: translateX(12.5rem);
+    transform: translateX(12.5em);
   }
   60% {
     opacity: .7;
-    transform: translateX(-0.938rem);
+    transform: translateX(-0.938em);
   }
   100% {
     opacity: 1;
@@ -178,17 +180,17 @@ hr.light {
 @keyframes cd-bounce-rotate {
   0% {
     opacity: .2;
-    transform: perspective(50rem) rotateX(-80deg);
+    transform: perspective(50em) rotateX(-80deg);
   }
   20% {
     opacity: 1;
   }
   60% {
-    transform: perspective(50rem) rotateX(20deg);
+    transform: perspective(50em) rotateX(20deg);
   }
   100% {
     opacity: 1;
-    transform: perspective(50rem) rotateX(0);                      
+    transform: perspective(50em) rotateX(0);                      
   }
 }
 
@@ -196,15 +198,15 @@ hr.light {
 /* Style the links inside the sidenav */
 #mySidenav a {
   position: absolute; /* Position them relative to the browser window */
-  left: -7.5rem; 
+  left: -7.5em; 
   transition: 0.3s; /* Add transition on hover */
-  padding: 0.875rem; /* 0.875rem padding */
-  width: 8.125rem; /* Set a specific width */
+  padding: 0.875em; 
+  width: 8.125em; /* Set a specific width */
   text-decoration: none; /* Remove underline */
-  font-size: 1.25rem; /* Increase font size */
+  font-size: 1.25em; /* Increase font size */
   color: white; /* White text color */
-  border-radius: 0 0.313rem 0.313rem 0; /* Rounded corners on the top right and bottom right side */
-  margin-top: 1rem;
+  border-radius: 0 0.313em 0.313em 0; /* Rounded corners on the top right and bottom right side */
+  margin-top: 4em;
   z-index: 2;
 }
 
@@ -213,7 +215,6 @@ hr.light {
 
 }
 
-/* The about link: 1.25rem from the top with a green background */
 #home {
   top: 130%;
   background-color: #04AA6D;
@@ -235,7 +236,7 @@ hr.light {
 }
 
 
-@media (max-width: 48rem){  
+@media (max-width: 768px){  
   .carousel-caption {
     top: 20%;
   }
@@ -244,14 +245,14 @@ hr.light {
   }
   .carousel-caption h3{   
     font-size: 140%;
-    padding-bottom: 0.2rem;
+    padding-bottom: 0.2em;
   }
   .carousel-caption .btn{   
     font-size: 95%;
-    padding: 0.5rem 0.875rem;
+    padding: 0.5em 0.875em;
   }
 }
-@media (max-width: 36rem){
+@media (max-width: 576px){
   .carousel-caption {
     top: 10%;
   }
@@ -263,7 +264,7 @@ hr.light {
   }
   .carousel-caption .btn {    
     font-size: 90%;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25em 0.5em;
   } 
 }
 /*sidetab*/
@@ -275,22 +276,21 @@ hr.light {
   top: 0;
   left: 0;
   width: 0;
-  background-color: #eee;
+  background-color: rgb(255, 255, 255);
   transition: 0.5s;
-  padding-top: 3.75rem;
+  padding-top: 3.75em;
   text-align:center;
   overflow-y: scroll; 
 }
 .state1::-webkit-scrollbar-track
 {
-	-webkit-box-shadow: inset 0 0.063rem 0.063rem rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
 }
 
 .state1::-webkit-scrollbar
 {
-	width: 1rem;
-  height: 1rem;
+	width: 1.5em;
+  height: 1em;
 	background-color: #F5F5F5;
 }
 
@@ -298,7 +298,7 @@ hr.light {
 {
 	background-color: rgb(54, 201, 238);	
 	background-image: -webkit-linear-gradient(45deg,
-	                                          rgba(255, 255, 255, .2) 25%,
+	                                          rgba(255, 255, 255, 0.2) 25%,
 											  transparent 25%,
 											  transparent 50%,
 											  rgba(255, 255, 255, .2) 50%,
@@ -308,12 +308,9 @@ hr.light {
 }
 
 .state1 a {
-  padding: 0.5rem 0.5rem 0.5rem 2rem;
   text-decoration: none;
-  font-size: 1.563rem;
-  color: #818181;
+  font-size: 1.563em;
   display: block;
-  transition: 0.3s;
 }
 
 .state1 a:hover{
@@ -322,23 +319,21 @@ hr.light {
 
 .state1 .closebtn {
   position: absolute;
-  top: -1rem;
-  right: 1.563rem;
-  margin-left: 3.125rem;
-  color: rgb(0, 0, 0);
-  font-size: 3rem;
+  top: 0.8em;
+  right: 1.7em;
+  color: rgb(99, 99, 99);
+  font-size: 3.5em;
   font-weight: bold;
-  text-shadow: rgb(255, 255, 255) 0.1rem 0.1rem;
 }
 
 @media screen and (max-height: 450px) {
-  .state1 {padding-top: 0.938rem;}
+  .state1 {padding-top: 0.938em;}
   .state1 a {font-size: 1.125em;}
 }
 
 /* Style the tab */
 .tab {
-  border: 0.063rem solid #ccc;
+  border: 0.063em solid #ccc;
   background-color: #f1f1f1;
   overflow: hidden;
 }
@@ -351,7 +346,7 @@ hr.light {
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 0.875rem 1rem;
+  padding: 0.875em 1em;
   transition: 0.3s;
   font-size: 1.063em;
   display:flex;
@@ -370,7 +365,7 @@ hr.light {
 
 /* Style the tab content */
 .tabcontent {
-  border: 0.063rem solid #ccc;
+  border: 0.063em solid #ccc;
   overflow-y: scroll;
 }
 .tabcontent::-webkit-scrollbar {
@@ -378,41 +373,37 @@ hr.light {
 }
 
 .header {
-  border-bottom: 0.188rem solid black;
+  border-bottom: 0.25em solid black;
   background-color: #4bcbfe;
   color: white;
   text-transform:uppercase;
-  text-shadow: 0.063rem 0.125em 0.125em rgb(0, 0, 0);
+  text-shadow: 0.063em 0.125em 0.125em rgb(0, 0, 0);
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 1em;
 }
 .card-header {
-  border-bottom: 0.188rem solid rgba(0, 0, 0, 0.514);
+  border-bottom: 0.188em solid rgba(0, 0, 0, 0.514);
   background-color: #0da8ef73;
   text-transform:uppercase;
   text-align: left;
-  font-size: 0.8rem;
+  font-size: 1em;
 }
 
 input[type=search] {
   background-position: 0.625em 0.625em; 
   background-repeat: no-repeat;
-  margin-top: 0.625em;
-  margin-bottom: 0.625em;
-  width: 8.125rem;
+  width: 8.125em;
   -webkit-transition: 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
+  padding: 0.313em;
   border: none;
-  padding: 0.313rem;
-
 }
 input[type=search]:focus {
-  width: 87%;
-  padding: 0.8rem;
-  
+  width: 89%;
+  padding: 0.8em;
 }
 .btn-outline-dark{
-  border-radius: 0.313rem;
+  border-radius: 0.313em;
   background-color: #ffffff;
 }
 .col1{ 
@@ -425,7 +416,7 @@ input[type=search]:focus {
   overflow-y: scroll;
   overflow-x: none;
   height: 44%;
-  margin: 0.2rem;
+  margin: 0.2em;
   outline: outset;
   color: rgb(255, 255, 255);
 }
@@ -437,8 +428,7 @@ input[type=search]:focus {
 
 .vertical-menu::-webkit-scrollbar
 {
-	width: 0.8rem;
-  height:0.438rem;
+	width: 1em;
 }
 
 .vertical-menu::-webkit-scrollbar-thumb
@@ -465,29 +455,10 @@ input[type=search]:focus {
 .card{
   border-radius: 0.625em;
   margin-bottom: 2%;
- 
 }
-.mauxanh{
-  background-color: greenyellow;
-}
-
-.btn-dark{
-  margin-top: 0.313rem;
-  margin-bottom: 0.313rem;
-  max-width: 80%;
-}
-.btn-light{
-  margin-top: 0.313rem;
-  margin-bottom: 0.313rem;
- 
-  background-color: transparent;
-}
-
-
 /*///////////////////*/
 input[type=radio] {
-  padding: 0.75rem 1.25rem;
-  margin-left: 2rem;
+  margin-left: 2em;
 }
 .container input:checked ~ .checkmark {
   background-color: #2196F3;
@@ -496,17 +467,17 @@ input[type=radio] {
 /* Full-width input fields */
 input[type=nameHome] {
   width: 100%;
-  padding: 0.75rem 1.25rem;
-  margin: 0.5rem 0;
+  padding: 0.75em 1.25em;
+  margin: 0.5em 0;
   display: inline-block;
   border: 0.063em solid #ccc;
   outline: none;
   box-sizing: border-box;
 }
 input[type=nameRoom]{
-  width: 73%;
-  padding: 0.75em 1.25rem;
-  margin: 0.5rem 0;
+  width: 71.5%;
+  padding: 0.75em 1.25em;
+  margin: 0.5em 0;
   display: inline-block;
   border: 0.063em solid #ccc;
   outline: none;
@@ -515,16 +486,18 @@ input[type=nameRoom]{
 
 /* Extra styles for the cancel button */
 .btnadd {
-  width: auto;
   padding: 0.625em 1.125em;
-  background-color: #f44336;
+  background-color: #4fbbec;
+  color: white;
+  outline:none;
 }
   
 .btnadd1 {
   width: 100%;
+  outline:none;
   padding: 0.625em 1.125em;
   background-color: #32b926;
-  border-radius: 0.313rem;
+  border-radius: 0.313em;
   color: white;
 }
 #add_device_modal{
@@ -544,16 +517,10 @@ img.avatar {
   width: 10%;
   border-radius: 50%;
 }
-
 .container1 {
-  padding: 1rem;
-}
-span.psw {
-  float: right;
-  padding-top: 1rem;
+  padding: 1em;
 }
 
-/* The formAddHome (background) */
 .formAddHome {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -565,7 +532,7 @@ span.psw {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  padding-top: 3.75rem;
+  padding-top: 3.75em;
 } 
 
 
@@ -573,8 +540,8 @@ span.psw {
 .formAddHome-content {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 0.063rem solid #888;
-  width: 80%; 
+  border: 0.063em solid #888;
+  width: 90%; 
 }
 
 /* Add Zoom Animation */
@@ -593,24 +560,11 @@ span.psw {
   to {transform: scale(1)}
 }
 
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .btnadd {
-     width: 100%;
-  }
-}
 .btncus{
-  margin-top: 0.313rem;
-  margin-bottom: 0.313rem;
-  margin-left: 0.313rem;
-  margin-right: 0.313rem;
-  border-radius: 0.313rem;
+  border-radius: 0.313em;
   padding: 0.438em;
-  min-width: 2.5rem; 
+  min-width: 2.5em;
+  height: auto;
   background-color: rgb(255, 255, 255); 
 }
 .btncus:hover {
@@ -619,60 +573,51 @@ span.psw {
 /*////////////////////btn add room///////////////////////////////*/
 .buttons_added {
     opacity:1;
-    display:inline-block;
-    display:-ms-inline-flexbox;
     display:inline-flex;
-    white-space:nowrap;
-    padding: 0.75em;
     width: 13%;
-    min-width: 8.438em;
-   
+    min-width: 8.5em;
+    
 }
 .form-inde {
-    display:-ms-inline-flexbox;
-    display:inline-flex;
-    display: inline-block;
+    font-weight: 900;
     position:relative;
-    width:3rem;
+    width:3em;
     padding:0.75em;
-    text-shadow:0.063rem 0.063rem 0.063rem #fff;
-    border:0.063rem solid #ddd;
-    background-color: cornflowerblue;
+    text-shadow:0.063em 0.063em 0.063em #fff;
+    border:0.063em solid #ddd;
+    background-color: #4fbbec;
     outline:none;
 }
 .input-qty {
     display: inline-block;
     text-align:center;
-    border-top:0.063rem solid #ddd;
-    border-bottom:0.063rem solid #ddd;
+    border-top:0.063em solid #dde;
+    border-bottom:0.063em solid #dde;
     border-left:0;
     border-right:0;
     width: 100%;
 }
 /*///////////////////////*/
 .form-select {
-    display:-ms-inline-flexbox;
     display:inline-flex;
-    display: inline-block;
     position:relative;
-    text-shadow:0.063rem 0.063rem 0.063rem #fff;
+    text-shadow:0.063em 0.063em 0.063em #fff;
     box-shadow: none;
 
 
 }
 .form-select select{
-    content: '25BC';
+    content: "\f054";
     height: 100%;
     width: 100%;
     padding: 0.75em;
-    border:0.063rem solid #47aedb87;
+    border:0.063em solid #4fbbec;
 
 }
  .form-select:hover::after {
    color: Gainsboro;
  }
 select::after {
-  
    position: absolute;
    top: 0;
    right: 0;
@@ -706,25 +651,12 @@ select::after {
    cursor: pointer;
  }
  label{
-  margin-bottom: -0.2rem;
+  margin-bottom: -0.2em;
   margin-top: 0.5%;
  }
  
  /*hien thi thong bao*/
- .example button {
-  float: left;
-  background-color: #4E3E55;
-  color: white;
-  border: none;
-  box-shadow: none;
-  font-size: 1.063em;
-  font-weight: 500;
-  font-weight: 600;
-  border-radius: 0.188rem;
-  padding: 0.938rem 2.188rem;
-  margin: 1.625rem 0.313rem 0 0.313rem;
-  cursor: pointer; 
-}
+
 #defaultOpen{
   background-color: #4c67d3ef;
   color: white;
@@ -747,7 +679,7 @@ select::after {
 
 }
 .table-bordered td, .table-bordered th {
-  border: 0.063rem solid #03030371;
+  border: 0.063em solid #03030371;
 }
 .maubang_1{
   background-color: rgb(226, 238, 238);
@@ -758,12 +690,12 @@ select::after {
 
 .btncheck{
   width: 90%;
-  padding: 0.5rem 0.75em;
+  padding: 0.5em 0.75em;
   border-radius: 0.625em;
   background-color: #9adee7;
   display: inline-block;
   text-align: left;
-  margin-left: -1rem ;
+  margin-left: -1em ;
 }
 .formHome {
   display: none; /* Hidden by default */
@@ -774,7 +706,6 @@ select::after {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  border: 0.063rem solid rgb(30, 134, 219);
 } 
 .formHome>div{
   position: absolute;
@@ -786,14 +717,11 @@ select::after {
 .formHome-content {
   background-color: rgb(255, 255, 255);
   color: white;
-  border: 0.063rem solid #888;
   height: 100%;
-  overflow-y: scroll;
-  
+  overflow: auto;
 }
 .formHome-content::-webkit-scrollbar-track
 {
-	-webkit-box-shadow: inset 0 0.063rem 0.063rem rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
 }
 
@@ -824,11 +752,12 @@ select::after {
 .gridcus {
   font: 2em Sansita, sans-serif;
   display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
-  grid-auto-rows: minmax(5rem, auto);
+  grid-gap: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+  grid-auto-rows: minmax(3em, auto);
   grid-auto-flow: dense;
   position:relative;
+  
 }
 .gridcus >*:hover {
   background-color: rgb(103, 103, 216);
@@ -836,6 +765,7 @@ select::after {
 
 .gridcus > * {
   color: #fff;
+  border-radius: 1em;
   background-color: rgba(45, 66, 253, 0.548);
   outline: outset;
   position:relative;
@@ -844,28 +774,7 @@ select::after {
   text-align: center;
 }
 .container-gridcus{
-  margin: 2rem;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-  grid-auto-rows: minmax(8rem, auto);
-  grid-auto-flow: dense;
-  position:relative;
-  grid-gap: 2%;
-  background-color: #ffffff;
   margin: 5em;
-}
-
-.grid-container > div {
-  background-color: rgba(253, 253, 253, 0.8);
-  border: 0.063rem solid rgb(30, 134, 219);
-  text-align: left;
-  color: #000;
-  border-radius: 0.313rem;
-  box-shadow: rgba(29, 213, 238, 0.2) 0.313rem 0.063rem;
-  grid-row: auto / span 2;
-  grid-column: auto / span 2;
 }
 .h1cus{
   display: flex;
@@ -875,42 +784,28 @@ select::after {
   color: rgb(255, 255, 255);
   text-transform: uppercase;
   background-color: #50a0ab;
-  padding: 2rem;
-  border-bottom: 0.063rem solid rgb(0, 0, 0);
-  text-shadow:  black 0.1rem 0.1rem;
+  padding: 1em;
+  border-bottom: 0.063em solid rgb(0, 0, 0);
 }
 .h4cus{
-  margin: 0.3rem;
+  margin: 0.3em;
   text-align: left;
   text-transform: uppercase;
   outline: outset;
   color: rgb(232, 235, 211);
   background-color: rgb(15, 92, 235);
-  padding: 0.5rem;
-  font-size: 0.8rem;
+  padding: 0.5em;
+  font-size: 0.8em;
 }
 .btnback {
   position: absolute;
-  left: 0.3rem;
-  top: 2rem;
-  color: rgb(0, 0, 0);
-  font-size: 2rem;
+  top: 0.75em;
+  left: 0.5em;
+  color: rgb(48, 48, 48);
+  font-size: 3em;
   font-weight: bold;
-  text-shadow: rgb(10, 165, 213) 0.125em 0.125em;
+ 
 }
 .btnback:hover{
-  color: #0026fd;
-}
-
-.btn_close{
-  position: absolute;
-  right: 2%;
-  top: 0;
-  color: rgb(0, 0, 0);
-  font-size: 1.875rem;
-  font-weight: bold;
-  text-shadow: rgb(10, 165, 213) 0.125em 0.125em;
-}
-.btn_close:hover{
   color: #0026fd;
 }

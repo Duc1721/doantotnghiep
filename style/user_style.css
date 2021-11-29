@@ -10,7 +10,7 @@
     padding: 0.313em;
     background-color:#212529;
     box-shadow: 0.063em 0.063em;
-    font-size: 1.25em;
+    font-size: 0.6em;
     border-radius: 0.2em;
   }
   .gridroom {
@@ -46,32 +46,28 @@
   }
 
   .gridchucnang > * {
-    margin: 1rem;
+    margin: 0.25em;
     background-color: rgb(49 39 191 / 54%);
     color: #fff;
     grid-column: auto / span 1;
     grid-row: auto / span 2;
     outline: outset;
     position:relative;
-    border-radius: 1rem;
+    border-radius: 50%;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0.733), rgb(102, 209, 177));
   }
-  .nutchucnang{
-    filter: brightness(1.1);
-  }
   .nutchucnang i:hover{
-    color: rgba(121, 248, 227, 0.904);
+    color: rgba(67, 241, 96, 0.904);
   }
   .nutchucnang i{
     color: rgba(116, 113, 109, 0.904);
     display: block;
     text-align:center;
     margin-top: 0.25em;
-    -webkit-text-stroke-width: 0.03em;
+    -webkit-text-stroke-width: 0.01em;
     -webkit-text-stroke-color: rgb(255, 255, 255);
 
   }
-
 .tablecus{
   position:relative;
   text-transform: uppercase;
@@ -81,10 +77,10 @@
 }
 .btndangxuat {
   position: absolute;
-  right: 0.5rem;
-  bottom: 1rem;
+  right: 0.5em;
+  bottom: 0.5em;
   color: #818896;
-  font-size: 2rem;
+  font-size: 2em;
   font-weight: 900;
   padding: 0.3em 0.6em;
   border-radius: 50%;
@@ -96,12 +92,11 @@
 
 .btnback2 {
   position: absolute;
-  right: 0.5rem;
-  top: -2rem;
+  right: 0.5em;
+  top: -0.5em;
   color: rgb(0, 0, 0);
-  font-size: 3rem;
+  font-size: 3em;
   font-weight: bold;
-  text-shadow: rgb(255, 255, 255) 0.1rem 0.1rem;
 }
 .btnback2:hover{
   color: #fd0000;
@@ -115,26 +110,8 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  padding-top: 3.75rem;
+  padding-top: 3.75em;
 }
-.formdelroom>div{
-  position: absolute;     
-    top: 0;
-    width: 100%;
-    height:100%;
-    background-color: #ffffff;
-
-}
-.formdelroom-content {
-  background-color: rgba(36, 36, 85, 0.535);
-  color: white;
-  margin: 5rem  10rem auto auto;
-  border: 0.063rem solid #888;
-  width: 30%; /* Could be more or less, depending on screen size */
-  min-width: 21.875rem;
-  outline: outset;
-}
-
 .h1custom{
   display: flex;
   justify-content: center;
@@ -143,18 +120,17 @@
   color: #3a3f48;
   text-transform: uppercase;
   padding-top: 0.5em ;
-  font-size: 2.5rem;
- 
+  font-size: 3em;
 }
 .h5custom{
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.5em;
   color: rgb(0, 0, 0);
   text-transform: uppercase;
-  padding: 0.5rem;
-  border-top: 0.063rem solid rgb(0, 0, 0);
-  font-size: 1rem;
-  text-shadow:  rgb(238, 224, 224) 0.1rem 0.1rem;
+  padding: 1em;
+  border-top: 0.063em solid rgb(138, 138, 138);
+  font-size: 1.3em;
+  text-shadow:  rgb(238, 224, 224) 0.1em 0.1em;
 }
 
 /* dienthoai */
@@ -639,7 +615,7 @@
   margin: 1em;
   width: 5em;
   height: 5em;
-  line-height: 5.5em;
+  line-height:5.5em;
   position: relative;
   text-align: center;
   border-radius: 50%;
@@ -676,7 +652,7 @@
 .pl {
   height: 3.2em;
   display: block;
-  font-size: 0.3em;
+  font-size: 0.35em;
   margin-top: -5.5em;
   line-height: 2em;
   text-align: center;

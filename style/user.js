@@ -67,14 +67,14 @@ function vaonha(){
                         tenphong_user = decode_data(phong_fb.namephong)
                         room.innerHTML += `<div style="background-image: url(phongmacdinh.jpg);background-size: contain;" 
                                                 class="resize" onclick="vaophong('${iduser}','${tennha}','${idphong_user}'); hienthitatca('${iduser}', '${idphong_user}')" >
-                                                <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong_user}</b></h5>
+                                                <h5  class="chucnang" ><b>${tenphong_user}</b></h5>
                                             </div>`         
                 } 
             }
         }
     }
     document.getElementById("getten").innerHTML = tennha + ": DANH SÁCH PHÒNG " + 
-        `&ensp;<span style="font-size:1.7rem" class="nutchucnang" id="doitennha" title="Đổi tên nhà" data-toggle="collapse" data-target="#doitennha${iduser}"><i class="fas fa-pen"></i></spa>`
+        `&ensp;<span style="font-size:0.7em" class="nutchucnang" id="doitennha" title="Đổi tên nhà" data-toggle="collapse" data-target="#doitennha${iduser}"><i class="fad fa-user-edit"></i></spa>`
     document.getElementById("showdoiten").innerHTML = ` <div id="doitennha${iduser}" class="collapse">
                                                         <input id="input${iduser}"   maxlength="20" style="width:90%;outline: none;" placeholder="Nhập tên nhà mới">
                                                         <button class="btnthem" onclick="luutennha('${iduser}')"><i class="fad fa-check"></i></button>
@@ -130,7 +130,7 @@ function vaophong(idnha, tennha, idphong){
                                                             <button class="btn-outline-dark"><i class="far fa-trash-alt" onclick="xoathietbi('${idnha}', '${idphong}','${idthietbi}')" title="Xóa thiết bị"></i></button>
                                                             <button class="btn-outline-dark" ><i class="fas fa-pen" data-toggle="collapse" data-target="#rename_device${idnha}${idphong}${idthietbi}" title="Đổi tên thiết bị"></i></button>
                                                             <div id="rename_device${idnha}${idphong}${idthietbi}" class="collapse">
-                                                                <input id="input${idnha}${idphong}${idthietbi}"  style="width:80%;height:2.4rem"  maxlength="20" placeholder="Nhập tên thiết bị mới"><button class="btncus" id="check${idnha}${idphong}${idthietbi}" onclick="doitenthietbi('${idnha}','${idphong}','${idthietbi}', '${tennha}')"><i class="fad fa-check"></i></button>
+                                                                <input id="input${idnha}${idphong}${idthietbi}"  style="width:80%;height:2.6em; outline:none;"  maxlength="20" placeholder="Nhập tên thiết bị mới"><button class="btncus" id="check${idnha}${idphong}${idthietbi}" onclick="doitenthietbi('${idnha}','${idphong}','${idthietbi}', '${tennha}')"><i class="fad fa-check"></i></button>
                                                             </div>
                                                             <div class="collapse" id="retype_device${idnha}${idphong}${idthietbi}">
                                                             <h5 class="h5custom">  
@@ -152,7 +152,7 @@ function vaophong(idnha, tennha, idphong){
                             <button class="btn-outline-dark" data-toggle="collapse" data-target="#retype_device${idnha}${idphong}${idthietbi}" title="Phân loại"><i class="fas fa-sunset"></i></button> 
                             <button class="btn-outline-dark" ><i class="fas fa-pen" data-toggle="collapse" data-target="#rename_device${idnha}${idphong}${idthietbi}" title="Đổi tên thiết bị"></i></button>
                             <div id="rename_device${idnha}${idphong}${idthietbi}" class="collapse">
-                                <input id="input${idnha}${idphong}${idthietbi}" style="width:80%;height:2.4rem"  maxlength="20" placeholder="Nhập tên thiết bị mới"><button class="btncus" id="check${idnha}${idphong}${idthietbi}" onclick="doitenthietbi('${idnha}','${idphong}','${idthietbi}', '${tennha}')"><i class="fad fa-check"></i></button>
+                                <input id="input${idnha}${idphong}${idthietbi}" style="width:80%;height:2.6em"  maxlength="20" placeholder="Nhập tên thiết bị mới"><button class="btncus" id="check${idnha}${idphong}${idthietbi}" onclick="doitenthietbi('${idnha}','${idphong}','${idthietbi}', '${tennha}')"><i class="fad fa-check"></i></button>
                             </div>
                             <div class="collapse" id="retype_device${idnha}${idphong}${idthietbi}">
                               <h5 class="h5custom">  
@@ -188,7 +188,7 @@ function opendelRoom(){
                         tenphong_user = decode_data(phong_fb.namephong)
                         room.innerHTML += `<div style="background-image: url(phongmacdinh.jpg);background-size: contain;" 
                                                 class="resize" onclick="deleteRoomU('${iduser}','${idphong_user}')" >
-                                                <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong_user}</b></h5>
+                                                <h5  class="chucnang"><b>${tenphong_user}</b></h5>
                                                 </div>`         
                     } 
                 }
@@ -244,7 +244,7 @@ function openeditRoom(){
                         room.innerHTML += `<div id="rchon${iduser}${idphong_user}">
                         <div style="background-image: url(phongmacdinh.jpg);background-size: contain;" 
                                                 class="resize" onclick="modeEdit('${iduser}','${idphong_user}','${tenphong_user}')" id="e${iduser}${idphong_user}">
-                                                <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong_user}</b></h5>
+                                                <h5  class="chucnang"><b>${tenphong_user}</b></h5>
                                             </div>
                         </div>`         
                     } 
@@ -269,15 +269,15 @@ function modeEdit(idnha, idphong, tenphong){
 
     rchon.innerHTML =`<div style="background-image: url(phongmacdinh.jpg);background-size: contain;" 
                             class="resize" id="e${idnha}${idphong}">
-                            <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong}</b></h5>
+                            <h5  class="chucnang"><b>${tenphong}</b></h5>
                        </div>`
     ider = "e" + idnha + idphong
     ideroom = document.getElementById(ider)
     ideroom.innerHTML = `<div>
-                            <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong}</b></h5>
-                            <input id="input${idnha}${idphong}"  style="padding:0.5rem;font-size:1.25rem;position:absolute;bottom:2.4rem;outline:none"
+                            <h5  class="chucnang"><b>${tenphong}</b></h5>
+                            <input id="input${idnha}${idphong}"  style="padding:0.6em;font-size:0.6em;position:absolute;bottom:2.45em;outline:none"
                                 type="nameHome" maxlength="20" placeholder="Nhập tên phòng mới">
-                            <button style="padding:0.3rem;width:100%;position:absolute;bottom:0" onclick="luutenphong('${idnha}','${idphong}')">
+                            <button style="padding:0.2em;width:100%;position:absolute;bottom:0" onclick="luutenphong('${idnha}','${idphong}')">
                             <i class="fad fa-check"></i></button>
                         </div>`
   }
@@ -322,7 +322,7 @@ function openadddevice() {
                         room.innerHTML += `<div id="rchon${iduser}${idphong_user}">
                         <div style="background-image: url(phongmacdinh.jpg);background-size: contain;" 
                                                 class="resize" onclick="modead3('${iduser}','${idphong_user}','${tenphong_user}')" id="e${iduser}${idphong_user}">
-                                                <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong_user}</b></h5>
+                                                <h5  class="chucnang" ><b>${tenphong_user}</b></h5>
                                             </div>
                         </div>`         
                     } 
@@ -348,16 +348,16 @@ function modead3(idnha, idphong, tenphong){
 
     rchon.innerHTML =`<div style="background-image: url(phongmacdinh.jpg);background-size: contain;" 
                             class="resize" id="e${idnha}${idphong}">
-                            <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong}</b></h5>
+                            <h5  class="chucnang"><b>${tenphong}</b></h5>
                        </div>`
     ider = "e" + idnha + idphong
     ideroom = document.getElementById(ider)
     ideroom.innerHTML = `<div>
-                            <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong}</b></h5>
-                            <input id="thietbithem${idnha}${idphong}"  style="padding:0.4rem;font-size:1.5rem;position:absolute;bottom:2.9rem;outline:none;width:100%; text-align:center;"
+                            <h5  class="chucnang"><b>${tenphong}</b></h5>
+                            <input id="thietbithem${idnha}${idphong}"  style="padding:0.6em;font-size:0.6em;position:absolute;bottom:3em;outline:none;width:100%; text-align:center;"
                                 type="number" placeholder="Nhập số thiết bị" max ='8' min= '1' maxlength = "1"
                                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-                            <button style="padding:0.3rem;width:100%;position:absolute;bottom:0" onclick="themthietbi('${idnha}','${idphong}')">
+                            <button style="padding:0.2em;width:100%;position:absolute;bottom:0" onclick="themthietbi('${idnha}','${idphong}')">
                             <i class="fad fa-check"></i></button>
                         </div>`
 
@@ -674,11 +674,11 @@ function httbi(idnha, idphong, idthietbi){
         document.getElementById(idnhietdo).innerText = "?"
     } else if(phanloai=="Thiết bị" && trangthai == "1"){
         document.getElementById("htnhietdo").innerHTML = ` <div class="gauge">
-                                                                <p  style="background-color: greenyellow" onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai}')"><span id= "nhietdo${idthietbi}"></span>
+                                                                <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai}')"><span id= "nhietdo${idthietbi}"></span>
                                                                 <span class="pl">Trạng thái: Bật</span></p>
                                                             </div>`
         idnhietdo = "nhietdo" + idthietbi
-        document.getElementById(idnhietdo).innerHTML = `<i class="fas fa-power-off" style="color:green;font-size:2em"></i>`
+        document.getElementById(idnhietdo).innerHTML = `<i class="fas fa-power-off" style="color:greenyellow;font-size:2em"></i>`
        
     }  else if(phanloai=="Thiết bị" && trangthai == "0"){
         document.getElementById("htnhietdo").innerHTML = ` <div class="gauge" >
@@ -690,12 +690,12 @@ function httbi(idnha, idphong, idthietbi){
        
     } else if(phanloai=="Cảm biến" && trangthai !== "Đợi cập nhật từ GATEWAY"){
         document.getElementById("htnhietdo").innerHTML = ` <div class="gauge">
-                                                                <p><span id= "nhietdo${idthietbi}"></span><span>&deg;C</span>
-                                                                <span class="pl">Nhiệt độ</span></p>
+                                                                <p style="line-height:4.65em;"><span id= "nhietdo${idthietbi}"></span><span>&deg;C</span>
+                                                                <span class="pl" style="line-height:5em;">Nhiệt độ</span></p>
                                                             </div>`
         idnhietdo = "nhietdo" + idthietbi
         document.getElementById(idnhietdo).innerText = trangthai
-        //<p><span id= "nhietdo${idthietbi}"></span><span>&deg;C</span>
+      
        
     } else {}
     document.getElementById("xoa").addEventListener('click', function(e) {
@@ -750,12 +750,12 @@ function hienthitatca(idnha, idphong){
                             document.getElementById(idnhietdo).innerText = "?"
                         } else if(phanloai_thietbi_fb=="Thiết bị" && trangthai_thietbi_fb == "1"){
                             document.getElementById("tca").innerHTML += `<div class="gauge1">
-                                                                            <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai_thietbi_fb}')" style="background-color: greenyellow"><span id= "nhietdoall${idthietbi}"></span>
+                                                                            <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai_thietbi_fb}')"><span id= "nhietdoall${idthietbi}"></span>
                                                                         
                                                                             <span class="pl" style="margin-top: -4.5em;">- ${name_thietbi_fb} -</span></p>
                                                                         </div>`
                             idnhietdo = "nhietdoall" + idthietbi
-                            document.getElementById(idnhietdo).innerHTML = `<i class="fas fa-power-off" style="color:green;font-size:2em"></i>`
+                            document.getElementById(idnhietdo).innerHTML = `<i class="fas fa-power-off" style="color:greenyellow;font-size:2em"></i>`
                             
                         }  else if(phanloai_thietbi_fb=="Thiết bị" && trangthai_thietbi_fb == "0"){
                             document.getElementById("tca").innerHTML += `<div class="gauge1">
