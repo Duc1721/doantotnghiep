@@ -499,7 +499,8 @@ input[type=nameHome] {
   padding: 0.75rem 1.25rem;
   margin: 0.5rem 0;
   display: inline-block;
-  border: 0.063rem solid #5cc;
+  border: 0.063em solid #ccc;
+  outline: none;
   box-sizing: border-box;
 }
 input[type=nameRoom]{
@@ -507,7 +508,8 @@ input[type=nameRoom]{
   padding: 0.75em 1.25rem;
   margin: 0.5rem 0;
   display: inline-block;
-  border: 0.063rem solid #ccc;
+  border: 0.063em solid #ccc;
+  outline: none;
   box-sizing: border-box;
 }
 

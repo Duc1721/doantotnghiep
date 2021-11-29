@@ -28,6 +28,7 @@ function toggleStatea(idnha, idphong, idthietbi, trangthai) {
     newPush_trangthai = database.ref("ADMIN").child(idnha).child(idphong).child(idthietbi).child("onoff")
     newPush_trangthai.set(trangthai_mahoa);
 }
+
 window.onload = function()
 {
    vaonha()
@@ -65,19 +66,19 @@ function vaonha(){
                     if (tenphong == "namephong") {
                         tenphong_user = decode_data(phong_fb.namephong)
                         room.innerHTML += `<div style="background-image: url(phongmacdinh.jpg);background-size: contain;" 
-                                                class="resize" onclick="vaophong('${iduser}','${tennha}','${idphong_user}')" >
+                                                class="resize" onclick="vaophong('${iduser}','${tennha}','${idphong_user}'); hienthitatca('${iduser}', '${idphong_user}')" >
                                                 <h5  class="chucnang" style="font-size: 1rem;" ><b>${tenphong_user}</b></h5>
                                             </div>`         
                 } 
             }
         }
     }
-    document.getElementById("getten").innerHTML = tennha + ": DANH SÁCH PHÒNG " + `&ensp;<span style="font-size:1.7rem" class="nutchucnang" id="doitennha" title="Đổi tên nhà" data-toggle="collapse" data-target="#doitennha${iduser}"><i class="fas fa-pen"></i></span>
-                                                                                    <div id="doitennha${iduser}" class="collapse">
-                                                                                        <input id="input${iduser}"   maxlength="20" style="width:80%;" placeholder="Nhập tên nhà mới">
-                                                                                        <button onclick="luutennha('${iduser}')"><i class="fad fa-check"></i></button>
-                                                                                    </div>`
-  
+    document.getElementById("getten").innerHTML = tennha + ": DANH SÁCH PHÒNG " + 
+        `&ensp;<span style="font-size:1.7rem" class="nutchucnang" id="doitennha" title="Đổi tên nhà" data-toggle="collapse" data-target="#doitennha${iduser}"><i class="fas fa-pen"></i></spa>`
+    document.getElementById("showdoiten").innerHTML = ` <div id="doitennha${iduser}" class="collapse">
+                                                        <input id="input${iduser}"   maxlength="20" style="width:90%;outline: none;" placeholder="Nhập tên nhà mới">
+                                                        <button class="btnthem" onclick="luutennha('${iduser}')"><i class="fad fa-check"></i></button>
+                                                    </div>`
     room.innerHTML += `<div class="gridchucnang">
                             <div onclick="addnewRoom1('${iduser}','${tennha}')" class="nutchucnang">
                                 <i class="fas fa-plus" title="Thêm phòng"></i></div>
@@ -91,6 +92,7 @@ function vaonha(){
   
 })
 }
+
 function vaophong(idnha, tennha, idphong){
     document.getElementById("them").onclick = hamthemthietbi(idnha, idphong)
     document.getElementById("tatcathietbi").addEventListener('click', function(e) { hienthitatca(idnha, idphong)})
@@ -168,8 +170,6 @@ function vaophong(idnha, tennha, idphong){
         }
         
     });
-    
-
 }
 
 function closeAddnewHomeuser() {
@@ -304,8 +304,7 @@ function luutennha(idnha){
         swal("Thành công!", "Tên nhà đã được đổi!", "success");
         vaonha()
     } else {
-        swal("Lưu ý!", "Tên nhà phải lớn hơn 5 ký tự!", "error");
-        vaonha()
+        swal("Lưu ý!", "Tên nhà phải lớn hơn 5 ký tự!", "error")
     }
 }
 
@@ -676,18 +675,18 @@ function httbi(idnha, idphong, idthietbi){
     } else if(phanloai=="Thiết bị" && trangthai == "1"){
         document.getElementById("htnhietdo").innerHTML = ` <div class="gauge">
                                                                 <p  style="background-color: greenyellow" onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai}')"><span id= "nhietdo${idthietbi}"></span>
-                                                                <span class="pl">Trạng thái</span></p>
+                                                                <span class="pl">Trạng thái: Bật</span></p>
                                                             </div>`
         idnhietdo = "nhietdo" + idthietbi
-        document.getElementById(idnhietdo).innerText = "BẬT"
+        document.getElementById(idnhietdo).innerHTML = `<i class="fas fa-power-off" style="color:green;font-size:2em"></i>`
        
     }  else if(phanloai=="Thiết bị" && trangthai == "0"){
         document.getElementById("htnhietdo").innerHTML = ` <div class="gauge" >
                                                                 <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai}')"><span id= "nhietdo${idthietbi}"></span>
-                                                                <span class="pl">Trạng thái</span></p>
+                                                                <span class="pl">Trạng thái: Tắt</span></p>
                                                             </div>`
         idnhietdo = "nhietdo" + idthietbi
-        document.getElementById(idnhietdo).innerText = "TẮT"
+        document.getElementById(idnhietdo).innerHTML = `<i class="fas fa-power-off" style="color:gray;font-size:2em"></i>`
        
     } else if(phanloai=="Cảm biến" && trangthai !== "Đợi cập nhật từ GATEWAY"){
         document.getElementById("htnhietdo").innerHTML = ` <div class="gauge">
@@ -696,6 +695,7 @@ function httbi(idnha, idphong, idthietbi){
                                                             </div>`
         idnhietdo = "nhietdo" + idthietbi
         document.getElementById(idnhietdo).innerText = trangthai
+        //<p><span id= "nhietdo${idthietbi}"></span><span>&deg;C</span>
        
     } else {}
     document.getElementById("xoa").addEventListener('click', function(e) {
@@ -741,7 +741,9 @@ function hienthitatca(idnha, idphong){
                         if(trangthai_thietbi_fb == "Đợi cập nhật từ GATEWAY"){
                             document.getElementById("tca").innerHTML += `<div class="gauge1">
                                                                             <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai_thietbi_fb}')"><span id= "nhietdoall${idthietbi}"></span>
-                                                                            <span class="pl">Không xác định</span></p>
+                                                                           
+                                                                            <span class="pl" style="margin-top: -4.5em;">- ${name_thietbi_fb} -</span></p>
+                                                                            
                                                                         </div>`
                         
                             idnhietdo = "nhietdoall" + idthietbi
@@ -749,23 +751,26 @@ function hienthitatca(idnha, idphong){
                         } else if(phanloai_thietbi_fb=="Thiết bị" && trangthai_thietbi_fb == "1"){
                             document.getElementById("tca").innerHTML += `<div class="gauge1">
                                                                             <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai_thietbi_fb}')" style="background-color: greenyellow"><span id= "nhietdoall${idthietbi}"></span>
-                                                                            <span class="pl">Trạng thái</span></p>
+                                                                        
+                                                                            <span class="pl" style="margin-top: -4.5em;">- ${name_thietbi_fb} -</span></p>
                                                                         </div>`
                             idnhietdo = "nhietdoall" + idthietbi
-                            document.getElementById(idnhietdo).innerText = "BẬT"
+                            document.getElementById(idnhietdo).innerHTML = `<i class="fas fa-power-off" style="color:green;font-size:2em"></i>`
                             
                         }  else if(phanloai_thietbi_fb=="Thiết bị" && trangthai_thietbi_fb == "0"){
                             document.getElementById("tca").innerHTML += `<div class="gauge1">
                                                                             <p onclick="toggleStatea('${idnha}', '${idphong}', '${idthietbi}', '${trangthai_thietbi_fb}')"><span id= "nhietdoall${idthietbi}"></span>
-                                                                            <span class="pl">Trạng thái</span></p>
+                                                                          
+                                                                            <span class="pl" style="margin-top: -4.5em;">- ${name_thietbi_fb} -</span></p>
                                                                         </div>`
                             idnhietdo = "nhietdoall" + idthietbi
-                            document.getElementById(idnhietdo).innerText = "TẮT"
+                            document.getElementById(idnhietdo).innerHTML = `<i class="fas fa-power-off" style="color:gray;font-size:2em"></i>`
                             
                         } else if(phanloai_thietbi_fb=="Cảm biến" && trangthai_thietbi_fb !== "Đợi cập nhật từ GATEWAY"){
                             document.getElementById("tca").innerHTML += `<div class="gauge1">
                                                                             <p><span id= "nhietdoall${idthietbi}"></span><span>&deg;C</span>
-                                                                            <span class="pl">Nhiệt độ</span></p>
+                                
+                                                                            <span class="pl" style="margin-top: -4.5em;">- ${name_thietbi_fb} -</span></p>       
                                                                         </div>`
                             idnhietdo = "nhietdoall" + idthietbi
                             document.getElementById(idnhietdo).innerText = trangthai_thietbi_fb
@@ -796,6 +801,29 @@ function suathongtin(idnha, idphong, idthietbi){
         newPush_phanloaimoi.set(encode_data(phanloaimoi));
     } else {
         swal("Lưu ý!", "Tên thiết bị phải lớn hơn 5 ký tự!", "error");
+    }
+}
+
+function decRoom() {
+    sothietbi = document.getElementById("valueRoomNumber").value;
+    minRoom = 1;
+    if (sothietbi > minRoom) {
+        sothietbi = parseInt(sothietbi) - 1;
+        document.getElementById('valueRoomNumber').setAttribute('value', sothietbi);
+    } else {
+        return sothietbi
+    }
+
+}
+
+function incRoom() {
+    sothietbi = document.getElementById("valueRoomNumber").value;
+    maxRoom = 8;
+    if (sothietbi < maxRoom) {
+        sothietbi = parseInt(sothietbi) + 1;
+        document.getElementById('valueRoomNumber').setAttribute('value', sothietbi);
+    } else {
+        return sothietbi
     }
 }
 //////////////////////////////////////////
