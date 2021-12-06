@@ -662,6 +662,12 @@
   position: relative;
   display: inline-block;
 }
+.gauge1>p:hover {
+  background-color: rgba(221, 221, 221, 0.671);
+}
+.gauge>p:hover {
+  background-color: rgba(221, 221, 221, 0.671);
+}
 
 .gauge1 > p {
   font-family: "Kanit", sans-serif;
@@ -672,8 +678,8 @@
   background-image: -o-linear-gradient(top, #f7f7f7, #e7e7e7);
   color: #a7a7a7;
   margin: 1em;
-  width: 5em;
-  height: 5em;
+  width: 5.5em;
+  height: 5.5em;
   line-height: 5em;
   position: relative;
   text-align: center;
@@ -748,9 +754,9 @@
 }
 
 .grid-container1 {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
+  display: block;
   font-size:1.2em;
+  margin: 0 auto;
 }
 .grid-container1 > div {
   background-color: rgba(255, 255, 255, 0.8);

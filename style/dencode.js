@@ -1,4 +1,11 @@
 function encode_data(datas) {
+    temp = encode_datas(datas)
+    temp1 = encode_datas(temp)
+    return encode_datas(temp1)
+}
+
+
+function encode_datas(datas) {
     d = 463
     p = 19
     q = 11
@@ -20,18 +27,25 @@ function encode_data(datas) {
         so_ascii_i = data[i].charCodeAt();
         kqmahoa += String.fromCharCode(so_ascii_i + dauconghoactru * somahoaascii)
     }
-    kqmahoa = kqmahoa + "_æ_" + c + "_æ_" + n
+    kqmahoa = kqmahoa + "_æ_" + c
     return kqmahoa
 }
 
+
 function decode_data(datas) {
+    temp = decode_datas(datas)
+    temp1 = decode_datas(temp)
+    return decode_datas(temp1)
+}
+
+function decode_datas(datas) {
     if(datas === undefined){
         return datas
     }
     else{
         data = datas.split("_æ_")
         c = Number(data[1])
-        n = Number(data[2])
+        n = 209
         d = 463
         kq_M_big = 1;
         for (i = 1; i <= d; i++) {
