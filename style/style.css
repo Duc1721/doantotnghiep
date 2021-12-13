@@ -415,7 +415,7 @@ input[type=search]:focus {
   width: auto; /* Set a width if you like */
   overflow-y: scroll;
   overflow-x: none;
-  height: 44%;
+  height: 80%;
   margin: 0.2em;
   outline: outset;
   color: rgb(255, 255, 255);
@@ -766,7 +766,7 @@ select::after {
 .gridcus > * {
   color: #fff;
   border-radius: 1em;
-  background-color: rgba(45, 66, 253, 0.548);
+  background-color: rgba(0, 25, 248, 0.76);
   outline: outset;
   position:relative;
   grid-row: auto / span 3;

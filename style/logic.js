@@ -1081,3 +1081,20 @@ function oke_firebase(idnha,idphong) {
     } 
     taomatkhau()
 }
+
+function dangxuatadmin(){
+    swal({
+		title: "Xác nhận đăng xuất",
+		showCancelButton: true,
+		confirmButtonColor: '#DD6B55',
+		confirmButtonText: 'Đồng ý',
+		cancelButtonText: "Không, hủy yêu cầu!",
+		closeOnConfirm: true,
+		closeOnCancel: true
+	},
+	function(isConfirm){
+    if (isConfirm){
+        window.location.href = './login.html';
+    } else {}
+	});
+}

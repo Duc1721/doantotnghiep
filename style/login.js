@@ -21,7 +21,7 @@ function login(){
                         window.location.href = './index.html';
                        
                     } else  swal("Thất bại","Tài khoản hoặc mật khẩu không chính xác","error") 
-                } 
+                } else  swal("Thất bại","Tài khoản hoặc mật khẩu không chính xác","error") 
             }
         }
     
@@ -68,7 +68,7 @@ function doimatkhau(){
     matkhaudoi = document.getElementById("matkhaudoi").value;
     nhaplaimatkhau = document.getElementById("nhaplaimatkhaudoi").value;
     if (matkhaudoi!=nhaplaimatkhau ||  matkhaudoi.length<5 ){
-        swal("Thất bại","Mật khẩu mới nhập lại không trùng khớp hoặc bé hơn 5 ký tự","error") 
+        swal("Thất bại","Mật khẩu mới nhập lại không trùng khớp hoặc mật khẩu mới bé hơn 5 ký tự","error") 
         matkhaudoi.innerHTML =''
         nhaplaimatkhau.innerHTML =''
     } else{
