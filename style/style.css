@@ -562,8 +562,9 @@ img.avatar {
 
 .btncus{
   border-radius: 0.313em;
-  padding: 0.438em;
-  min-width: 2.5em;
+  padding: 0.5em;
+  margin-left: 0.5em;
+  min-width: 3em;
   height: auto;
   background-color: rgb(255, 255, 255); 
 }

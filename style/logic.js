@@ -106,7 +106,7 @@ function showHome() {
                                 <h5></h5>
                                 <h6><button id="idhome${id_nha_fb}" class="btncus btn-add-home" onclick="showRoom('${id_nha_fb}')" data-toggle="tooltip" title="Hiển thị phòng!" ><i class="fas fa-home"></i></button>
                                 <button class="btncus" onclick="addnewRoom('${id_nha_fb}','${name_nha_fb}')"  data-toggle="tooltip" title="Thêm phòng!"><i class="far fa-plus-square"></i></button>
-                                <button class="btncus" onclick = "deleteHome( '${id_nha_fb}')" title="Xóa nhà!"><i class="fa fa-close"></i></button>
+                                <button class="btncus" onclick = "deleteHome( '${id_nha_fb}')" title="Xóa nhà!"><i class="far fa-trash-alt"></i></button>
                                 <button class="btncus" data-toggle="collapse" data-toggle="tooltip" title="Sửa tên nhà!" data-target="#rename_home${id_nha_fb}"><i class="fa fa-pencil-square-o"></i></button> </h6>
                                 <div id="rename_home${id_nha_fb}" class="collapse">
                                     <input id="input${id_nha_fb}"   maxlength="20" type="nameHome" style="width:80%" placeholder="Nhập tên nhà mới"><button class="btncus" id="check${id_nha_fb}" onclick="checknewname_home('${id_nha_fb}')"><i class="fad fa-check"></i></button>
@@ -154,7 +154,7 @@ function showRoom(Rhome) {
                         <h5></h5>
                         <h6><button id = "idroom${Rhome}${Room}"class="btncus btn-add-room" onclick="showDevice('${Rhome}','${Room}')"  data-toggle="tooltip" title="Hiển thị thiết bị!"><i class="far fa-lightbulb"></i></button> 
                         <button class="btncus" onclick = "addnewdevice( '${Rhome}','${name_nha_fb}', '${Room}','${name_phong_fb}','${phanloai_thietbi_fb}')"  data-toggle="tooltip" title="Thêm thiết bị!"><i class="far fa-plus-square"></i></button>
-                        <button class="btncus" onclick = "deleteRoom( '${Rhome}', '${Room}')"  data-toggle="tooltip" title="Xóa phòng!"><i class="fa fa-close"></i></button> 
+                        <button class="btncus" onclick = "deleteRoom( '${Rhome}', '${Room}')"  data-toggle="tooltip" title="Xóa phòng!"><i class="far fa-trash-alt"></i></button> 
                         <button class="btncus" data-toggle="collapse" data-target="#rename_room${Rhome}${Room}"><i class="fa fa-pencil-square-o"  data-toggle="tooltip" title="Đổi tên phòng!"></i></button> </h6>
                         <div id="rename_room${Rhome}${Room}" class="collapse">
                             <input id="input${Rhome}${Room}" type="nameHome" style="width:80%"  maxlength="20" placeholder="Nhập tên phòng mới"><button class="btncus" id="check${Rhome}${Room}" onclick="checknewname_room('${Rhome}','${Room}')"><i class="fad fa-check"></i></button>
@@ -193,12 +193,12 @@ function showDevice(Dhome, Droom) {
                    <div class="card">
                         <h5 class="card-header btn"><b><i class="fad fa-fan-table"></i> ${name_thietbi_fb} - <i class="fas fa-clipboard-list-check"></i> ${phanloai_thietbi_fb}</b></h5>
                         <h5></h5>
-                        <h6><button class="btncus"><i class="fa fa-close" onclick = "deleteDevice( '${Dhome}', '${Droom}','${Device}')"  data-toggle="tooltip" title="Xóa thiết bị!"></i></button>
+                        <h6><button class="btncus"><i class="far fa-trash-alt" onclick = "deleteDevice( '${Dhome}', '${Droom}','${Device}')"  data-toggle="tooltip" title="Xóa thiết bị!"></i></button>
 
                           <button class="btncus" data-toggle="collapse" data-target="#rename_device${Dhome}${Droom}${Device}"  data-toggle="tooltip" title="Đổi tên thiết bị!"><i class="fa fa-pencil-square-o"></i></button> 
                           <button class="btncus" data-toggle="collapse" data-target="#retype_device${Dhome}${Droom}${Device}"  data-toggle="tooltip" title="Phân loại thiết bị!"><i class="fas fa-sunset"></i></button> 
                           
-                          <button class="btncus"  data-toggle="tooltip" title="Chưa cập nhật tính năng, thêm vào cho đẹp thôi :v !"><i class="fas fa-shield-check" onclick="swal('Chào bạn!', 'Nút nhấn sẽ được cập nhật tính năng gì đấy trong tương lai! :)', 'error')"></i></button> </h6>
+                         </h6>
 
 
                             <div id="rename_device${Dhome}${Droom}${Device}" class="collapse">
@@ -927,7 +927,7 @@ function openadddevice(idnha) {
         <div onclick="openeditRoom('${idnha}')" class="nutchucnang">
             <i class="fas fa-pen" title="Đổi tên phòng"></i></div>
         <div onclick="showRoom_user('${idnha}')" class="nutchucnang">
-            <i class="fas fa-plug" title="Tắt hêm thiết bị" style="color: black;"></i></div>
+            <i class="fas fa-plug" title="Tắt thêm thiết bị" style="color: black;"></i></div>
         </div>`
     })
 }
